@@ -3,142 +3,230 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.pkm.proyek.seismoalpha.InputActivity"
     android:orientation="vertical">
-   <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp">
         <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/icon_data_korban"
-            android:layout_margin="4dp"
-            android:src="@drawable/victims"/>
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/ic_person_black"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data Korban"
+            android:text="KORBAN"
             android:textStyle="bold"
-            android:id="@+id/title_data_korban"
-            android:layout_toRightOf="@id/icon_data_korban"
-            android:textSize="18sp"
-            android:layout_marginTop="8dp" />
-        <GridLayout
-            android:layout_width="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title_data_korban"
-            android:layout_toRightOf="@id/icon_data_korban"
-            android:columnCount="2">
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Korban jiwa:" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_width="48dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
+                    android:hint="0"
+                    android:inputType="numberSigned|numberDecimal"
+                    android:singleLine="true"
+                    android:id="@+id/input_korban_jiwa"
+                    android:layout_gravity="right"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="orang"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_marginRight="4dp"
-                android:text="Korban jiwa:"/>
-            <EditText
-                android:layout_width="64dp"
-                android:textAlignment="center"
+                android:text="Luka berat:" />
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="0"
-                android:inputType="numberSigned|numberDecimal"
-                android:singleLine="true"
-                android:id="@+id/input_korban_jiwa"
-                android:layout_gravity="right"/>
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_width="48dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
+                    android:hint="0"
+                    android:inputType="numberSigned|numberDecimal"
+                    android:singleLine="true"
+                    android:id="@+id/input_luka_berat"
+                    android:layout_gravity="right"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="orang"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="Luka berat:"/>
-            <EditText
-                android:layout_width="64dp"
-                android:textAlignment="center"
-                android:layout_height="wrap_content"
-                android:hint="0"
-                android:inputType="numberSigned|numberDecimal"
-                android:singleLine="true"
-                android:id="@+id/input_luka_berat"
-                android:layout_gravity="right"/>
-            <TextView
+                android:text="Luka ringan:" />
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="Luka ringan:"/>
-            <EditText
-                android:layout_width="64dp"
-                android:textAlignment="center"
-                android:layout_height="wrap_content"
-                android:hint="0"
-                android:inputType="numberSigned|numberDecimal"
-                android:singleLine="true"
-                android:id="@+id/input_luka_ringan"
-                android:layout_gravity="right"/>
-        </GridLayout>
-    </RelativeLayout>
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_width="48dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
+                    android:hint="0"
+                    android:inputType="numberSigned|numberDecimal"
+                    android:singleLine="true"
+                    android:id="@+id/input_luka_ringan"
+                    android:layout_gravity="right"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="orang"/>
+            </LinearLayout>
+        </LinearLayout>
+    </GridLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="4dp"
         android:background="@android:color/darker_gray"/>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp">
         <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:id="@+id/icon_data_kerusakan"
-            android:layout_margin="4dp"
-            android:src="@drawable/building"/>
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/ic_account_balance_black"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data Kerusakan"
+            android:text="KERUSAKAN"
             android:textStyle="bold"
-            android:id="@+id/title_data_kerusakan"
-            android:layout_toRightOf="@id/icon_data_kerusakan"
-            android:textSize="18sp"
-            android:layout_marginTop="8dp" />
-        <GridLayout
-            android:layout_width="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:layout_below="@+id/title_data_kerusakan"
-            android:layout_toRightOf="@id/icon_data_kerusakan">
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Rusak berat:" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_width="48dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
+                    android:hint="0"
+                    android:inputType="numberSigned|numberDecimal"
+                    android:singleLine="true"
+                    android:id="@+id/input_rusak_berat"
+                    android:layout_gravity="right"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="unit"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_marginRight="4dp"
-                android:text="Rusak berat:"/>
-            <EditText
-                android:layout_width="64dp"
-                android:textAlignment="center"
-                android:layout_height="wrap_content"
-                android:hint="0"
-                android:inputType="numberSigned|numberDecimal"
-                android:singleLine="true"
-                android:id="@+id/input_rusak_berat"
-                android:layout_gravity="right"/>
-            <TextView
+                android:text="Rusak ringan:" />
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:text="Rusak ringan:"/>
-            <EditText
-                android:layout_width="64dp"
-                android:textAlignment="center"
-                android:layout_height="wrap_content"
-                android:hint="0"
-                android:singleLine="true"
-                android:inputType="numberSigned|numberDecimal"
-                android:id="@+id/input_rusak_ringan"
-                android:layout_gravity="right"/>
-        </GridLayout>
-    </RelativeLayout>
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_width="48dp"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"
+                    android:hint="0"
+                    android:singleLine="true"
+                    android:inputType="numberSigned|numberDecimal"
+                    android:id="@+id/input_rusak_ringan"
+                    android:layout_gravity="center_vertical"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:text="unit"/>
+            </LinearLayout>
+        </LinearLayout>
+    </GridLayout>
+
     <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -156,8 +244,12 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_done_white_36dp"
             android:layout_alignParentBottom="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
+
+
 
 </LinearLayout>

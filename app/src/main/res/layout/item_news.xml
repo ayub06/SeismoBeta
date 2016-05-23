@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    android:id="@+id/cv_news"
+<android.support.v7.widget.CardView android:id="@+id/cv_news"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp">
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp"
+    android:layout_marginTop="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gempa "
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
             <TextView
@@ -31,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="Bantul"
                 android:id="@+id/lokasi_gempa"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
             <TextView
@@ -43,10 +46,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="8dp">
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:src="@mipmap/ic_date_range_black"
                 android:layout_gravity="center_vertical"/>
             <TextView
@@ -60,8 +65,8 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorAccent" />
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:src="@mipmap/ic_access_time_black"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="8dp"
@@ -82,8 +87,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:textColor="@color/black"
+                android:layout_marginStart="12dp"
                 android:text="Kekuatan : "/>
             <TextView
                 android:layout_width="wrap_content"
@@ -100,27 +104,39 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:layout_marginTop="4dp"
             android:background="@android:color/darker_gray"/>
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Korban"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="12dp">
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_person_black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KORBAN"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"/>
+        </LinearLayout>
 
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp">
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -128,15 +144,13 @@
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:text="Korban jiwa:" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:layout_width="48dp"
-                        android:textAlignment="center"
+                        android:layout_width="24dp"
                         android:layout_height="wrap_content"
                         android:text="20"
                         android:textColor="@color/colorAccent"
@@ -155,15 +169,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:text="Luka berat:" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:layout_width="48dp"
-                        android:textAlignment="center"
+                        android:layout_width="24dp"
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textStyle="bold"
@@ -182,15 +194,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:text="Luka ringan:" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:layout_width="48dp"
-                        android:textAlignment="center"
+                        android:layout_width="24dp"
                         android:layout_height="wrap_content"
                         android:text="48"
                         android:textColor="@color/colorAccent"
@@ -206,26 +216,38 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
             android:layout_marginTop="4dp"
             android:background="@android:color/darker_gray"/>
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Total Kerusakan"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="12dp">
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_account_balance_black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KERUSAKAN"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"/>
+        </LinearLayout>
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp">
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -233,15 +255,13 @@
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:text="Rusak berat:" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:layout_width="48dp"
-                        android:textAlignment="center"
+                        android:layout_width="24dp"
                         android:layout_height="wrap_content"
                         android:text="41"
                         android:textColor="@color/colorAccent"
@@ -260,17 +280,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:text="Rusak ringan:" />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
-                        android:layout_width="48dp"
-                        android:textAlignment="center"
+                        android:layout_width="24dp"
                         android:layout_height="wrap_content"
-                        android:text="128"
+                        android:text="12"
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold"
                         android:id="@+id/total_rusak_ringan" />

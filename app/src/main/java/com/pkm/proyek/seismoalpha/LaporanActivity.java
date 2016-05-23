@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -30,6 +32,13 @@ public class LaporanActivity extends AppCompatActivity {
     public static int indexGempa;
     public static RecyclerView rv;
     public static ProgressBar loading;
+    private boolean fabHide = true;
+    private View layerPutih;
+    private TextView textFabLaporan;
+    private TextView textFabRehabRekon;
+    private FloatingActionButton rehabRekonFab;
+    private FloatingActionButton fab;
+    FloatingActionButton showFab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,19 +70,69 @@ public class LaporanActivity extends AppCompatActivity {
         new loadFromAPI().execute(
                 new Pair<Context, String>(this, String.valueOf(indexGempa))
         );
-
-
-        FloatingActionButton fab=(FloatingActionButton)findViewById(R.id.fab);
+        showFab = (FloatingActionButton)findViewById(R.id.fab_show);
         if(LoginActivity.umum||
                 !(Pelapor.akunIni.getAlamat().contains(Gempa.gempaArrayList.get(indexGempa).getNama()))){
-            assert fab != null;
-            fab.setVisibility(View.GONE);
+            assert showFab != null;
+            showFab.setVisibility(View.GONE);
         }
+
+        //menthod untuk menghandle onClick agar tidak ruwet disini
+        //menampilkan dan menghilangkan submenu fab
+
+        assert showFab != null;
+        showFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fabHide) {
+                    showFloatingButton();
+                } else {
+                    hideFloatingButton();
+                }
+
+            }
+        });
+
+        layerPutih = findViewById(R.id.view_white_opacity);
+        textFabLaporan = (TextView)findViewById(R.id.text_fab_laporan);
+        textFabRehabRekon = (TextView)findViewById(R.id.text_fab_rehab_rekon);
+
+        layerPutih.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideFloatingButton();
+            }
+        });
+        //fab rehab rekon handling
+        rehabRekonFab = (FloatingActionButton)findViewById(R.id.fab_rehab_rekon);
+        assert rehabRekonFab != null;
+        rehabRekonFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPickLocation(true);
+            }
+        });
+
+        fab=(FloatingActionButton)findViewById(R.id.fab);
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToPickLocation(false);
+            }
+        });
+
+        textFabLaporan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPickLocation(false);
+            }
+        });
+
+        textFabRehabRekon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPickLocation(true);
             }
         });
 
@@ -127,5 +186,29 @@ public class LaporanActivity extends AppCompatActivity {
         Intent intent=new Intent(getApplicationContext(),PickLocation.class);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    private void showFloatingButton() {
+        layerPutih.setVisibility(View.VISIBLE);
+        textFabLaporan.setVisibility(View.VISIBLE);
+        textFabRehabRekon.setVisibility(View.VISIBLE);
+        fab.setVisibility(View.VISIBLE);
+        rehabRekonFab.setVisibility(View.VISIBLE);
+        showFab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_close_white));
+        fabHide = false;
+    }
+
+    private  void hideFloatingButton() {
+        layerPutih.setVisibility(View.GONE);
+        textFabLaporan.setVisibility(View.GONE);
+        textFabRehabRekon.setVisibility(View.GONE);
+        fab.setVisibility(View.GONE);
+        rehabRekonFab.setVisibility(View.GONE);
+        showFab.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.mipmap.ic_add_white));
+        fabHide = true;
+    }
+
+    private void handleSetOnClick() {
+
     }
 }
