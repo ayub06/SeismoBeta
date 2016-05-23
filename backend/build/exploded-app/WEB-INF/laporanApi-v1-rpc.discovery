@@ -1,0 +1,297 @@
+{
+ "kind": "discovery#rpcDescription",
+ "etag": "\"H01Z-1ikbwOw463Un2bFZHenx1g/Non0hUW9JRQakcn2c3eC_fAA-1Q\"",
+ "discoveryVersion": "v1",
+ "id": "laporanApi:v1",
+ "name": "laporanApi",
+ "version": "v1",
+ "description": "This is an API",
+ "ownerDomain": "backend.seismosense.pkm.com",
+ "ownerName": "backend.seismosense.pkm.com",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rpc",
+ "rootUrl": "https://seismosense-1261.appspot.com/_ah/api/",
+ "rpcUrl": "https://seismosense-1261.appspot.com/_ah/api/rpc",
+ "rpcPath": "/_ah/api/rpc",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "CollectionResponse_Laporan": {
+   "id": "CollectionResponse_Laporan",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Laporan"
+     }
+    },
+    "nextPageToken": {
+     "type": "string"
+    }
+   }
+  },
+  "Laporan": {
+   "id": "Laporan",
+   "type": "object",
+   "properties": {
+    "alamat": {
+     "type": "string"
+    },
+    "gempaId": {
+     "type": "string"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "jumlah_korban": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "lokasi_Lat": {
+     "type": "number",
+     "format": "double"
+    },
+    "lokasi_Lng": {
+     "type": "number",
+     "format": "double"
+    },
+    "luka_berat": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "luka_ringan": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "rusak_berat": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "rusak_ringan": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "usernamePelapor": {
+     "type": "string"
+    }
+   }
+  }
+ },
+ "methods": {
+  "laporanApi.get": {
+   "id": "laporanApi.get",
+   "allowGet": true,
+   "parameters": {
+    "id": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "id"
+   ],
+   "returns": {
+    "$ref": "Laporan"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "laporanApi.insert": {
+   "id": "laporanApi.insert",
+   "parameters": {
+    "resource": {
+     "$ref": "Laporan"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "Laporan"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "laporanApi.list": {
+   "id": "laporanApi.list",
+   "allowGet": true,
+   "parameters": {
+    "cursor": {
+     "type": "string"
+    },
+    "idGempa": {
+     "type": "string",
+     "required": true
+    },
+    "limit": {
+     "type": "integer",
+     "format": "int32"
+    }
+   },
+   "parameterOrder": [
+    "idGempa"
+   ],
+   "returns": {
+    "$ref": "CollectionResponse_Laporan"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "laporanApi.patch": {
+   "id": "laporanApi.patch",
+   "supportsPatch": true,
+   "parameters": {
+    "alamat": {
+     "type": "string"
+    },
+    "gempaId": {
+     "type": "string"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "jumlah_korban": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "lokasi_Lat": {
+     "type": "number",
+     "format": "double"
+    },
+    "lokasi_Lng": {
+     "type": "number",
+     "format": "double"
+    },
+    "luka_berat": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "luka_ringan": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "rusak_berat": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "rusak_ringan": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "usernamePelapor": {
+     "type": "string"
+    }
+   },
+   "parameterOrder": [
+    "id"
+   ],
+   "returns": {
+    "$ref": "Laporan"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "laporanApi.remove": {
+   "id": "laporanApi.remove",
+   "parameters": {
+    "id": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    }
+   },
+   "parameterOrder": [
+    "id"
+   ],
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "laporanApi.update": {
+   "id": "laporanApi.update",
+   "parameters": {
+    "id": {
+     "type": "string",
+     "required": true,
+     "format": "int64"
+    },
+    "resource": {
+     "$ref": "Laporan"
+    }
+   },
+   "parameterOrder": [
+    "resource",
+    "id"
+   ],
+   "returns": {
+    "$ref": "Laporan"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  }
+ }
+}

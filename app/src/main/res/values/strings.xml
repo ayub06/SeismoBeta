@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Seismo Alpha</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="promt_un">Username</string>
+    <string name="GPSAlertDialogMessage">Ijinkan <b>Seismo Sense</b> mengakses lokasi Anda?</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="umum">UMUM</string>
+    <string name="pelapor">PELAPOR</string>
+
+    <string name="title_activity_pick_location">Map</string>
+
+    <string name="m2">m<sup>2</sup></string>
+    <string name="gcm_defaultSenderId">1261</string>
+    <string name="rehab_rekon">Rehab Rekon</string>
+    <string name="title_activity_input_korban">Korban</string>
+    <string name="title_activity_input_kerusakan">Kerusakan</string>
+    <string name="menu_rehab_title">Menu Rehab Rekon</string>
+</resources>

@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sabaya.deadline.MainActivity">
+    <item
+        android:id="@+id/kirim_laporan"
+        android:title="KIRIM"
+        android:orderInCategory="1"
+        app:showAsAction="ifRoom" />
+
+</menu>

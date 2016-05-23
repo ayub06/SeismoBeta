@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.pkm.proyek.seismoalpha">
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    ?
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="com.pkm.proyek.seismoalpha.gcm.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.pkm.proyek.seismoalpha.gcm.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".LoginActivity"
+            android:label="Seismo Sense">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".InputActivity"
+            android:label="Lapor"
+            android:parentActivityName=".LaporanActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pkm.proyek.seismoalpha.LaporanActivity" />
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="Seismo Sense" />
+        <activity
+            android:name=".LaporanActivity"
+            android:label="Laporan"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pkm.proyek.seismoalpha.MainActivity" />
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+
+                <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".PickLocation"
+            android:label="@string/title_activity_pick_location">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pkm.proyek.seismoalpha.LaporanActivity" />
+        </activity>
+
+        <activity
+            android:name=".rehabrekon.RehabRekonActivity"
+            android:label="@string/menu_rehab_title">
+
+        </activity>
+
+        <activity
+            android:name=".rehabrekon.korban.InputKorbanActivity"
+            android:label="@string/title_activity_input_korban"
+            android:parentActivityName=".rehabrekon.RehabRekonActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pkm.proyek.seismoalpha.rehabrekon.RehabRekonActivity" />
+        </activity>
+        <activity
+            android:name=".rehabrekon.kerusakan.InputKerusakanActivity"
+            android:label="@string/title_activity_input_kerusakan"
+            android:parentActivityName=".rehabrekon.RehabRekonActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.pkm.proyek.seismoalpha.rehabrekon.RehabRekonActivity" />
+        </activity>
+    </application>
+
+</manifest>
