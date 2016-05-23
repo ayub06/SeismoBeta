@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.pkm.proyek.seismoalpha.R;
 import com.pkm.proyek.seismoalpha.rehabrekon.kerusakan.InputKerusakanActivity;
@@ -13,9 +14,9 @@ import com.pkm.proyek.seismoalpha.rehabrekon.korban.InputKorbanActivity;
 
 public class RehabRekonActivity extends AppCompatActivity {
 
-    private Button korban;
-    private Button kerusakan;
-    private Button bantuan;
+    private LinearLayout korban;
+    private LinearLayout kerusakan;
+    private LinearLayout bantuan;
 
     private ImageView korban_ch;
     private ImageView kerusakan_ch;
@@ -30,9 +31,9 @@ public class RehabRekonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_new);
 
-        korban      =(Button) findViewById(R.id.rr_korban);
-        kerusakan   =(Button) findViewById(R.id.rr_kerusakan);
-        bantuan     =(Button) findViewById(R.id.rr_bantuan);
+        korban      =(LinearLayout) findViewById(R.id.rr_korban);
+        kerusakan   =(LinearLayout) findViewById(R.id.rr_kerusakan);
+        bantuan     =(LinearLayout) findViewById(R.id.rr_bantuan);
 
         korban_ch   =(ImageView) findViewById(R.id.korban_ch);
         kerusakan_ch=(ImageView) findViewById(R.id.kerusakan_ch);
