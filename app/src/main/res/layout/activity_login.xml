@@ -22,17 +22,35 @@
         android:layout_centerVertical="true"
         android:animateLayoutChanges="true">
 
-
+        <TextView
+            android:id="@+id/seismo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SEISMO SENSE"
+            android:textColor="@color/colorPrimaryDark"
+            android:gravity="center"
+            android:textStyle="bold"
+            style="@style/TextAppearance.AppCompat.Display1"/>
+        <TextView
+            android:id="@+id/mappingfor"
+            android:layout_below="@id/seismo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:textColor="#B71C1C"
+            android:gravity="center"
+            android:text="&quot;Mapping for Caring&quot;"/>
         <ImageView
+            android:layout_below="@id/mappingfor"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:id="@+id/logo"
             android:src="@drawable/logo_seismo"
+            android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:layout_centerHorizontal="true"/>
         <LinearLayout
             android:id="@+id/kontainer_button"
-            android:layout_marginTop="24dp"
             android:layout_below="@id/logo"
             android:layout_centerHorizontal="true"
             android:orientation="horizontal"
@@ -51,6 +69,25 @@
                 android:text="TIM"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/logodiktiugm"
+            android:layout_marginTop="24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/kontainer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_marginEnd="12dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ristekdikti"/>
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@mipmap/logo_ugm"/>
         </LinearLayout>
 
         <android.support.design.widget.TextInputLayout

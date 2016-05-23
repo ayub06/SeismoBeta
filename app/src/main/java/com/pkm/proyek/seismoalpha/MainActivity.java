@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
         ));
 
         Calendar calendarr=Calendar.getInstance();
-        calendarr.set(2006, 5, 24);
+        calendarr.set(2004, 12, 26);
         Gempa.gempaArrayList.add(new Gempa(
                 1,
                 "Aceh",

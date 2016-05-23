@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Seismo Alpha</string>
+    <string name="server_client_id">906411139846-l01mknrocs3mqnbl78cfpe9iqq5qdn31.apps.googleusercontent.com</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

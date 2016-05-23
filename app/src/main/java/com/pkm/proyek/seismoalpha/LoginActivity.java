@@ -29,8 +29,10 @@ public class LoginActivity extends AppCompatActivity {
     View decorView;
     ImageView logo;
     LinearLayout kontainer;
+    LinearLayout kontainerLogo;
     public static RelativeLayout loading;
     public static ProgressBar spinning;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         umumButton = (Button)findViewById(R.id.umum);
         pelaporButton = (Button)findViewById(R.id.pelapor);
         kontainer = (LinearLayout)findViewById(R.id.kontainer_button);
+        kontainerLogo = (LinearLayout)findViewById(R.id.logodiktiugm);
 
         loading=(RelativeLayout)findViewById(R.id.loading);
         spinning=(ProgressBar)findViewById(R.id.spinning);
@@ -68,10 +71,12 @@ public class LoginActivity extends AppCompatActivity {
                 logo.setScaleY((float) 0.8);
                 logo.setScaleX((float) 0.8);
                 kontainer.setVisibility(View.GONE);
+                kontainerLogo.setVisibility(View.GONE);
                 un_container.setVisibility(View.VISIBLE);
                 pw_container.setVisibility(View.VISIBLE);
                 loginButton.setVisibility(View.VISIBLE);
                 logo.setClickable(false);
+
             }
         });
         loginButton.setOnClickListener(new View.OnClickListener() {

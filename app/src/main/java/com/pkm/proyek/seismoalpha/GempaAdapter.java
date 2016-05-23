@@ -31,6 +31,7 @@ public class GempaAdapter extends RecyclerView.Adapter<GempaAdapter.PersonViewHo
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
         TextView waktu;
+        TextView jam;
         TextView nama;
         TextView sr;
 
@@ -47,6 +48,7 @@ public class GempaAdapter extends RecyclerView.Adapter<GempaAdapter.PersonViewHo
             super(itemView);
             nama           = (TextView) itemView.findViewById(R.id.lokasi_gempa);
             waktu        = (TextView) itemView.findViewById(R.id.tanggal_gempa);
+            jam         = (TextView) itemView.findViewById(R.id.jam_gempa);
             sr        = (TextView) itemView.findViewById(R.id.skala_gempa);
 
             jumlah_korban = (TextView) itemView.findViewById(R.id.total_korban_jiwa);
@@ -74,7 +76,8 @@ public class GempaAdapter extends RecyclerView.Adapter<GempaAdapter.PersonViewHo
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
-        personViewHolder.waktu.setText(gempa.get(i).getJam() + " | " + gempa.get(i).getTanggalSingkat());
+        personViewHolder.waktu.setText(gempa.get(i).getTanggalSingkat());
+        personViewHolder.jam.setText(gempa.get(i).getJam());
         personViewHolder.nama.setText(gempa.get(i).getNama());
         personViewHolder.sr.setText(String.valueOf(gempa.get(i).getSr()));
 
