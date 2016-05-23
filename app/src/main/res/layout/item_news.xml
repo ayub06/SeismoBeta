@@ -38,19 +38,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" "/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5,9"
-                android:id="@+id/skala_gempa"
-                android:textSize="20sp"
-                android:textColor="@color/white"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" SR"
-                android:textSize="20sp"
-                android:textColor="@color/white"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,7 +57,8 @@
                 android:id="@+id/tanggal_gempa"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="@color/red" />
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent" />
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
@@ -84,103 +72,214 @@
                 android:layout_gravity="center_vertical"
                 android:text="06:15"
                 android:id="@+id/jam_gempa"
-                android:textColor="@color/red"/>
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/black"
+                android:text="Kekuatan : "/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5,9"
+                android:textStyle="bold"
+                android:id="@+id/skala_gempa"
+                android:textColor="@color/colorAccent"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" SR"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@android:color/darker_gray"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Korban"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total Korban:"
-            android:textStyle="bold"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"/>
         <GridLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp">
-            <TextView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Korban jiwa"
-                android:textSize="18sp"
-                android:textColor="@color/black" />
-            <TextView
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:id="@+id/total_korban_jiwa" />
-            <TextView
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Korban jiwa:" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="48dp"
+                        android:textAlignment="center"
+                        android:layout_height="wrap_content"
+                        android:text="20"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"
+                        android:id="@+id/total_luka_berat" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="orang"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Luka berat"
-                android:textSize="18sp"
-                android:textColor="@color/black" />
-            <TextView
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Luka berat:" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="48dp"
+                        android:textAlignment="center"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorAccent"
+                        android:id="@+id/total_korban_jiwa" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="orang"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="20"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:id="@+id/total_luka_berat" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Luka ringan"
-                android:textSize="18sp"
-                android:textColor="@color/black" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="48"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:id="@+id/total_luka_ringan" />
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Luka ringan:" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="48dp"
+                        android:textAlignment="center"
+                        android:layout_height="wrap_content"
+                        android:text="48"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"
+                        android:id="@+id/total_luka_ringan" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="orang"/>
+                </LinearLayout>
+            </LinearLayout>
         </GridLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@android:color/darker_gray"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Kerusakan:"
+            android:text="Total Kerusakan"
             android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/black"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"/>
         <GridLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp">
-            <TextView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Rusak berat"
-                android:textSize="18sp"
-                android:textColor="@color/black" />
-            <TextView
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp">
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="41"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:id="@+id/total_rusak_berat" />
-            <TextView
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Rusak berat:" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="48dp"
+                        android:textAlignment="center"
+                        android:layout_height="wrap_content"
+                        android:text="41"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"
+                        android:id="@+id/total_rusak_berat" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="unit"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rusak ringan"
-                android:textSize="18sp"
-                android:textColor="@color/black" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="128"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:id="@+id/total_rusak_ringan" />
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Rusak ringan:" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="48dp"
+                        android:textAlignment="center"
+                        android:layout_height="wrap_content"
+                        android:text="128"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"
+                        android:id="@+id/total_rusak_ringan" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="unit"/>
+                </LinearLayout>
+            </LinearLayout>
         </GridLayout>
         <LinearLayout
             android:layout_width="match_parent"

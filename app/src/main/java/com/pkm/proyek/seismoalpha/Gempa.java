@@ -2,6 +2,7 @@ package com.pkm.proyek.seismoalpha;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -120,14 +121,17 @@ public class Gempa {
     }
 
     public String getJam(){
-        return this.waktu.get(Calendar.HOUR_OF_DAY)+"."+ this.waktu.get(Calendar.MINUTE);
+        return this.waktu.get(Calendar.HOUR_OF_DAY)+":"+ this.waktu.get(Calendar.MINUTE);
     }
 
     public String getTanggal(){
-        return this.waktu.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.SHORT, Locale.getDefault())
+        SimpleDateFormat format = new SimpleDateFormat("dd MMMM yyyy");
+        String date = format.format(waktu.getTime());
+        return date;
+        /*return this.waktu.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.SHORT, Locale.getDefault())
                 +", "+ this.waktu.get(Calendar.DAY_OF_MONTH)
                 +" "+ this.waktu.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault())
-                +" "+ this.waktu.get(Calendar.YEAR);
+                +" "+ this.waktu.get(Calendar.YEAR);*/
     }
 
     public String getTanggalSingkat(){
