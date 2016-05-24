@@ -64,6 +64,8 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
+
+        loadingStop();
     }
 
     @Override
@@ -88,6 +90,8 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
                 position=latLng;
                 posisi.setPosition(latLng);
                 showLokasi(latLng);
+
+
             }
         });
 
@@ -96,6 +100,7 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
     }
 
     public String getAddressName(LatLng latLng){
+
         try {
             addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
         } catch (IOException e) {
@@ -119,6 +124,8 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
                         getAddressName(latLng);
         //loadingStop();
         displayLokasi.setText(displayLoc);
+
+
     }
 
     private void loadingStart(){

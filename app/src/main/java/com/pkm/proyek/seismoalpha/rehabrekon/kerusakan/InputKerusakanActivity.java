@@ -44,6 +44,8 @@ public class InputKerusakanActivity extends AppCompatActivity {
             "Tempat Ibadah",
             "Lain-lain"
     };
+    private View.OnClickListener fabClickNext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,14 @@ public class InputKerusakanActivity extends AppCompatActivity {
         fab=(FloatingActionButton)findViewById(R.id.fab);
         viewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(viewPager);
+
+        fabClickNext=new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //viewPager.arrowScroll(pageSelected+1);
+                viewPager.setCurrentItem(pageSelected+1);
+            }
+        };
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -72,11 +82,15 @@ public class InputKerusakanActivity extends AppCompatActivity {
                 Log.d("TOTAL KERUSAKAN", String.valueOf(kerusakanArrayList.size()));
                 toolbar.setTitle(category[position]);
                 if (position==category.length-1){
-                    fab.setImageResource(R.drawable.building);
+                    fab.setImageResource(R.drawable.ic_done_white_36dp);
+                    fabDefault();
+                }else {
+                    fab.setOnClickListener(fabClickNext);
+                    fab.setImageResource(R.mipmap.ic_keyboard_arrow_right_white);
                 }
 
                 //kerusakanArrayList.get(pageSelected).getFragment().getInputData();
-                //pageSelected=position;
+                pageSelected=position;
             }
 
             @Override
@@ -85,8 +99,8 @@ public class InputKerusakanActivity extends AppCompatActivity {
             }
         });
 
-        fabDefault();
-
+        //fabDefault();
+        fab.setOnClickListener(fabClickNext);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
     }

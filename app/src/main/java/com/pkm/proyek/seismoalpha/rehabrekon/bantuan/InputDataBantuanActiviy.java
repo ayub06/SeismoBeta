@@ -1,11 +1,15 @@
 package com.pkm.proyek.seismoalpha.rehabrekon.bantuan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
 
 import com.pkm.proyek.seismoalpha.R;
+import com.pkm.proyek.seismoalpha.rehabrekon.RehabRekonActivity;
 
 /**
  * Created by User3887 on 5/24/2016.
@@ -35,6 +39,16 @@ public class InputDataBantuanActiviy extends AppCompatActivity {
         inputKuantitas = (EditText)findViewById(R.id.data_bantuan_kuantitas);
         inputSumberBantuan = (EditText)findViewById(R.id.data_bantuan_sumber_bantuan);
         inputKeterangan = (EditText)findViewById(R.id.data_bantuan_keterangan);
+
+        FloatingActionButton fab=(FloatingActionButton)findViewById(R.id.fab);
+        assert fab != null;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RehabRekonActivity.bantuan_checked=true;
+                startActivity(new Intent(getApplicationContext(), RehabRekonActivity.class));
+            }
+        });
     }
 
     private void getInputData() {

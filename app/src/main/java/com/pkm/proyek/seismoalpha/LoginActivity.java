@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 umum = true;
+                startLoad();
                 configGoogleSignIn();
                 signIn();
                 //startActivity(new Intent(getApplicationContext(),MainActivity.class));
