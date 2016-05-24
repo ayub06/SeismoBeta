@@ -70,14 +70,15 @@ public class LaporanActivity extends AppCompatActivity {
         new loadFromAPI().execute(
                 new Pair<Context, String>(this, String.valueOf(indexGempa))
         );
-        showFab = (FloatingActionButton)findViewById(R.id.fab_show);
+
+        /*showFab = (FloatingActionButton)findViewById(R.id.fab_show);
         if(LoginActivity.umum||
                 !(Pelapor.akunIni.getAlamat().contains(Gempa.gempaArrayList.get(indexGempa).getNama()))){
             assert showFab != null;
             showFab.setVisibility(View.GONE);
-        }
+        }*/
 
-        //menthod untuk menghandle onClick agar tidak ruwet disini
+        //menthod untuk menghandle onClick dan fab agar tidak ruwet disini
         handleSetOnClick();
         try {
             getActionBar().setDisplayHomeAsUpEnabled(false);
@@ -154,6 +155,7 @@ public class LaporanActivity extends AppCompatActivity {
     private void handleSetOnClick() {
 
         //menampilkan dan menghilangkan submenu fab
+        showFab = (FloatingActionButton)findViewById(R.id.fab_show);
         assert showFab != null;
         showFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,7 +194,12 @@ public class LaporanActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToPickLocation(false);
+                if(LoginActivity.umum||
+                        !(Pelapor.akunIni.getAlamat().contains(Gempa.gempaArrayList.get(indexGempa).getNama()))){
+                    startActivity(new Intent(getApplicationContext(),InputUmum.class));
+                } else {
+                    goToPickLocation(false);
+                }
             }
         });
 

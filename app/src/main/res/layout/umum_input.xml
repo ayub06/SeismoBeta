@@ -293,7 +293,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bangunan:"/>
+            android:text="Bangunan Rusak:"/>
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -308,14 +308,14 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rusak Berat"
+                android:text="Berat"
                 android:textColor="#757575"
                 android:checked="false"
                 android:id="@+id/radio_bangunan_rusak_berat" />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rusak Ringan"
+                android:text="Ringan"
                 android:textColor="#757575"
                 android:checked="false"
                 android:id="@+id/radio_bangunan_rusak_ringan" />
@@ -324,7 +324,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jalan:"/>
+            android:text="Jalan Rusak:"/>
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -339,14 +339,14 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rusak Berat"
+                android:text="Berat"
                 android:textColor="#757575"
                 android:checked="false"
                 android:id="@+id/radio_jalan_rusak_berat" />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rusak Ringan"
+                android:text="Ringan"
                 android:checked="false"
                 android:textColor="#757575"
                 android:id="@+id/radio_jalan_rusak_ringan" />
@@ -355,7 +355,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jembatan:"/>
+            android:text="Jembatan Rusak:"/>
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -370,14 +370,14 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rusak Berat"
+                android:text="Berat"
                 android:checked="false"
                 android:textColor="#757575"
                 android:id="@+id/radio_jembatan_rusak_berat" />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rusak Ringan"
+                android:text="Ringan"
                 android:checked="false"
                 android:textColor="#757575"
                 android:id="@+id/radio_jembatan_rusak_ringan" />
@@ -390,6 +390,7 @@
             android:textColor="@color/white"
             android:minHeight="0dp"
             android:minWidth="0dp"
+            android:clickable="true"
             android:padding="8dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
@@ -424,12 +425,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nama Tempat"
+            android:textColor="@color/colorAccent"
             android:textSize="14sp"
             android:id="@+id/umum_bantuan_tempat" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Alamat Tempat"
+            android:textColor="@color/colorAccent"
             android:textSize="14sp"
             android:id="@+id/umum_bantuan_alamat" />
         <TextView
@@ -498,7 +501,6 @@
         <EditText
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:hint="Kebutuhaan yang diperlukan"
             android:textColor="@color/colorAccent"
             android:textSize="14sp"
             android:id="@+id/umum_kebutuhan" />
@@ -509,7 +511,6 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Jumlah kebutuhan"
             android:textSize="14sp"
             android:textColor="@color/colorAccent"
             android:id="@+id/umum_kuantiti" />
