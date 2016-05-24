@@ -95,6 +95,12 @@
             android:label="Input Umum">
 
         </activity>
+        <activity
+            android:name=".rehabrekon.bantuan.InputDataBantuanActiviy"
+            android:label="Data Bantuan">
+
+        </activity>
+
 
         <activity
             android:name=".rehabrekon.korban.InputKorbanActivity"

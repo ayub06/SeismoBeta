@@ -38,7 +38,7 @@ public class LaporanActivity extends AppCompatActivity {
     private TextView textFabRehabRekon;
     private FloatingActionButton rehabRekonFab;
     private FloatingActionButton fab;
-    FloatingActionButton showFab;
+    private FloatingActionButton showFab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +106,7 @@ public class LaporanActivity extends AppCompatActivity {
     }
 
 
+/*
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -123,6 +124,7 @@ public class LaporanActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+*/
 
     private void goToPickLocation(boolean fromRehab){
         Bundle bundle=new Bundle();
@@ -154,24 +156,32 @@ public class LaporanActivity extends AppCompatActivity {
 
     private void handleSetOnClick() {
 
-        //menampilkan dan menghilangkan submenu fab
+        layerPutih = findViewById(R.id.view_white_opacity);
+        textFabLaporan = (TextView)findViewById(R.id.text_fab_laporan);
+        textFabRehabRekon = (TextView)findViewById(R.id.text_fab_rehab_rekon);
+        rehabRekonFab = (FloatingActionButton)findViewById(R.id.fab_rehab_rekon);
         showFab = (FloatingActionButton)findViewById(R.id.fab_show);
+        //menampilkan dan menghilangkan submenu fab
         assert showFab != null;
         showFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (fabHide) {
                     showFloatingButton();
+
+                    //hide fab untuk rehab rekon jika user umum
+                    if(LoginActivity.umum||
+                            !(Pelapor.akunIni.getAlamat().contains(Gempa.gempaArrayList.get(indexGempa).getNama()))){
+                        textFabRehabRekon.setVisibility(View.GONE);
+                        rehabRekonFab.setVisibility(View.GONE);
+                    }
+
                 } else {
                     hideFloatingButton();
                 }
 
             }
         });
-
-        layerPutih = findViewById(R.id.view_white_opacity);
-        textFabLaporan = (TextView)findViewById(R.id.text_fab_laporan);
-        textFabRehabRekon = (TextView)findViewById(R.id.text_fab_rehab_rekon);
 
         layerPutih.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,7 +190,6 @@ public class LaporanActivity extends AppCompatActivity {
             }
         });
         //fab rehab rekon handling
-        rehabRekonFab = (FloatingActionButton)findViewById(R.id.fab_rehab_rekon);
         assert rehabRekonFab != null;
         rehabRekonFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,6 +206,8 @@ public class LaporanActivity extends AppCompatActivity {
                 if(LoginActivity.umum||
                         !(Pelapor.akunIni.getAlamat().contains(Gempa.gempaArrayList.get(indexGempa).getNama()))){
                     startActivity(new Intent(getApplicationContext(),InputUmum.class));
+                    textFabRehabRekon.setVisibility(View.GONE);
+                    rehabRekonFab.setVisibility(View.GONE);
                 } else {
                     goToPickLocation(false);
                 }
