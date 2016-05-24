@@ -15,12 +15,20 @@ public class Pelapor {
 
     private int id;
     private Bitmap foto;
+    private String urlFoto;
     private String username;
     private String password;
     private String nama;
     private String alamat;
     private LatLng lokasi;
 
+
+    public Pelapor(String urlFoto, int id, String nama, String username) {
+        this.urlFoto = urlFoto;
+        this.id = id;
+        this.nama = nama;
+        this.username = username;
+    }
 
     public Pelapor(int id, Bitmap foto, String username, String password, String nama, String alamat, LatLng lokasi) {
         this.id = id;
@@ -30,6 +38,14 @@ public class Pelapor {
         this.nama = nama;
         this.alamat = alamat;
         this.lokasi = lokasi;
+    }
+
+    public String getUrlFoto() {
+        return urlFoto;
+    }
+
+    public void setUrlFoto(String urlFoto) {
+        this.urlFoto = urlFoto;
     }
 
     public LatLng getLokasi() {
