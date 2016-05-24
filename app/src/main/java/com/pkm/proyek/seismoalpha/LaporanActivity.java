@@ -78,64 +78,7 @@ public class LaporanActivity extends AppCompatActivity {
         }
 
         //menthod untuk menghandle onClick agar tidak ruwet disini
-        //menampilkan dan menghilangkan submenu fab
-
-        assert showFab != null;
-        showFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (fabHide) {
-                    showFloatingButton();
-                } else {
-                    hideFloatingButton();
-                }
-
-            }
-        });
-
-        layerPutih = findViewById(R.id.view_white_opacity);
-        textFabLaporan = (TextView)findViewById(R.id.text_fab_laporan);
-        textFabRehabRekon = (TextView)findViewById(R.id.text_fab_rehab_rekon);
-
-        layerPutih.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideFloatingButton();
-            }
-        });
-        //fab rehab rekon handling
-        rehabRekonFab = (FloatingActionButton)findViewById(R.id.fab_rehab_rekon);
-        assert rehabRekonFab != null;
-        rehabRekonFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToPickLocation(true);
-            }
-        });
-
-        fab=(FloatingActionButton)findViewById(R.id.fab);
-        assert fab != null;
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToPickLocation(false);
-            }
-        });
-
-        textFabLaporan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToPickLocation(false);
-            }
-        });
-
-        textFabRehabRekon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToPickLocation(true);
-            }
-        });
-
+        handleSetOnClick();
         try {
             getActionBar().setDisplayHomeAsUpEnabled(false);
         }catch (NullPointerException e){
@@ -209,6 +152,63 @@ public class LaporanActivity extends AppCompatActivity {
     }
 
     private void handleSetOnClick() {
+
+        //menampilkan dan menghilangkan submenu fab
+        assert showFab != null;
+        showFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fabHide) {
+                    showFloatingButton();
+                } else {
+                    hideFloatingButton();
+                }
+
+            }
+        });
+
+        layerPutih = findViewById(R.id.view_white_opacity);
+        textFabLaporan = (TextView)findViewById(R.id.text_fab_laporan);
+        textFabRehabRekon = (TextView)findViewById(R.id.text_fab_rehab_rekon);
+
+        layerPutih.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideFloatingButton();
+            }
+        });
+        //fab rehab rekon handling
+        rehabRekonFab = (FloatingActionButton)findViewById(R.id.fab_rehab_rekon);
+        assert rehabRekonFab != null;
+        rehabRekonFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPickLocation(true);
+            }
+        });
+
+        fab=(FloatingActionButton)findViewById(R.id.fab);
+        assert fab != null;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPickLocation(false);
+            }
+        });
+
+        textFabLaporan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPickLocation(false);
+            }
+        });
+
+        textFabRehabRekon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPickLocation(true);
+            }
+        });
 
     }
 }

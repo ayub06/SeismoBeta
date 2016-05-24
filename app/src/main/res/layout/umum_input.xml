@@ -1,314 +1,518 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:text="Korban"/>
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="5">
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_person_black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KORBAN"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"/>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Meninggal"/>
-        <EditText
-            android:layout_width="60dp"
+            android:text="Meninggal:"/>
+        <GridLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp"
-            android:id="@+id/umum_korban_meninggal_l" />
+            android:columnCount="2">
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:layout_width="48dp"
+                        android:id="@+id/umum_korban_meninggal_l"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:inputType="numberSigned"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"
+                        android:hint="0"
+                        android:singleLine="true"
+                        android:layout_marginEnd="8dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="laki-laki"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:layout_width="48dp"
+                        android:id="@+id/umum_korban_meninggal_p"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:inputType="numberSigned"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorAccent"
+                        android:hint="0"
+                        android:layout_marginEnd="8dp"
+                        android:singleLine="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="perempuan"/>
+                </LinearLayout>
+            </LinearLayout>
+        </GridLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="L"/>
-        <EditText
-            android:layout_width="60dp"
+            android:text="Luka Berat:"/>
+        <GridLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp"
-            android:id="@+id/umum_korban_meninggal_p" />
+            android:columnCount="2">
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:layout_width="48dp"
+                        android:id="@+id/umum_luka_berat_l"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:inputType="numberSigned"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"
+                        android:hint="0"
+                        android:singleLine="true"
+                        android:layout_marginEnd="8dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="laki-laki"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:layout_width="48dp"
+                        android:id="@+id/umum_luka_berat_p"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:inputType="numberSigned"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorAccent"
+                        android:hint="0"
+                        android:layout_marginEnd="8dp"
+                        android:singleLine="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="perempuan"/>
+                </LinearLayout>
+            </LinearLayout>
+        </GridLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="P"/>
+            android:text="Luka Ringan:"/>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:layout_width="48dp"
+                        android:id="@+id/umum_luka_ringan_l"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:inputType="numberSigned"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"
+                        android:hint="0"
+                        android:singleLine="true"
+                        android:layout_marginEnd="8dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="laki-laki"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:layout_width="48dp"
+                        android:id="@+id/umum_luka_ringan_p"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:inputType="numberSigned"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorAccent"
+                        android:hint="0"
+                        android:layout_marginEnd="8dp"
+                        android:singleLine="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="perempuan"/>
+                </LinearLayout>
+            </LinearLayout>
+        </GridLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hilang:"/>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:layout_width="48dp"
+                        android:id="@+id/umum_hilang_l"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:inputType="numberSigned"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"
+                        android:hint="0"
+                        android:singleLine="true"
+                        android:layout_marginEnd="8dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="laki-laki"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:layout_width="48dp"
+                        android:id="@+id/umum_hilang_p"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:inputType="numberSigned"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorAccent"
+                        android:hint="0"
+                        android:layout_marginEnd="8dp"
+                        android:singleLine="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="perempuan"/>
+                </LinearLayout>
+            </LinearLayout>
+        </GridLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_account_balance_black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INFRASTRUKTUR"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bangunan:"/>
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hancur"
+                android:textColor="#757575"
+                android:checked="false"
+                android:id="@+id/radio_bangunan_hancur" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rusak Berat"
+                android:textColor="#757575"
+                android:checked="false"
+                android:id="@+id/radio_bangunan_rusak_berat" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rusak Ringan"
+                android:textColor="#757575"
+                android:checked="false"
+                android:id="@+id/radio_bangunan_rusak_ringan" />
+        </RadioGroup>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Luka Berat"/>
-        <EditText
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp"
-            android:id="@+id/umum_luka_berat_l" />
-        <TextView
+            android:text="Jalan:"/>
+        <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="L"/>
-        <EditText
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp"
-            android:id="@+id/umum_luka_berat_p" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="P"/>
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hancur"
+                android:checked="false"
+                android:textColor="#757575"
+                android:id="@+id/radio_jalan_hancur" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rusak Berat"
+                android:textColor="#757575"
+                android:checked="false"
+                android:id="@+id/radio_jalan_rusak_berat" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rusak Ringan"
+                android:checked="false"
+                android:textColor="#757575"
+                android:id="@+id/radio_jalan_rusak_ringan" />
+        </RadioGroup>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Luka Ringan"/>
-        <EditText
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp"
-            android:id="@+id/umum_luka_ringan_l" />
-        <TextView
+            android:text="Jembatan:"/>
+        <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="L"/>
-        <EditText
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp"
-            android:id="@+id/umum_luka_ringan_p" />
-        <TextView
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hancur"
+                android:textColor="#757575"
+                android:checked="false"
+                android:id="@+id/radio_jembatan_hancur" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rusak Berat"
+                android:checked="false"
+                android:textColor="#757575"
+                android:id="@+id/radio_jembatan_rusak_berat" />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rusak Ringan"
+                android:checked="false"
+                android:textColor="#757575"
+                android:id="@+id/radio_jembatan_rusak_ringan" />
+        </RadioGroup>
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="P"/>
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:text="unggah foto"
+            android:background="@color/colorAccent"
+            android:textColor="@color/white"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:padding="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="end"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="Hilang"/>
-        <EditText
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp"
-            android:id="@+id/umum_hilang_l" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="L"/>
-        <EditText
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp"
-            android:id="@+id/umum_hilang_p" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="P"/>
-
-    </GridLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:text="Infrastruktur"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="Bangunan"/>
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hancur"
-            android:checked="false"
-            android:id="@+id/radio_bangunan_hancur" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rusak Berat"
-            android:checked="false"
-            android:id="@+id/radio_bangunan_rusak_berat" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rusak Ringan"
-            android:checked="false"
-            android:id="@+id/radio_bangunan_rusak_ringan" />
-    </RadioGroup>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="Jalan"/>
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hancur"
-            android:checked="false"
-            android:id="@+id/radio_jalan_hancur" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rusak Berat"
-            android:checked="false"
-            android:id="@+id/radio_jalan_rusak_berat" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rusak Ringan"
-            android:checked="false"
-            android:id="@+id/radio_jalan_rusak_ringan" />
-    </RadioGroup>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="Jembatan"/>
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hancur"
-            android:checked="false"
-            android:id="@+id/radio_jembatan_hancur" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rusak Berat"
-            android:checked="false"
-            android:id="@+id/radio_jembatan_rusak_berat" />
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rusak Ringan"
-            android:checked="false"
-            android:id="@+id/radio_jembatan_rusak_ringan" />
-    </RadioGroup>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@android:color/darker_gray"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:text="Bantuan"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center_vertical"
+                android:src="@mipmap/ic_favorite_black"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BANTUAN"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"/>
+        </LinearLayout>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nama Tempat"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:id="@+id/umum_bantuan_tempat" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
             android:hint="Alamat Tempat"
+            android:textSize="14sp"
             android:id="@+id/umum_bantuan_alamat" />
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="5">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:text="Jumlah Pengungsi"/>
+            android:text="Jumlah Pengungsi:"/>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2">
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:layout_width="48dp"
+                        android:id="@+id/umum_jml_pengungsi_l"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:inputType="numberSigned"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"
+                        android:hint="0"
+                        android:singleLine="true"
+                        android:layout_marginEnd="8dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="laki-laki"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:layout_width="48dp"
+                        android:id="@+id/umum_jml_pengungsi_p"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:inputType="numberSigned"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorAccent"
+                        android:hint="0"
+                        android:layout_marginEnd="8dp"
+                        android:singleLine="true"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="perempuan"/>
+                </LinearLayout>
+            </LinearLayout>
+        </GridLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kebutuhan:"/>
         <EditText
-            android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp"
-            android:id="@+id/umum_jml_pengungsi_l" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:text="L"/>
-        <EditText
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp"
-            android:id="@+id/umum_jml_pengungsi_p" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:text="P"/>
-    </GridLayout>
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="4">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kebutuhan"
-            android:textSize="16sp"/>
-        <EditText
-            android:layout_height="wrap_content"
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
+            android:hint="Kebutuhaan yang diperlukan"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"
             android:id="@+id/umum_kebutuhan" />
         <TextView
             android:layout_width="wrap_content"
             android:text="Kuantiti"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"/>
+            android:layout_height="wrap_content"/>
         <EditText
-            android:layout_width="60dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Jumlah kebutuhan"
+            android:textSize="14sp"
+            android:textColor="@color/colorAccent"
             android:id="@+id/umum_kuantiti" />
-    </GridLayout>
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

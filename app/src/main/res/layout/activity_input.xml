@@ -210,10 +210,10 @@
                     android:layout_width="48dp"
                     android:textColor="@color/colorAccent"
                     android:textSize="14sp"
+                    android:singleLine="true"
                     android:textAlignment="center"
                     android:layout_height="wrap_content"
                     android:hint="0"
-                    android:singleLine="true"
                     android:inputType="numberSigned|numberDecimal"
                     android:id="@+id/input_rusak_ringan"
                     android:layout_gravity="center_vertical"/>
