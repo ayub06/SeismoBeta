@@ -38,7 +38,7 @@ public class LaporanActivity extends AppCompatActivity {
     private TextView textFabRehabRekon;
     private FloatingActionButton rehabRekonFab;
     private FloatingActionButton fab;
-    FloatingActionButton showFab;
+    private FloatingActionButton showFab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,72 +70,16 @@ public class LaporanActivity extends AppCompatActivity {
         new loadFromAPI().execute(
                 new Pair<Context, String>(this, String.valueOf(indexGempa))
         );
-        showFab = (FloatingActionButton)findViewById(R.id.fab_show);
+
+        /*showFab = (FloatingActionButton)findViewById(R.id.fab_show);
         if(LoginActivity.umum||
                 !(Pelapor.akunIni.getAlamat().contains(Gempa.gempaArrayList.get(indexGempa).getNama()))){
             assert showFab != null;
             showFab.setVisibility(View.GONE);
-        }
+        }*/
 
-        //menthod untuk menghandle onClick agar tidak ruwet disini
-        //menampilkan dan menghilangkan submenu fab
-
-        assert showFab != null;
-        showFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (fabHide) {
-                    showFloatingButton();
-                } else {
-                    hideFloatingButton();
-                }
-
-            }
-        });
-
-        layerPutih = findViewById(R.id.view_white_opacity);
-        textFabLaporan = (TextView)findViewById(R.id.text_fab_laporan);
-        textFabRehabRekon = (TextView)findViewById(R.id.text_fab_rehab_rekon);
-
-        layerPutih.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideFloatingButton();
-            }
-        });
-        //fab rehab rekon handling
-        rehabRekonFab = (FloatingActionButton)findViewById(R.id.fab_rehab_rekon);
-        assert rehabRekonFab != null;
-        rehabRekonFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToPickLocation(true);
-            }
-        });
-
-        fab=(FloatingActionButton)findViewById(R.id.fab);
-        assert fab != null;
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToPickLocation(false);
-            }
-        });
-
-        textFabLaporan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToPickLocation(false);
-            }
-        });
-
-        textFabRehabRekon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToPickLocation(true);
-            }
-        });
-
+        //menthod untuk menghandle onClick dan fab agar tidak ruwet disini
+        handleSetOnClick();
         try {
             getActionBar().setDisplayHomeAsUpEnabled(false);
         }catch (NullPointerException e){
@@ -162,6 +106,7 @@ public class LaporanActivity extends AppCompatActivity {
     }
 
 
+/*
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -179,6 +124,7 @@ public class LaporanActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+*/
 
     private void goToPickLocation(boolean fromRehab){
         Bundle bundle=new Bundle();
@@ -209,6 +155,78 @@ public class LaporanActivity extends AppCompatActivity {
     }
 
     private void handleSetOnClick() {
+
+        layerPutih = findViewById(R.id.view_white_opacity);
+        textFabLaporan = (TextView)findViewById(R.id.text_fab_laporan);
+        textFabRehabRekon = (TextView)findViewById(R.id.text_fab_rehab_rekon);
+        rehabRekonFab = (FloatingActionButton)findViewById(R.id.fab_rehab_rekon);
+        showFab = (FloatingActionButton)findViewById(R.id.fab_show);
+        //menampilkan dan menghilangkan submenu fab
+        assert showFab != null;
+        showFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (fabHide) {
+                    showFloatingButton();
+
+                    //hide fab untuk rehab rekon jika user umum
+                    if(LoginActivity.umum||
+                            !(Pelapor.akunIni.getAlamat().contains(Gempa.gempaArrayList.get(indexGempa).getNama()))){
+                        textFabRehabRekon.setVisibility(View.GONE);
+                        rehabRekonFab.setVisibility(View.GONE);
+                    }
+
+                } else {
+                    hideFloatingButton();
+                }
+
+            }
+        });
+
+        layerPutih.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideFloatingButton();
+            }
+        });
+        //fab rehab rekon handling
+        assert rehabRekonFab != null;
+        rehabRekonFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPickLocation(true);
+            }
+        });
+
+        fab=(FloatingActionButton)findViewById(R.id.fab);
+        assert fab != null;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(LoginActivity.umum||
+                        !(Pelapor.akunIni.getAlamat().contains(Gempa.gempaArrayList.get(indexGempa).getNama()))){
+                    startActivity(new Intent(getApplicationContext(),InputUmum.class));
+                    textFabRehabRekon.setVisibility(View.GONE);
+                    rehabRekonFab.setVisibility(View.GONE);
+                } else {
+                    goToPickLocation(false);
+                }
+            }
+        });
+
+        textFabLaporan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPickLocation(false);
+            }
+        });
+
+        textFabRehabRekon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToPickLocation(true);
+            }
+        });
 
     }
 }

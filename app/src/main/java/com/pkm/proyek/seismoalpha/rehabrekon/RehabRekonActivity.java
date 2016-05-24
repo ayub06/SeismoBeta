@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.pkm.proyek.seismoalpha.R;
+import com.pkm.proyek.seismoalpha.rehabrekon.bantuan.InputDataBantuanActiviy;
 import com.pkm.proyek.seismoalpha.rehabrekon.kerusakan.InputKerusakanActivity;
 import com.pkm.proyek.seismoalpha.rehabrekon.korban.InputKorbanActivity;
 
@@ -56,7 +57,7 @@ public class RehabRekonActivity extends AppCompatActivity {
         bantuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getApplicationContext(), InputDataBantuanActiviy.class));
             }
         });
     }

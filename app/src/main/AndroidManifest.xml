@@ -91,6 +91,18 @@
         </activity>
 
         <activity
+            android:name=".InputUmum"
+            android:label="Input Umum">
+
+        </activity>
+        <activity
+            android:name=".rehabrekon.bantuan.InputDataBantuanActiviy"
+            android:label="Data Bantuan">
+
+        </activity>
+
+
+        <activity
             android:name=".rehabrekon.korban.InputKorbanActivity"
             android:label="@string/title_activity_input_korban"
             android:parentActivityName=".rehabrekon.RehabRekonActivity"

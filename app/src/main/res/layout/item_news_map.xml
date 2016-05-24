@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gempa "
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
             <TextView
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="Bantul"
                 android:id="@+id/lokasi_gempa"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
             <TextView
@@ -43,13 +43,13 @@
                 android:layout_height="wrap_content"
                 android:text="5,9"
                 android:id="@+id/skala_gempa"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="@color/white"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" SR"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textColor="@color/white"/>
         </LinearLayout>
         <TextView
@@ -57,104 +57,99 @@
             android:layout_height="wrap_content"
             android:text="21 Maret 2016"
             android:id="@+id/tanggal_gempa"
-            android:textSize="18sp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Korban:"
+            android:text="Korban:"
             android:textStyle="bold"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"/>
         <GridLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp">
             <TextView
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Korban jiwa"
-                android:textSize="18sp"
-                android:textColor="@color/black" />
+                android:text="Korban jiwa" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_gravity="end"
                 android:id="@+id/total_korban_jiwa" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Luka berat"
-                android:textSize="18sp"
-                android:textColor="@color/black" />
+                android:text="Luka berat" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="20"
-                android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_gravity="end"
+                android:textColor="@color/colorAccent"
                 android:id="@+id/total_luka_berat" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Luka ringan"
-                android:textSize="18sp"
-                android:textColor="@color/black" />
+                android:text="Luka ringan" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="48"
-                android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_gravity="end"
                 android:id="@+id/total_luka_ringan" />
         </GridLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Kerusakan:"
+            android:text="Kerusakan:"
             android:textStyle="bold"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"/>
         <GridLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp">
             <TextView
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rusak berat"
-                android:textSize="18sp"
-                android:textColor="@color/black" />
+                android:text="Rusak berat" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="41"
-                android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_gravity="end"
                 android:id="@+id/total_rusak_berat" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rusak ringan"
-                android:textSize="18sp"
-                android:textColor="@color/black" />
+                android:text="Rusak ringan" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="128"
-                android:textSize="18sp"
-                android:textColor="@color/black"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:layout_gravity="end"
                 android:id="@+id/total_rusak_ringan" />
         </GridLayout>
         <LinearLayout
