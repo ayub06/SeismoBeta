@@ -1,30 +1,28 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.laporan.tim;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.Pair;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.pkm.proyek.seismoalpha.main.Gempa;
+import com.pkm.proyek.seismoalpha.InputUmum;
+import com.pkm.proyek.seismoalpha.LoginActivity;
+import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
+import com.pkm.proyek.seismoalpha.maps.PickLocation;
+import com.pkm.proyek.seismoalpha.R;
+import com.pkm.proyek.seismoalpha.loadFromAPI;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class LaporanActivity extends AppCompatActivity {
 

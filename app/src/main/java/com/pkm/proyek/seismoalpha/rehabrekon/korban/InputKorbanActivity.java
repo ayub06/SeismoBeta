@@ -14,9 +14,9 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 
-import com.pkm.proyek.seismoalpha.LaporanActivity;
-import com.pkm.proyek.seismoalpha.Pelapor;
-import com.pkm.proyek.seismoalpha.PickLocation;
+import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
+import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
+import com.pkm.proyek.seismoalpha.maps.PickLocation;
 import com.pkm.proyek.seismoalpha.R;
 import com.pkm.proyek.seismoalpha.loadFromAPI;
 import com.pkm.proyek.seismoalpha.rehabrekon.RehabRekonActivity;

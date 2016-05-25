@@ -1,18 +1,19 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.main;
 
-import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.Pair;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.pkm.proyek.seismoalpha.ImageRound;
+import com.pkm.proyek.seismoalpha.LoginActivity;
+import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
+import com.pkm.proyek.seismoalpha.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setAkunIni(String username) {
-        for(int i=0;i<Pelapor.pelaporArrayList.size();i++){
+        for(int i = 0; i< Pelapor.pelaporArrayList.size(); i++){
             if(Pelapor.pelaporArrayList.get(i).getUsername().equals(username)){
                 Pelapor.akunIni=Pelapor.pelaporArrayList.get(i);
                 Log.d("PELAPOR AKUN INI","OK");

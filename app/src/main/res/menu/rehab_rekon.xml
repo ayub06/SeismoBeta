@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.pkm.proyek.seismoalpha.LaporanActivity">
+    tools:context=".laporan.tim.LaporanActivity">
     <item
         android:id="@+id/rehab_rek"
         android:title="@string/rehab_rekon"

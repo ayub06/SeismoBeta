@@ -11,6 +11,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
+import com.pkm.proyek.seismoalpha.maps.PickLocation;
+import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.seismosense.backend.laporanApi.model.Laporan;
 public class InputActivity extends AppCompatActivity {
 

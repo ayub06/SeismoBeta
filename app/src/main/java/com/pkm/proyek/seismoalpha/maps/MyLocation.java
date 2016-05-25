@@ -1,4 +1,4 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.maps;
 
 import android.Manifest;
 import android.app.Activity;

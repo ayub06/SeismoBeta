@@ -44,22 +44,22 @@
         <activity
             android:name=".InputActivity"
             android:label="Lapor"
-            android:parentActivityName=".LaporanActivity">
+            android:parentActivityName=".laporan.tim.LaporanActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.pkm.proyek.seismoalpha.LaporanActivity" />
+                android:value=".laporan.tim.LaporanActivity" />
             <!-- Parent activity meta-data to support 4.0 and lower -->
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".main.MainActivity"
             android:label="Seismo Sense" />
         <activity
-            android:name=".LaporanActivity"
+            android:name=".laporan.tim.LaporanActivity"
             android:label="Laporan"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.pkm.proyek.seismoalpha.MainActivity" />
+                android:value=".main.MainActivity" />
         </activity>
 
         <meta-data
@@ -67,7 +67,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".maps.MapsActivity"
             android:label="@string/app_name">
             <intent-filter>
 
@@ -77,11 +77,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PickLocation"
+            android:name=".maps.PickLocation"
             android:label="@string/title_activity_pick_location">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.pkm.proyek.seismoalpha.LaporanActivity" />
+                android:value=".laporan.tim.LaporanActivity" />
         </activity>
 
         <activity

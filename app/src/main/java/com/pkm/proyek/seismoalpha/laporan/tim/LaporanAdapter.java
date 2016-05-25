@@ -1,9 +1,8 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.laporan.tim;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,9 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.lang.reflect.AccessibleObject;
+import com.pkm.proyek.seismoalpha.maps.MapsActivity;
+import com.pkm.proyek.seismoalpha.R;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.PersonViewHolder>{
 

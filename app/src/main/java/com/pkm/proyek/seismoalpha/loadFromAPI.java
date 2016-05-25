@@ -13,11 +13,19 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
+import com.pkm.proyek.seismoalpha.laporan.tim.Laporan;
+import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
+import com.pkm.proyek.seismoalpha.main.Gempa;
+import com.pkm.proyek.seismoalpha.main.GempaAdapter;
+import com.pkm.proyek.seismoalpha.main.MainActivity;
+import com.pkm.proyek.seismoalpha.maps.MapsActivity;
+import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.proyek.seismoalpha.rehabrekon.kerusakan.InputKerusakanActivity;
 import com.pkm.proyek.seismoalpha.rehabrekon.korban.InputKorbanActivity;
 import com.pkm.seismosense.backend.kerusakanApi.KerusakanApi;
 import com.pkm.seismosense.backend.kerusakanLainApi.KerusakanLainApi;
 import com.pkm.seismosense.backend.korbanApi.KorbanApi;
+import com.pkm.seismosense.backend.laporanUmumApi.LaporanUmumApi;
 import com.pkm.seismosense.backend.myApi.MyApi;
 import com.pkm.seismosense.backend.pelaporApi.PelaporApi;
 import com.pkm.seismosense.backend.laporanApi.LaporanApi;
@@ -36,6 +44,7 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
     public static final int SYNC_MODE_POST_KORBAN_RR=4;
     public static final int SYNC_MODE_POST_KERUSAKAN_RR=5;
     public static final int SYNC_MODE_POST_KERUSAKAN_LAIN_RR=6;
+    public static final int SYNC_MODE_POST_LAPORAN_UMUM=7;
 
     public static int from;
     public static final int MAIN_ACTIVITY=-1;
@@ -50,6 +59,7 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
     private static KorbanApi korbanApi  =   null;
     private static KerusakanApi kerusakanApi  =   null;
     private static KerusakanLainApi kerusakanLainApi  =   null;
+    private static LaporanUmumApi laporanUmumApi=   null;
 
     private Context context;
     private String username;
@@ -239,7 +249,7 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
 
                     //Getting Pelapor Index
                     int indexPelapor=0;
-                    for(int j=0;j<Pelapor.pelaporArrayList.size();j++){
+                    for(int j = 0; j< Pelapor.pelaporArrayList.size(); j++){
                         if(Pelapor.pelaporArrayList.get(j).getUsername().equals(laporanList.get(i).getUsernamePelapor())){
                             indexPelapor=j;
                         }
@@ -414,6 +424,35 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
         Log.d("here",name);
         try {
             return myApiService.sayHi(name).execute().getData();
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+    }
+
+    private String setLaporanUmumSync(Pair<Context, String>[] params) {
+        if(laporanUmumApi== null) {  // Only do this once
+            LaporanUmumApi.Builder builder = new LaporanUmumApi.Builder(AndroidHttp.newCompatibleTransport(),
+                    new AndroidJsonFactory(), null)
+                    .setRootUrl(URL_ROOT)
+                    /*.setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
+                        @Override
+                        public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
+                            abstractGoogleClientRequest.setDisableGZipContent(true);
+                        }
+                    })*/;
+            laporanUmumApi= builder.build();
+        }
+        context = params[0].first;
+
+        try {
+
+            //LOAD INPUT LAPORAN UMUM FOR SAVE (Tunggu Fata Dulu)
+            String result= String.valueOf(laporanApi.insert(InputActivity.laporanSave).execute().getId());
+            if (result.isEmpty()){
+                return "0";
+            }else {
+                return "1";
+            }
         } catch (IOException e) {
             return e.getMessage();
         }

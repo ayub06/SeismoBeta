@@ -1,4 +1,4 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.pelapor;
 
 import android.graphics.Bitmap;
 

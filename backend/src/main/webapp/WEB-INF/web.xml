@@ -18,7 +18,9 @@
                 com.pkm.seismosense.backend.PelaporEndpoint,
                 com.pkm.seismosense.backend.KorbanEndpoint,
                 com.pkm.seismosense.backend.KerusakanEndpoint,
-                com.pkm.seismosense.backend.KerusakanLainEndpoint</param-value>
+                com.pkm.seismosense.backend.KerusakanLainEndpoint,
+                com.pkm.seismosense.backend.BantuanEndpoint,
+                com.pkm.seismosense.backend.LaporanUmumEndpoint</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

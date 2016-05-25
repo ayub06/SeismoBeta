@@ -1,4 +1,4 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.maps;
 
 import android.content.Intent;
 import android.location.Address;
@@ -18,6 +18,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.pkm.proyek.seismoalpha.InputActivity;
+import com.pkm.proyek.seismoalpha.R;
+import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.proyek.seismoalpha.rehabrekon.RehabRekonActivity;
 
 import java.io.IOException;
@@ -76,7 +79,7 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
         //LatLng sydney = new LatLng(-34, 151);
 
         if (position==null){
-            position=Pelapor.akunIni.getLokasi();
+            position= Pelapor.akunIni.getLokasi();
         }
         Log.d("POSISI",position.toString());
         showLokasi(position);

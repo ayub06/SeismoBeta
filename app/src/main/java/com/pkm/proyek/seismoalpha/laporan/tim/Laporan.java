@@ -1,6 +1,8 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.laporan.tim;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.pkm.proyek.seismoalpha.main.Gempa;
+import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 
 import java.util.ArrayList;
 import java.util.Calendar;

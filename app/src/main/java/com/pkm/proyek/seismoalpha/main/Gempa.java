@@ -1,11 +1,10 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.main;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
 
 /**
  * Created by Shalahudin Al Ayyub on 26/03/2016.

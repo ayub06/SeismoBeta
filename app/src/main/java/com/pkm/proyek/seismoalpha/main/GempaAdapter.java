@@ -1,10 +1,8 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.main;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.Pair;
@@ -13,7 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.pkm.proyek.seismoalpha.R;
+import com.pkm.proyek.seismoalpha.laporan.tim.Laporan;
+import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
+import com.pkm.proyek.seismoalpha.loadFromAPI;
 
 import java.util.ArrayList;
 import java.util.List;
