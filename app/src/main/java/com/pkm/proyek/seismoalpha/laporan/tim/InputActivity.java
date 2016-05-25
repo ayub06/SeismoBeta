@@ -1,4 +1,4 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.laporan.tim;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,7 +12,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
+import com.pkm.proyek.seismoalpha.R;
+import com.pkm.proyek.seismoalpha.util.loadFromAPI;
 import com.pkm.proyek.seismoalpha.maps.PickLocation;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.seismosense.backend.laporanApi.model.Laporan;

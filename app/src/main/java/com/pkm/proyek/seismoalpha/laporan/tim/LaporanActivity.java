@@ -16,11 +16,11 @@ import android.widget.TextView;
 
 import com.pkm.proyek.seismoalpha.main.Gempa;
 import com.pkm.proyek.seismoalpha.InputUmum;
-import com.pkm.proyek.seismoalpha.LoginActivity;
+import com.pkm.proyek.seismoalpha.pelapor.LoginActivity;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.proyek.seismoalpha.maps.PickLocation;
 import com.pkm.proyek.seismoalpha.R;
-import com.pkm.proyek.seismoalpha.loadFromAPI;
+import com.pkm.proyek.seismoalpha.util.loadFromAPI;
 
 import java.util.ArrayList;
 

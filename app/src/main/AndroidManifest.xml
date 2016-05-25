@@ -33,7 +33,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".pelapor.LoginActivity"
             android:label="Seismo Sense">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".InputActivity"
+            android:name=".laporan.tim.InputActivity"
             android:label="Lapor"
             android:parentActivityName=".laporan.tim.LaporanActivity">
             <meta-data

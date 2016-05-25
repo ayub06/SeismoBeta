@@ -1,4 +1,4 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.util;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

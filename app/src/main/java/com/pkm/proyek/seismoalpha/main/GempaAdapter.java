@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.pkm.proyek.seismoalpha.R;
 import com.pkm.proyek.seismoalpha.laporan.tim.Laporan;
 import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
-import com.pkm.proyek.seismoalpha.loadFromAPI;
+import com.pkm.proyek.seismoalpha.util.loadFromAPI;
 
 import java.util.ArrayList;
 import java.util.List;

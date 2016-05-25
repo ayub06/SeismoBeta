@@ -1,4 +1,4 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.pelapor;
 
 
 import android.content.Context;
@@ -31,9 +31,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
+import com.pkm.proyek.seismoalpha.R;
+import com.pkm.proyek.seismoalpha.util.loadFromAPI;
 import com.pkm.proyek.seismoalpha.main.MainActivity;
 import com.pkm.proyek.seismoalpha.maps.MyLocation;
-import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.seismosense.backend.pelaporApi.PelaporApi;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.pkm.proyek.seismoalpha;
+package com.pkm.proyek.seismoalpha.util;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,12 +13,14 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
+import com.pkm.proyek.seismoalpha.laporan.tim.InputActivity;
 import com.pkm.proyek.seismoalpha.laporan.tim.Laporan;
 import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
 import com.pkm.proyek.seismoalpha.main.Gempa;
 import com.pkm.proyek.seismoalpha.main.GempaAdapter;
 import com.pkm.proyek.seismoalpha.main.MainActivity;
 import com.pkm.proyek.seismoalpha.maps.MapsActivity;
+import com.pkm.proyek.seismoalpha.pelapor.LoginActivity;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.proyek.seismoalpha.rehabrekon.kerusakan.InputKerusakanActivity;
 import com.pkm.proyek.seismoalpha.rehabrekon.korban.InputKorbanActivity;

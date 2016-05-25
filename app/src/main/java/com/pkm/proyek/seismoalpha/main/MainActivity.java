@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.pkm.proyek.seismoalpha.ImageRound;
-import com.pkm.proyek.seismoalpha.LoginActivity;
+import com.pkm.proyek.seismoalpha.util.ImageRound;
+import com.pkm.proyek.seismoalpha.pelapor.LoginActivity;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.proyek.seismoalpha.R;
 

@@ -18,7 +18,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.pkm.proyek.seismoalpha.InputActivity;
+import com.pkm.proyek.seismoalpha.laporan.tim.InputActivity;
 import com.pkm.proyek.seismoalpha.R;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.proyek.seismoalpha.rehabrekon.RehabRekonActivity;
