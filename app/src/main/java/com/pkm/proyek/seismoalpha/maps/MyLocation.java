@@ -90,7 +90,7 @@ public class MyLocation extends AsyncTask<Activity,Void,Boolean> implements
         // Note that this can be NULL if last location isn't already known.
         if (mCurrentLocation != null) {
             // Print current location if not null and getLocation
-            Toast.makeText(activity.getApplicationContext(), "LASTLOCATION" + mCurrentLocation.toString(),Toast.LENGTH_SHORT).show();
+//            Toast.makeText(activity.getApplicationContext(), "LASTLOCATION" + mCurrentLocation.toString(),Toast.LENGTH_SHORT).show();
             Log.d("DEBUG", "current location: " + mCurrentLocation.toString());
             PickLocation.position= new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude());
         }else {
@@ -121,7 +121,7 @@ public class MyLocation extends AsyncTask<Activity,Void,Boolean> implements
         String msg = "Updated Location: " +
                 Double.toString(location.getLatitude()) + "," +
                 Double.toString(location.getLongitude());
-        Toast.makeText(activity.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(activity.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
         // You can now create a LatLng Object for use with maps
         PickLocation.position= new LatLng(location.getLatitude(), location.getLongitude());
         if(PickLocation.position!=null){
