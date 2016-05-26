@@ -1,141 +1,154 @@
 package com.pkm.proyek.seismoalpha;
 
-import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
+import android.os.Bundle;
+import android.util.Pair;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.RadioButton;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
+import com.pkm.proyek.seismoalpha.maps.PickLocation;
+import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
+import com.pkm.seismosense.backend.laporanApi.model.Laporan;
 public class InputUmum extends AppCompatActivity {
-    EditText inputMeninggalL;
-    EditText inputMeninggalP;
-    EditText inputLukaBeratL;
-    EditText inputLukaBeratP;
-    EditText inputLukaRinganL;
-    EditText inputLukaRinganP;
-    EditText inputHilangL;
-    EditText inputHilangP;
-    EditText inputTempat;
-    EditText inputAlamat;
-    EditText inputPengungsiL;
-    EditText inputPengungsiP;
-    EditText inputKebutuhan;
-    EditText inputKuantiti;
 
-    Button btnFotoBangunan;
-    Button btnFotoJalan;
-    Button btnFotoJembatan;
+//    public static com.pkm.seismosense.backend.laporanApi.model.Laporan laporanSave;
 
-    RadioButton radioBangunanHancur;
-    RadioButton radioBangunanRusakBerat;
-    RadioButton radioBangunanRusakRingan;
-    RadioButton radioJalanHancur;
-    RadioButton radioJalanRusakBerat;
-    RadioButton radioJalanRusakRingan;
-    RadioButton radioJembatanHancur;
-    RadioButton radioJembatanRusakBerat;
-    RadioButton radioJembatanRusakRingan;
+    EditText inputKorbanJiwa;
+    EditText inputLukaBerat;
+    EditText inputLukaRingan;
+    EditText inputRusakBerat;
+    EditText inputRusakRingan;
 
-    String namaTempat;
-    String alamatTempat;
-    int jmlMeninggalL;
-    int jmlMeninggalP;
-    int jmlLukaBeratL;
-    int jmlLukaBeratP;
-    int jmlLukaRinganL;
-    int jmlLukaRinganP;
-    int jmlHilangL;
-    int jmlHilangP;
-    int jmlPengungsiL;
-    int jmlPengungsiP;
-    String kebutuhan;
-    int kuantiti;
+
+    String korbanJiwa;
+    String lukaBerat;
+    String lukaRingan;
+    String rusakBerat;
+    String rusakRingan;
+    Double longitude, latitude;
+    //String lokasiLaporan;
+    //private LocationManager locationManager;
+    private static Activity activity;
+    public static ProgressBar loading;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.umum_input);
-        inputTempat = (EditText)findViewById(R.id.umum_bantuan_tempat);
-        inputAlamat = (EditText)findViewById(R.id.umum_bantuan_alamat);
-        inputKebutuhan = (EditText)findViewById(R.id.umum_kebutuhan);
-        inputKuantiti = (EditText)findViewById(R.id.umum_kuantiti);
-        inputMeninggalL = (EditText)findViewById(R.id.umum_korban_meninggal_l);
-        inputMeninggalP = (EditText)findViewById(R.id.umum_korban_meninggal_p);
-        inputLukaBeratL = (EditText)findViewById(R.id.umum_luka_berat_l);
-        inputLukaBeratP = (EditText)findViewById(R.id.umum_luka_berat_p);
-        inputLukaRinganL = (EditText)findViewById(R.id.umum_luka_ringan_l);
-        inputLukaRinganP = (EditText)findViewById(R.id.umum_luka_ringan_p);
-        inputHilangL = (EditText)findViewById(R.id.umum_hilang_l);
-        inputHilangP = (EditText)findViewById(R.id.umum_hilang_p);
-        inputPengungsiL = (EditText)findViewById(R.id.umum_jml_pengungsi_l);
-        inputPengungsiP = (EditText)findViewById(R.id.umum_jml_pengungsi_p);
+        setContentView(R.layout.activity_input);
 
-        radioBangunanHancur = (RadioButton)findViewById(R.id.radio_bangunan_hancur);
-        radioBangunanRusakBerat = (RadioButton)findViewById(R.id.radio_bangunan_rusak_berat);
-        radioBangunanRusakRingan = (RadioButton)findViewById(R.id.radio_bangunan_rusak_ringan);
-        radioJalanHancur = (RadioButton)findViewById(R.id.radio_jalan_hancur);
-        radioJalanRusakBerat = (RadioButton)findViewById(R.id.radio_jalan_rusak_berat);
-        radioJalanRusakRingan = (RadioButton)findViewById(R.id.radio_jalan_rusak_ringan);
-        radioJembatanHancur = (RadioButton)findViewById(R.id.radio_jembatan_hancur);
-        radioJembatanRusakBerat = (RadioButton)findViewById(R.id.radio_jembatan_rusak_berat);
-        radioJembatanRusakRingan = (RadioButton)findViewById(R.id.radio_jembatan_rusak_ringan);
+        activity=this;
+        //Loading init
+        loading = (ProgressBar) findViewById(R.id.loading);
+        loadStop();
 
-        //menghandle kondisi ketika radiobutton diklik
-        //dipisahkan antara bangunan, jalan, dan jembatan
-        onRadioBangunanClicked();
-        onRadioJalanClicked();
-        onRadioJembatanClicked();
-    }
+        //Gempa apa ini?
+        //Bundle bundle = getIntent().getExtras();
+        //indexGempa = bundle.getInt("gempaid");
 
-    private void getInputData() {
-        namaTempat = inputTempat.getText().toString();
-        alamatTempat = inputAlamat.getText().toString();
-        kebutuhan = inputKebutuhan.getText().toString();
-        jmlMeninggalL = Integer.valueOf(inputMeninggalL.getText().toString());
-        jmlMeninggalL = Integer.valueOf(inputMeninggalL.getText().toString());
-        jmlMeninggalP = Integer.valueOf(inputMeninggalP.getText().toString());
-        jmlLukaBeratL = Integer.valueOf(inputLukaBeratL.getText().toString());
-        jmlLukaBeratP = Integer.valueOf(inputLukaBeratP.getText().toString());
-        jmlLukaRinganL = Integer.valueOf(inputLukaRinganL.getText().toString());
-        jmlLukaRinganP = Integer.valueOf(inputLukaRinganP.getText().toString());
-        jmlHilangL = Integer.valueOf(inputHilangL.getText().toString());
-        jmlHilangP = Integer.valueOf(inputHilangP.getText().toString());
-        jmlPengungsiL = Integer.valueOf(inputPengungsiL.getText().toString());
-        jmlPengungsiP = Integer.valueOf(inputPengungsiP.getText().toString());
-        kuantiti = Integer.valueOf(inputKuantiti.getText().toString());
-    }
+        //Init View
+        inputKorbanJiwa = (EditText) findViewById(R.id.input_korban_jiwa);
+        inputLukaBerat = (EditText) findViewById(R.id.input_luka_berat);
+        inputLukaRingan = (EditText) findViewById(R.id.input_luka_ringan);
 
-    private void onRadioBangunanClicked(){
-        if(radioBangunanHancur.isChecked()){
-            //bangunan hancur
-        }
-        else if(radioBangunanRusakBerat.isChecked()){
-            //bangunan rusak berat
-        }
-        else if(radioBangunanRusakRingan.isChecked()){
-            //bangunan rusak ringan
+        inputRusakBerat = (EditText) findViewById(R.id.input_rusak_berat);
+        inputRusakRingan = (EditText) findViewById(R.id.input_rusak_ringan);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ambilDataInput();
+                saveLaporan();
+            }
+        });
+
+        try {
+            getActionBar().setDisplayHomeAsUpEnabled(false);
+        }catch (NullPointerException e){
+            e.printStackTrace();
         }
     }
 
-    private void onRadioJalanClicked(){
-        if(radioJalanHancur.isChecked()){
-            //jalan hancur
+    private void saveLaporan() {
+
+        /*//Create Laporan Entity, it will be saved in Google Datastore
+        laporanSave = new Laporan();
+        laporanSave.setGempaId(String.valueOf(LaporanActivity.indexGempa));
+        laporanSave.setUsernamePelapor(Pelapor.akunIni.getUsername());
+        laporanSave.setLokasiLat(PickLocation.position.latitude);   //LOKASI BASED ON LOCATION PICKER
+        laporanSave.setLokasiLng(PickLocation.position.longitude);  //LOKASI BASED ON LOCATION PICKER
+        if (PickLocation.positionAddress.contains("Gagal")){
+            laporanSave.setAlamat(Pelapor.akunIni.getAlamat());
+        }else {
+            laporanSave.setAlamat(PickLocation.positionAddress);
         }
-        else if(radioJalanRusakBerat.isChecked()){
-            //jalan rusak berat
+        laporanSave.setJumlahKorban(Integer.parseInt(korbanJiwa));
+        laporanSave.setLukaBerat(Integer.parseInt(lukaBerat));
+        laporanSave.setLukaRingan(Integer.parseInt(lukaRingan));
+        laporanSave.setRusakBerat(Integer.parseInt(rusakBerat));
+        laporanSave.setRusakRingan(Integer.parseInt(rusakRingan));
+
+        //Store Now
+        loadFromAPI.sync_mode = loadFromAPI.SYNC_MODE_POST_LAPORAN;
+        new loadFromAPI().execute(
+                new Pair<Context, String>(this, String.valueOf(LaporanActivity.indexGempa))
+        );*/
+    }
+
+
+    private void ambilDataInput() {
+        //Get Location Pelapor
+        latitude=Pelapor.akunIni.getLokasi().latitude;
+        longitude=Pelapor.akunIni.getLokasi().longitude;
+
+        //Get the text and prevent null
+        korbanJiwa = inputKorbanJiwa.getText().toString();
+        if (korbanJiwa.isEmpty()) {
+            korbanJiwa = "0";
         }
-        else if(radioJalanRusakRingan.isChecked()){
-            //jalan rusak ringan
+        lukaBerat = inputLukaBerat.getText().toString();
+        if (lukaBerat.isEmpty()) {
+            lukaBerat = "0";
+        }
+        lukaRingan = inputLukaRingan.getText().toString();
+        if (lukaRingan.isEmpty()) {
+            lukaRingan = "0";
+        }
+        rusakBerat = inputRusakBerat.getText().toString();
+        if (rusakBerat.isEmpty()) {
+            rusakBerat = "0";
+        }
+        rusakRingan = inputRusakRingan.getText().toString();
+        if (rusakRingan.isEmpty()) {
+            rusakRingan = "0";
         }
     }
 
-    private void onRadioJembatanClicked(){
-        if(radioJembatanHancur.isChecked()){
-            //jembatan hancur
-        }
-        else if(radioJembatanRusakBerat.isChecked()){
-            //jembatan rusak berat
-        }
-        else if(radioJembatanRusakRingan.isChecked()){
-            //jembatan rusak ringan
-        }
+    public static void loadStart() {
+        loading.setVisibility(View.VISIBLE);
     }
+
+    public static void loadStop() {
+        loading.setVisibility(View.GONE);
+    }
+
+    public static void failed(Context context) {
+        Toast.makeText(context, "Laporan Tidak Terkirim", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void success(Context context) {
+        Toast.makeText(context, "Laporan Berhasil Terkirim", Toast.LENGTH_SHORT).show();
+        NavUtils.navigateUpFromSameTask(activity);
+    }
+
+
+
 }
