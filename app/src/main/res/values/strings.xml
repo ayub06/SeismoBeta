@@ -28,4 +28,19 @@
     <string name="title_activity_input_korban">Korban</string>
     <string name="title_activity_input_kerusakan">Kerusakan</string>
     <string name="menu_rehab_title">Menu Rehab Rekon</string>
+    
+    <string-array name="umum_tim_menu">
+        <item>Semua</item>
+        <item>Tim</item>
+        <item>Umum</item>
+    </string-array>
+
+    <string-array name="filter_menu">
+        <item>Semua</item>
+        <item>Meninggal</item>
+        <item>Luka Berat</item>
+        <item>Luka Ringan</item>
+        <item>Rusak Berat</item>
+        <item>Rusak Ringan</item>
+    </string-array>
 </resources>

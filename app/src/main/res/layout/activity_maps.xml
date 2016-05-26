@@ -11,7 +11,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:layout_alignParentTop="true" />
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         map:tabTextColor="#ffffff"
@@ -21,6 +21,25 @@
         android:layout_height="wrap_content">
 
     </android.support.design.widget.TabLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_container"
+        android:orientation="horizontal"
+        android:weightSum="1.0"
+        android:layout_below="@id/tabLayout">
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:id="@+id/umum_tim_spinner"/>
+        <Spinner
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:id="@+id/filter_spinner"/>
+    </LinearLayout>
 
 </RelativeLayout>
 

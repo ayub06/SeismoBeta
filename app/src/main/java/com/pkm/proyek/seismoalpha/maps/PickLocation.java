@@ -67,8 +67,6 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
 
             }
         });
-
-        loadingStop();
     }
 
     @Override
@@ -77,7 +75,7 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(-34, 151);
-
+        loadingStart();
         if (position==null){
             position= Pelapor.akunIni.getLokasi();
         }
@@ -98,8 +96,8 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position,10));
+        loadingStop();
     }
 
     public String getAddressName(LatLng latLng){
