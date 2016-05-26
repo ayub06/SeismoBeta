@@ -1,5 +1,8 @@
 package com.pkm.proyek.seismoalpha.laporan.umum;
 
+import android.graphics.Bitmap;
+
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.LatLng;
 import com.pkm.proyek.seismoalpha.main.Gempa;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
@@ -15,6 +18,11 @@ public class LaporanUmum {
     public static ArrayList<LaporanUmum> laporanArrayList;
     private Long idLaporan;
 
+    //USER
+    private String nama;
+    private Bitmap foto;
+
+    //LAPORAN
     private Gempa gempa;
     private Pelapor pelapor;
     private Calendar waktu;
