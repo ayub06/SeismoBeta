@@ -11,7 +11,7 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/spinner_container" />
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         map:tabTextColor="#ffffff"

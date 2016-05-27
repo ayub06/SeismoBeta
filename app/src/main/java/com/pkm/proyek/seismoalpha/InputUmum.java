@@ -15,10 +15,14 @@ import android.widget.Toast;
 import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
 import com.pkm.proyek.seismoalpha.maps.PickLocation;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
+import com.pkm.proyek.seismoalpha.util.loadFromAPI;
 import com.pkm.seismosense.backend.laporanApi.model.Laporan;
+import com.pkm.seismosense.backend.laporanUmumApi.model.LaporanUmum;
+
 public class InputUmum extends AppCompatActivity {
 
 //    public static com.pkm.seismosense.backend.laporanApi.model.Laporan laporanSave;
+    public static LaporanUmum laporanSave;
 
     EditText inputKorbanJiwa;
     EditText inputLukaBerat;
@@ -79,8 +83,8 @@ public class InputUmum extends AppCompatActivity {
 
     private void saveLaporan() {
 
-        /*//Create Laporan Entity, it will be saved in Google Datastore
-        laporanSave = new Laporan();
+        //Create Laporan Entity, it will be saved in Google Datastore
+        laporanSave = new LaporanUmum();
         laporanSave.setGempaId(String.valueOf(LaporanActivity.indexGempa));
         laporanSave.setUsernamePelapor(Pelapor.akunIni.getUsername());
         laporanSave.setLokasiLat(PickLocation.position.latitude);   //LOKASI BASED ON LOCATION PICKER
@@ -100,7 +104,7 @@ public class InputUmum extends AppCompatActivity {
         loadFromAPI.sync_mode = loadFromAPI.SYNC_MODE_POST_LAPORAN;
         new loadFromAPI().execute(
                 new Pair<Context, String>(this, String.valueOf(LaporanActivity.indexGempa))
-        );*/
+        );
     }
 
 
