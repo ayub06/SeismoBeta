@@ -44,37 +44,51 @@ public class MapsActivity extends FragmentActivity
     private ClusterManager<MyItem> mNullClusterManager;
 
     private TabLayout tabLayout;
-    private ArrayList<LatLng> list;
+    private static ArrayList<LatLng> list;
     private Marker pusat;
 
     private Spinner spinnerKiri, spinnerKanan;
-    private int spinnerKiriStatus = 0, spinnerKananStatus = 0;
-
+    private int  spinnerKananStatus = 0;
+    private int spinnerKiriStatus = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
-        spinnerKiri = (Spinner)findViewById(R.id.umum_tim_spinner);
+//        spinnerKiri = (Spinner)findViewById(R.id.umum_tim_spinner);
         spinnerKanan = (Spinner)findViewById(R.id.filter_spinner);
         addListToSpinner();
-        spinnerKiri.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*spinnerKiri.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerKiriStatus = position;
                 handleMultipleKondisi();
+                if(tabLayout.getSelectedTabPosition() == 0) {
+                    clearCluster();
+                    showCluster();
+                } else {
+                    clearHeatMap();
+                    showHeatMap();
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
         spinnerKanan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerKananStatus = position;
-                handleMultipleKondisi();
+//                handleMultipleKondisi();
+                if(tabLayout.getSelectedTabPosition() == 0) {
+                    clearCluster();
+                    showCluster();
+                } else {
+                    clearHeatMap();
+                    showHeatMap();
+                }
             }
 
             @Override
@@ -90,6 +104,7 @@ public class MapsActivity extends FragmentActivity
 
         if (mode!=DISPLAY_LAPORAN) {
             //SET TAB LAYOUT
+            ambilSemuaData();
             setTabLayout();
         }
 
@@ -100,7 +115,7 @@ public class MapsActivity extends FragmentActivity
     }
 
     private void handleMultipleKondisi() {
-        if((spinnerKiriStatus == 0) && spinnerKananStatus == 0){
+        /*if((spinnerKiriStatus == 0) && spinnerKananStatus == 0){
             ambilSemuaData();
         } else if ((spinnerKiriStatus == 0) && spinnerKananStatus == 1) {
             ambilSemuaData();
@@ -151,25 +166,25 @@ public class MapsActivity extends FragmentActivity
         } else if ((spinnerKiriStatus == 2) && spinnerKananStatus == 5) {
             ambilDataUmum();
             ambilDataRusakRingan();
-        }
+        }*/
     }
 
     private void addListToSpinner() {
-        List<String> listKiri = new ArrayList<String>();
+//        List<String> listKiri = new ArrayList<String>();
         List<String> listKanan = new ArrayList<String>();
-        listKiri.add("Semua");
-        listKiri.add("Tim");
-        listKiri.add("Umum");
+//        listKiri.add("Semua");
+//        listKiri.add("Tim");
+//        listKiri.add("Umum");
         listKanan.add("Semua");
         listKanan.add("Korban Jiwa");
         listKanan.add("Luka Berat");
         listKanan.add("Luka Ringan");
         listKanan.add("Rusak Berat");
         listKanan.add("Rusak Ringan");
-        ArrayAdapter<String> adapterKiri = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, listKiri);
-        adapterKiri.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerKiri.setAdapter(adapterKiri);
+//        ArrayAdapter<String> adapterKiri = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_item, listKiri);
+//        adapterKiri.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerKiri.setAdapter(adapterKiri);
         ArrayAdapter<String> adapterKanan = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, listKanan);
         adapterKanan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -215,8 +230,33 @@ public class MapsActivity extends FragmentActivity
             mMap.setOnMarkerClickListener(mClusterManager);
 
             //Here Use Read MyItem to Cluster Marker
-            readLaporanForClustering();
+//            readLaporanForClustering();
 
+            if(spinnerKananStatus == 1) {
+                clearCluster();
+                clearHeatMap();
+                ambilDataMeninggal();
+            } else if(spinnerKananStatus == 2) {
+                clearCluster();
+                clearHeatMap();
+                ambilDataLukaBerat();
+            } else if(spinnerKananStatus == 3) {
+                clearCluster();
+                clearHeatMap();
+                ambilDataLukaRingan();
+            } else if(spinnerKananStatus == 4) {
+                clearCluster();
+                clearHeatMap();
+                ambilDataRusakBerat();
+            } else if(spinnerKananStatus == 5){
+                clearCluster();
+                clearHeatMap();
+                ambilDataRusakRingan();
+            } else if(spinnerKananStatus == 0){
+                clearCluster();
+                clearHeatMap();
+                ambilSemuaData();
+            }
 
             //Add Marker for Pusat Gempa
             pusat=mMap.addMarker(new MarkerOptions()

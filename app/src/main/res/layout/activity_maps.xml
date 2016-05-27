@@ -29,11 +29,11 @@
         android:orientation="horizontal"
         android:weightSum="1.0"
         android:layout_below="@id/tabLayout">
-        <Spinner
+        <!--<Spinner
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".5"
-            android:id="@+id/umum_tim_spinner"/>
+            android:id="@+id/umum_tim_spinner"/>-->
         <Spinner
             android:layout_width="0dp"
             android:layout_height="wrap_content"
