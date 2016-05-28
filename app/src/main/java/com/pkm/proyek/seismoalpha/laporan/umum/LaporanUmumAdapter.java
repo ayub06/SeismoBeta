@@ -20,10 +20,10 @@ import java.util.ArrayList;
 
 public class LaporanUmumAdapter extends RecyclerView.Adapter<LaporanUmumAdapter.PersonViewHolder>{
 
-    private ArrayList<Laporan> laporan;
+    private ArrayList<LaporanUmum> laporan;
     private Activity activity;
 
-    public LaporanUmumAdapter(ArrayList<Laporan> laporan, Activity activity){
+    public LaporanUmumAdapter(ArrayList<LaporanUmum> laporan, Activity activity){
         this.activity=activity;
         this.laporan = laporan;
     }
@@ -91,8 +91,8 @@ public class LaporanUmumAdapter extends RecyclerView.Adapter<LaporanUmumAdapter.
             }
         });
         personViewHolder.waktu.setText(laporan.get(i).getJam()+" | "+laporan.get(i).getTanggalSingkat());
-        personViewHolder.foto.setImageBitmap(laporan.get(i).getPelapor().getFoto());
-        personViewHolder.nama.setText(laporan.get(i).getPelapor().getNama());
+        personViewHolder.foto.setImageBitmap(laporan.get(i).getFoto());
+        personViewHolder.nama.setText(laporan.get(i).getNama());
         personViewHolder.alamat.setText(laporan.get(i).getAlamat());
 
         personViewHolder.jumlah_korban.setText(String.valueOf(laporan.get(i).getJumlah_korban()));

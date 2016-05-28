@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.pkm.proyek.seismoalpha.R;
+import com.pkm.proyek.seismoalpha.laporan.LaporanActivity;
 import com.pkm.proyek.seismoalpha.util.loadFromAPI;
 import com.pkm.proyek.seismoalpha.maps.PickLocation;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;

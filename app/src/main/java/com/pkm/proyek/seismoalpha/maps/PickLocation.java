@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pkm.proyek.seismoalpha.laporan.tim.InputActivity;
 import com.pkm.proyek.seismoalpha.R;
+import com.pkm.proyek.seismoalpha.laporan.umum.InputUmumActivity;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.proyek.seismoalpha.rehabrekon.RehabRekonActivity;
 
@@ -33,6 +34,7 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     public static LatLng position;
     public static String positionAddress;
+
     Geocoder geocoder;
     List<Address> addresses;
     TextView displayLokasi;
@@ -59,12 +61,16 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
                 Log.d("BUNDLE", String.valueOf(bundle.getBoolean("fromRehab")));
-                if(bundle.getBoolean("fromRehab")){
-                    startActivity(new Intent(getApplicationContext(),RehabRekonActivity.class));
-                }else{
-                    startActivity(new Intent(getApplicationContext(),InputActivity.class));
-                }
+                if (bundle.getBoolean("fromUmum")){
+                    startActivity(new Intent(getApplicationContext(), InputUmumActivity.class));
+                }else {
 
+                    if (bundle.getBoolean("fromRehab")) {
+                        startActivity(new Intent(getApplicationContext(), RehabRekonActivity.class));
+                    } else {
+                        startActivity(new Intent(getApplicationContext(), InputActivity.class));
+                    }
+                }
             }
         });
     }
@@ -91,12 +97,10 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
                 position=latLng;
                 posisi.setPosition(latLng);
                 showLokasi(latLng);
-
-
             }
         });
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position,10));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(position,7));
         loadingStop();
     }
 
@@ -104,17 +108,25 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
 
         try {
             addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            Log.d("GEOCODING","SUKSES");
         } catch (IOException e) {
             addresses=new ArrayList<>();
             addresses.add(new Address(Locale.getDefault()));
             addresses.get(0).setAddressLine(0,"Geocoding Gagal");
             addresses.get(0).setLocality("");
             addresses.get(0).setAdminArea("");
+            Log.d("GEOCODING","GAGAL");
             e.getStackTrace();
         }
         //country = addresses.get(0).getCountryName();
         //postalCode = addresses.get(0).getPostalCode();
-        positionAddress=addresses.get(0).getAddressLine(0)+ ", " + addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea();
+        try {
+            positionAddress = addresses.get(0).getAddressLine(0) + ", " + addresses.get(0).getLocality() + ", " + addresses.get(0).getAdminArea();
+        }catch (IndexOutOfBoundsException except){
+            positionAddress="Penerjemahan alamat gagal";
+            except.printStackTrace();
+        }
+        Log.d("GEOCODING","GAGAL GAKP[APA");
         return positionAddress;
     }
 
@@ -125,14 +137,14 @@ public class PickLocation extends FragmentActivity implements OnMapReadyCallback
                         getAddressName(latLng);
         //loadingStop();
         displayLokasi.setText(displayLoc);
-
-
+        Log.d("SHOW LOK","YA");
     }
 
     private void loadingStart(){
         loading.setVisibility(View.VISIBLE);
         displayLokasi.setVisibility(View.GONE);
     }
+
     private void loadingStop(){
         loading.setVisibility(View.GONE);
         displayLokasi.setVisibility(View.VISIBLE);

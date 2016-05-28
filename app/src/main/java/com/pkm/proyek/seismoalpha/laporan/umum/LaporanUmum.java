@@ -50,6 +50,22 @@ public class LaporanUmum {
         this.rusak_ringan = rusak_ringan;
     }
 
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public Bitmap getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Bitmap foto) {
+        this.foto = foto;
+    }
+
     public String getAlamat() {
         return alamat;
     }

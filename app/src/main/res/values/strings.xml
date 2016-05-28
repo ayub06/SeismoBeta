@@ -24,7 +24,7 @@
 
     <string name="m2">m<sup>2</sup></string>
     <string name="gcm_defaultSenderId">1261</string>
-    <string name="rehab_rekon">Rehab Rekon</string>
+    <string name="unverified">UNVERIFIED</string>
     <string name="title_activity_input_korban">Korban</string>
     <string name="title_activity_input_kerusakan">Kerusakan</string>
     <string name="menu_rehab_title">Menu Rehab Rekon</string>
