@@ -203,9 +203,10 @@ public class LaporanActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(LoginActivity.umum||
                         !(Pelapor.akunIni.getAlamat().contains(Gempa.gempaArrayList.get(indexGempa).getNama()))){
-                    startActivity(new Intent(getApplicationContext(),InputUmum.class));
+                    //startActivity(new Intent(getApplicationContext(),InputUmum.class));
                     textFabRehabRekon.setVisibility(View.GONE);
                     rehabRekonFab.setVisibility(View.GONE);
+                    goToPickLocation(false);
                 } else {
                     goToPickLocation(false);
                 }
