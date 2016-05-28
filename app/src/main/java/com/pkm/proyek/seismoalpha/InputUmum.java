@@ -12,11 +12,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
+import com.pkm.proyek.seismoalpha.laporan.LaporanActivity;
 import com.pkm.proyek.seismoalpha.maps.PickLocation;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.proyek.seismoalpha.util.loadFromAPI;
-import com.pkm.seismosense.backend.laporanApi.model.Laporan;
 import com.pkm.seismosense.backend.laporanUmumApi.model.LaporanUmum;
 
 public class InputUmum extends AppCompatActivity {

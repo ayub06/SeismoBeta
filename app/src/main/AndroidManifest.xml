@@ -44,17 +44,28 @@
         <activity
             android:name=".laporan.tim.InputActivity"
             android:label="Lapor"
-            android:parentActivityName=".laporan.tim.LaporanActivity">
+            android:parentActivityName=".laporan.LaporanActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".laporan.tim.LaporanActivity" />
+                android:value=".laporan.LaporanActivity" />
             <!-- Parent activity meta-data to support 4.0 and lower -->
         </activity>
+        <activity
+            android:name=".laporan.umum.InputUmumActivity"
+            android:label="Lapor"
+            android:parentActivityName=".laporan.LaporanActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".laporan.LaporanActivity" />
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+        </activity>
+
+
         <activity
             android:name=".main.MainActivity"
             android:label="Seismo Sense" />
         <activity
-            android:name=".laporan.tim.LaporanActivity"
+            android:name=".laporan.LaporanActivity"
             android:label="Laporan"
             android:parentActivityName=".main.MainActivity">
             <meta-data
@@ -81,7 +92,7 @@
             android:label="@string/title_activity_pick_location">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".laporan.tim.LaporanActivity" />
+                android:value=".laporan.LaporanActivity" />
         </activity>
 
         <activity

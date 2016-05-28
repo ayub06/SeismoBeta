@@ -12,7 +12,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 
-import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
+import com.pkm.proyek.seismoalpha.laporan.LaporanActivity;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.proyek.seismoalpha.maps.PickLocation;
 import com.pkm.proyek.seismoalpha.R;

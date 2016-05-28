@@ -29,6 +29,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.pkm.proyek.seismoalpha.R;
@@ -197,6 +198,8 @@ public class LoginActivity extends AppCompatActivity implements
                             acct.getDisplayName(),
                             acct.getId()
                     );
+
+                    Pelapor.akunIni.setAlamat("Unknown, Please pick your location");
 
                     Log.d("FOTO URL",Pelapor.akunIni.getUrlFoto());
                     Log.d("MY ACCOUNT","SUCCESS");

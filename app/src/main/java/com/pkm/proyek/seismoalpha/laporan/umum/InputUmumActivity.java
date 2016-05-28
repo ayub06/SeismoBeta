@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.pkm.proyek.seismoalpha.R;
-import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
+import com.pkm.proyek.seismoalpha.laporan.LaporanActivity;
 import com.pkm.proyek.seismoalpha.maps.PickLocation;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.proyek.seismoalpha.util.loadFromAPI;
@@ -40,6 +40,7 @@ public class InputUmumActivity extends AppCompatActivity {
     //private LocationManager locationManager;
     private static Activity activity;
     public static ProgressBar loading;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +64,12 @@ public class InputUmumActivity extends AppCompatActivity {
         inputRusakBerat = (EditText) findViewById(R.id.input_rusak_berat);
         inputRusakRingan = (EditText) findViewById(R.id.input_rusak_ringan);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadStart();
                 ambilDataInput();
                 saveLaporan();
             }

@@ -1,4 +1,4 @@
-package com.pkm.proyek.seismoalpha.laporan.tim;
+package com.pkm.proyek.seismoalpha.laporan;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,10 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.pkm.proyek.seismoalpha.laporan.tim.Laporan;
+import com.pkm.proyek.seismoalpha.laporan.tim.LaporanAdapter;
 import com.pkm.proyek.seismoalpha.main.Gempa;
 import com.pkm.proyek.seismoalpha.InputUmum;
 import com.pkm.proyek.seismoalpha.pelapor.LoginActivity;
@@ -47,10 +52,14 @@ public class LaporanActivity extends AppCompatActivity {
         activity=this;
 
         //Gempa apa ini?
-
         final Bundle bundle=getIntent().getExtras();
         if(bundle!=null){
             indexGempa=bundle.getInt("gempaid");
+        }
+
+        //Set Lokasi default Pelapor Umum
+        if (LoginActivity.umum){
+            Pelapor.akunIni.setLokasi(Gempa.gempaArrayList.get(indexGempa).getPusat());
         }
 
         //Create Adapter
@@ -104,29 +113,29 @@ public class LaporanActivity extends AppCompatActivity {
     }
 
 
-/*
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.rehab_rekon, menu);
+        getMenuInflater().inflate(R.menu.unverified, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.rehab_rek:
-                goToPickLocation(true);
+            case R.id.unve:
+                //SHOW UNVERIFIED LAPORAN
+
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
-*/
 
-    private void goToPickLocation(boolean fromRehab){
+    private void goToPickLocation(boolean fromRehab,boolean fromUmum){
         Bundle bundle=new Bundle();
         bundle.putBoolean("fromRehab",fromRehab);
+        bundle.putBoolean("fromUmum",fromUmum);
         Intent intent=new Intent(getApplicationContext(),PickLocation.class);
         intent.putExtras(bundle);
         startActivity(intent);
@@ -159,6 +168,7 @@ public class LaporanActivity extends AppCompatActivity {
         textFabRehabRekon = (TextView)findViewById(R.id.text_fab_rehab_rekon);
         rehabRekonFab = (FloatingActionButton)findViewById(R.id.fab_rehab_rekon);
         showFab = (FloatingActionButton)findViewById(R.id.fab_show);
+
         //menampilkan dan menghilangkan submenu fab
         assert showFab != null;
         showFab.setOnClickListener(new View.OnClickListener() {
@@ -168,8 +178,7 @@ public class LaporanActivity extends AppCompatActivity {
                     showFloatingButton();
 
                     //hide fab untuk rehab rekon jika user umum
-                    if(LoginActivity.umum||
-                            !(Pelapor.akunIni.getAlamat().contains(Gempa.gempaArrayList.get(indexGempa).getNama()))){
+                    if(LoginActivity.umum){
                         textFabRehabRekon.setVisibility(View.GONE);
                         rehabRekonFab.setVisibility(View.GONE);
                     }
@@ -187,12 +196,13 @@ public class LaporanActivity extends AppCompatActivity {
                 hideFloatingButton();
             }
         });
+
         //fab rehab rekon handling
         assert rehabRekonFab != null;
         rehabRekonFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToPickLocation(true);
+                goToPickLocation(true,false);
             }
         });
 
@@ -201,29 +211,44 @@ public class LaporanActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(LoginActivity.umum||
-                        !(Pelapor.akunIni.getAlamat().contains(Gempa.gempaArrayList.get(indexGempa).getNama()))){
-                    //startActivity(new Intent(getApplicationContext(),InputUmum.class));
+                if(LoginActivity.umum){
+
+                    //Umum
                     textFabRehabRekon.setVisibility(View.GONE);
                     rehabRekonFab.setVisibility(View.GONE);
-                    goToPickLocation(false);
+                    goToPickLocation(false,true);
                 } else {
-                    goToPickLocation(false);
+
+                    //TIM
+                    goToPickLocation(false,false);
                 }
             }
         });
 
-        textFabLaporan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToPickLocation(false);
-            }
-        });
+        if(LoginActivity.umum){
+
+            //UMUM
+            textFabLaporan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goToPickLocation(false, true);
+                }
+            });
+        }else {
+
+            //TIM
+            textFabLaporan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    goToPickLocation(false, false);
+                }
+            });
+        }
 
         textFabRehabRekon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToPickLocation(true);
+                goToPickLocation(true,false);
             }
         });
 

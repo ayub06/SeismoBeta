@@ -1,10 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".laporan.tim.LaporanActivity">
+    tools:context=".laporan.LaporanActivity">
     <item
-        android:id="@+id/rehab_rek"
-        android:title="@string/rehab_rekon"
+        android:id="@+id/unve"
+        android:title="@string/unverified"
         android:orderInCategory="1"
         app:showAsAction="always"/>
 
