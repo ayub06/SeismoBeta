@@ -13,9 +13,11 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
+import com.pkm.proyek.seismoalpha.InputUmum;
 import com.pkm.proyek.seismoalpha.laporan.tim.InputActivity;
 import com.pkm.proyek.seismoalpha.laporan.tim.Laporan;
 import com.pkm.proyek.seismoalpha.laporan.tim.LaporanActivity;
+import com.pkm.proyek.seismoalpha.laporan.umum.InputUmumActivity;
 import com.pkm.proyek.seismoalpha.main.Gempa;
 import com.pkm.proyek.seismoalpha.main.GempaAdapter;
 import com.pkm.proyek.seismoalpha.main.MainActivity;
@@ -82,6 +84,8 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                 return setRehabKerusakanSync(params);
             case SYNC_MODE_POST_KERUSAKAN_LAIN_RR:
                 return setRehabKerusakanLainSync(params);
+            case SYNC_MODE_POST_LAPORAN_UMUM:
+                return setLaporanUmumSync(params);
             default:
                 Log.d("loadFromAPI", "DEFAULT");
                 return "NOTHING";
@@ -166,6 +170,14 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                     break;
                 case SYNC_MODE_POST_KERUSAKAN_LAIN_RR:
                     Log.d("KERUSAKAN LAIN DB","OK");
+                    break;
+                case SYNC_MODE_POST_LAPORAN_UMUM:
+                    //Bundle bundle1=new Bundle();
+                    //bundle1.putInt("gempaid", Integer.parseInt(InputActivity.laporanSave.getGempaId()));
+                    //Intent intent1=new Intent(context, LaporanActivity.class);
+                    //intent1.putExtras(bundle1);
+                    InputUmumActivity.loadStop();
+                    InputUmumActivity.success(context);
                     break;
                 default:
                     Log.d("RESULT RESPONSE", result+"  1");
@@ -449,7 +461,7 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
         try {
 
             //LOAD INPUT LAPORAN UMUM FOR SAVE (Tunggu Fata Dulu)
-            String result= String.valueOf(laporanApi.insert(InputActivity.laporanSave).execute().getId());
+            String result= String.valueOf(laporanUmumApi.insert(InputUmumActivity.laporanSave).execute().getId());
             if (result.isEmpty()){
                 return "0";
             }else {
