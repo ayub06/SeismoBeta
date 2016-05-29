@@ -135,9 +135,13 @@ public class LaporanUmumEndpoint {
             name = "list",
             path = "laporanUmum",
             httpMethod = ApiMethod.HttpMethod.GET)
-    public CollectionResponse<LaporanUmum> list(@Nullable @Named("cursor") String cursor, @Nullable @Named("limit") Integer limit) {
+    public CollectionResponse<LaporanUmum> list(@Nullable @Named("cursor") String cursor, @Nullable @Named("limit") Integer limit, @Named("idGempa") String idGempa) {
+        com.google.appengine.api.datastore.Query.Filter propertyFilter =
+                new com.google.appengine.api.datastore.Query.FilterPredicate("gempaId", com.google.appengine.api.datastore.Query.FilterOperator.EQUAL, idGempa);
+
+
         limit = limit == null ? DEFAULT_LIST_LIMIT : limit;
-        Query<LaporanUmum> query = ofy().load().type(LaporanUmum.class).limit(limit);
+        Query<LaporanUmum> query = ofy().load().type(LaporanUmum.class).filter(propertyFilter);
         if (cursor != null) {
             query = query.startAt(Cursor.fromWebSafeString(cursor));
         }

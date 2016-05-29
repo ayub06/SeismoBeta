@@ -24,7 +24,6 @@ public class LaporanUmum {
 
     //LAPORAN
     private Gempa gempa;
-    private Pelapor pelapor;
     private Calendar waktu;
     private LatLng lokasi;
     private String alamat;
@@ -36,10 +35,10 @@ public class LaporanUmum {
     private int rusak_berat;
     private int rusak_ringan;
 
-    public LaporanUmum(Long idLaporan, Gempa gempa, Pelapor pelapor, Calendar waktu, LatLng lokasi, String alamat, int jumlah_korban, int luka_berat, int luka_ringan, int rusak_berat, int rusak_ringan) {
+    public LaporanUmum(Long idLaporan, Gempa gempa, String nama, Calendar waktu, LatLng lokasi, String alamat, int jumlah_korban, int luka_berat, int luka_ringan, int rusak_berat, int rusak_ringan) {
         this.idLaporan = idLaporan;
         this.gempa = gempa;
-        this.pelapor = pelapor;
+        this.nama=nama;
         this.waktu = waktu;
         this.lokasi = lokasi;
         this.alamat = alamat;
@@ -88,14 +87,6 @@ public class LaporanUmum {
 
     public void setGempa(Gempa gempa) {
         this.gempa = gempa;
-    }
-
-    public Pelapor getPelapor() {
-        return pelapor;
-    }
-
-    public void setPelapor(Pelapor pelapor) {
-        this.pelapor = pelapor;
     }
 
     public Calendar getWaktu() {

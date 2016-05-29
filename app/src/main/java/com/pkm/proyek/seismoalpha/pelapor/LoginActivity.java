@@ -189,7 +189,7 @@ public class LoginActivity extends AppCompatActivity implements
             GoogleSignInAccount acct = result.getSignInAccount();
             if (acct != null) {
                 //Set MyAccount
-                new LoadProfileImage().execute(getURLPhoto(acct.zzmI()));
+                //new LoadProfileImage().execute(getURLPhoto(acct.zzmI()));
                 if (acct.getId()!=null) {
 
                     Pelapor.akunIni=new Pelapor(
@@ -203,6 +203,8 @@ public class LoginActivity extends AppCompatActivity implements
 
                     Log.d("FOTO URL",Pelapor.akunIni.getUrlFoto());
                     Log.d("MY ACCOUNT","SUCCESS");
+
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }else {
                     Log.d("MY ACCOUNT","GAGAL");
                 }
@@ -223,43 +225,6 @@ public class LoginActivity extends AppCompatActivity implements
         urlPhoto=urlPhoto.replace((char) 92, (char) 47);
         Log.d("URL PHOTO",urlPhoto+"?sz=100");
         return urlPhoto+"?sz=100";
-    }
-
-    private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            if(urldisplay.contains("https")){
-                try {
-                    InputStream in = new java.net.URL(urldisplay).openStream();
-                    mIcon11 = BitmapFactory.decodeStream(in);
-                } catch (Exception e) {
-                    Log.e("Error", e.getMessage());
-                    e.printStackTrace();
-                }
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            if(result==null){
-
-                //User.myAccount.setFoto(BitmapFactory.decodeResource(getResources(),
-                //        R.drawable.ic_account_circle_white_24dp));
-                Log.d("AKUN FOTO","DEFAULT");
-            }else {
-                Log.d("AKUN FOTO", "ADA");
-                Pelapor.akunIni.setFoto(result);
-            }
-            if (!isRegistered()){
-                //showProgressDialog();
-                //new RegisterNewUser().execute(Pelapor.akunIni);
-            }else {
-                hideProgressDialog();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            }
-        }
     }
 
     private boolean isRegistered() {

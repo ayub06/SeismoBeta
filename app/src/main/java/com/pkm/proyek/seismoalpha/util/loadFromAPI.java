@@ -2,6 +2,8 @@ package com.pkm.proyek.seismoalpha.util;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,10 +15,12 @@ import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
+import com.pkm.proyek.seismoalpha.R;
 import com.pkm.proyek.seismoalpha.laporan.tim.InputActivity;
 import com.pkm.proyek.seismoalpha.laporan.tim.Laporan;
 import com.pkm.proyek.seismoalpha.laporan.LaporanActivity;
 import com.pkm.proyek.seismoalpha.laporan.umum.InputUmumActivity;
+import com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum;
 import com.pkm.proyek.seismoalpha.main.Gempa;
 import com.pkm.proyek.seismoalpha.main.GempaAdapter;
 import com.pkm.proyek.seismoalpha.main.MainActivity;
@@ -34,6 +38,7 @@ import com.pkm.seismosense.backend.pelaporApi.PelaporApi;
 import com.pkm.seismosense.backend.laporanApi.LaporanApi;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -48,6 +53,7 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
     public static final int SYNC_MODE_POST_KERUSAKAN_RR=5;
     public static final int SYNC_MODE_POST_KERUSAKAN_LAIN_RR=6;
     public static final int SYNC_MODE_POST_LAPORAN_UMUM=7;
+    public static final int SYNC_MODE_GET_LAPORAN_UMUM=8;
 
     public static int from;
     public static final int MAIN_ACTIVITY=-1;
@@ -85,6 +91,8 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                 return setRehabKerusakanLainSync(params);
             case SYNC_MODE_POST_LAPORAN_UMUM:
                 return setLaporanUmumSync(params);
+            case SYNC_MODE_GET_LAPORAN_UMUM:
+                return getLaporanUmumSync(params);
             default:
                 Log.d("loadFromAPI", "DEFAULT");
                 return "NOTHING";
@@ -151,7 +159,7 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                         context.startActivity(intentX);
                     }else {
                         Log.d("RESULT GET LAPORAN", result);
-                        LaporanActivity.showLaporanlist();
+                        LaporanActivity.showLaporanlist(false);
                     }
 
                     break;
@@ -177,6 +185,9 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                     //intent1.putExtras(bundle1);
                     InputUmumActivity.loadStop();
                     InputUmumActivity.success(context);
+                    break;
+                case SYNC_MODE_GET_LAPORAN_UMUM:
+                    Log.d("RESULT GET LAPORAN", result);
                     break;
                 default:
                     Log.d("RESULT RESPONSE", result+"  1");
@@ -442,6 +453,60 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
         }
     }
 
+    private String getLaporanUmumSync(Pair<Context, String>[] params) {
+        if(laporanUmumApi== null) {  // Only do this once
+            LaporanUmumApi.Builder builder = new LaporanUmumApi.Builder(AndroidHttp.newCompatibleTransport(),
+                    new AndroidJsonFactory(), null)
+                    .setRootUrl(URL_ROOT)
+                    /*.setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
+                        @Override
+                        public void initialize(AbstractGoogleClientRequest<?> abstractGoogleClientRequest) throws IOException {
+                            abstractGoogleClientRequest.setDisableGZipContent(true);
+                        }
+                    })*/;
+            laporanUmumApi= builder.build();
+        }
+        context = params[0].first;
+
+        Log.d("KENE","1");
+        try {
+            LaporanUmum.laporanArrayList=new ArrayList<>();
+            List<com.pkm.seismosense.backend.laporanUmumApi.model.LaporanUmum> laporanList=
+                    laporanUmumApi.list(String.valueOf(LaporanActivity.indexGempa)).execute().getItems();
+
+            if (laporanList!=null) {
+                Log.d("TRY PARSE", String.valueOf(laporanList.size()));
+                for (int i = 0; i < laporanList.size(); i++) {
+                    //Getting Laporan Time
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(laporanList.get(i).getId());
+
+                    //Create new Laporan from Server
+                    LaporanUmum.laporanArrayList.add(new LaporanUmum(
+                            laporanList.get(i).getId(),
+                            Gempa.gempaArrayList.get(Integer.parseInt(laporanList.get(i).getGempaId())),
+                            laporanList.get(i).getNama(),
+                            calendar,
+                            new LatLng(laporanList.get(i).getLokasiLat(), laporanList.get(i).getLokasiLng()),
+                            laporanList.get(i).getAlamat(),
+                            laporanList.get(i).getJumlahKorban(),
+                            laporanList.get(i).getLukaBerat(),
+                            laporanList.get(i).getLukaRingan(),
+                            laporanList.get(i).getRusakBerat(),
+                            laporanList.get(i).getRusakRingan()
+                    ));
+
+                    //Getting Pelapor Foto
+                    new LoadProfileImage(i).execute(laporanList.get(i).getUrlFoto());
+
+                }
+            }
+            return "1";
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+    }
+
     private String setLaporanUmumSync(Pair<Context, String>[] params) {
         if(laporanUmumApi== null) {  // Only do this once
             LaporanUmumApi.Builder builder = new LaporanUmumApi.Builder(AndroidHttp.newCompatibleTransport(),
@@ -468,6 +533,46 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
             }
         } catch (IOException e) {
             return e.getMessage();
+        }
+    }
+
+
+    private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
+
+        private int index;
+
+        public LoadProfileImage(int index) {
+            this.index = index;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            if(urldisplay.contains("https")){
+                try {
+                    InputStream in = new java.net.URL(urldisplay).openStream();
+                    mIcon11 = BitmapFactory.decodeStream(in);
+                } catch (Exception e) {
+                    Log.e("Error", e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            if(result==null){
+                LaporanUmum.laporanArrayList.get(index).setFoto(
+                        BitmapFactory.decodeResource(
+                                LaporanActivity.activity.getResources(),
+                                R.drawable.ic_account_circle_black_48dp)
+                );
+                Log.d("AKUN FOTO","DEFAULT");
+            }else {
+                LaporanUmum.laporanArrayList.get(index).setFoto(result);
+                Log.d("AKUN FOTO", "ADA");
+            }
+            LaporanActivity.showLaporanlist(true);
         }
     }
 

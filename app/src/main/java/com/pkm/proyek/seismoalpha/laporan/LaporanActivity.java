@@ -16,11 +16,11 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.pkm.proyek.seismoalpha.laporan.tim.Laporan;
 import com.pkm.proyek.seismoalpha.laporan.tim.LaporanAdapter;
+import com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum;
+import com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmumAdapter;
 import com.pkm.proyek.seismoalpha.main.Gempa;
-import com.pkm.proyek.seismoalpha.InputUmum;
 import com.pkm.proyek.seismoalpha.pelapor.LoginActivity;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.proyek.seismoalpha.maps.PickLocation;
@@ -94,14 +94,16 @@ public class LaporanActivity extends AppCompatActivity {
         }
     }
 
-    public static void showLaporanlist(){
-        /*ArrayList <Laporan> laporans=new ArrayList<>();
-        for (int i=0;i<Laporan.laporanArrayList.size();i++){
-            if (Laporan.laporanArrayList.get())
-        }*/
+    public static void showLaporanlist(boolean umum){
+
         //Assign to Adapter
-        LaporanAdapter adapter = new LaporanAdapter(Laporan.laporanArrayList,activity);
-        rv.setAdapter(adapter);
+        if(umum){
+            LaporanUmumAdapter adapter=new LaporanUmumAdapter(LaporanUmum.laporanArrayList,activity);
+            rv.setAdapter(adapter);
+        }else {
+            LaporanAdapter adapter = new LaporanAdapter(Laporan.laporanArrayList, activity);
+            rv.setAdapter(adapter);
+        }
         loadStop();
     }
     public static void loadStart() {
@@ -126,7 +128,10 @@ public class LaporanActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.unve:
                 //SHOW UNVERIFIED LAPORAN
-
+                loadFromAPI.sync_mode=loadFromAPI.SYNC_MODE_GET_LAPORAN_UMUM;
+                new loadFromAPI().execute(
+                        new Pair<Context, String>(this, String.valueOf(indexGempa))
+                );
                 break;
         }
         return super.onOptionsItemSelected(item);

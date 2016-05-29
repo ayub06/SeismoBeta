@@ -3,6 +3,7 @@ package com.pkm.seismosense.backend;
 import com.google.appengine.repackaged.com.google.type.LatLng;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
 @Entity
 public class LaporanUmum {
@@ -13,7 +14,7 @@ public class LaporanUmum {
     private String username;
     private String nama;
 
-    private String gempaId;
+    @Index private String gempaId;
     private String usernamePelapor;
     private Double lokasi_Lat;
     private Double lokasi_Lng;
