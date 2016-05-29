@@ -7,3 +7,8 @@
 /build
 /captures
 /app/build
+/backend/build
+*.class
+*.discovery
+*.discovery
+*.discovery
