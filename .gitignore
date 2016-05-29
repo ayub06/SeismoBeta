@@ -1,4 +1,3 @@
-*.iml
 .gradle
 /local.properties
 /.idea/workspace.xml
@@ -9,7 +8,5 @@
 /app/build
 /backend/build
 *.class
-*.discovery
-*.discovery
 *.discovery
 *.zip
