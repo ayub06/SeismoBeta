@@ -227,12 +227,18 @@
         </LinearLayout>
     </GridLayout>
     <Button
+        android:id="@+id/upload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         style="@style/Base.Widget.AppCompat.Button.Colored"
         android:text="upload foto"/>
+    <ImageView
+        android:id="@+id/foto_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 
     <RelativeLayout
         android:orientation="vertical"
