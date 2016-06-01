@@ -5,11 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +29,12 @@ import com.pkm.proyek.seismoalpha.util.loadFromAPI;
 import com.pkm.proyek.seismoalpha.maps.PickLocation;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.seismosense.backend.laporanApi.model.Laporan;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class InputActivity extends AppCompatActivity {
 
     public static com.pkm.seismosense.backend.laporanApi.model.Laporan laporanSave;
@@ -48,12 +59,12 @@ public class InputActivity extends AppCompatActivity {
 
     Button upload;
     ImageView mImageView;
+    private int widthScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_input);
-
+        setContentView(R.layout.activity_input_laporan);
 
         activity=this;
         //Loading init
@@ -170,19 +181,93 @@ public class InputActivity extends AppCompatActivity {
     }
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_TAKE_PHOTO = 1;
+
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                ex.printStackTrace();
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Log.d("PHOTO","SAVE");
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(photoFile));
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
+            }
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            mImageView.setImageBitmap(imageBitmap);
+        Log.d("PHOTO", String.valueOf(resultCode));
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+            //Bundle extras = data.getExtras();
+            //Bitmap imageBitmap = (Bitmap) extras.get("data");
+            //mImageView.setImageBitmap(imageBitmap);
+            setDensityValue();
+            setPic();
+        }else {
+            Log.d("PHOTO", "GAGAL");
         }
+    }
+
+    String mCurrentPhotoPath;
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStorageDirectory();
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath =image.getPath();
+        return image;
+    }
+    private void setDensityValue() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        widthScreen=metrics.widthPixels;
+    }
+
+    private void setPic() {
+        // Get the dimensions of the View
+
+        Log.d("PHOTO","LOAD");
+        int targetW = widthScreen; //mImageView.getWidth();
+        int targetH = widthScreen;//mImageView.getHeight();
+        Log.d("PHOTO", String.valueOf(targetH)+" "+targetW);
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+        Log.d("PHOTO","LOAD");
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Log.d("PHOTO","LOAD");
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        mImageView.setImageBitmap(bitmap);
     }
 }

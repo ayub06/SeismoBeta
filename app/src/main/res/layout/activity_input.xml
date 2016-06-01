@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".laporan.tim.InputActivity"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="@layout/activity_input_laporan"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -234,35 +236,14 @@
         android:layout_marginEnd="12dp"
         style="@style/Base.Widget.AppCompat.Button.Colored"
         android:text="upload foto"/>
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <ImageView
         android:id="@+id/foto_upload"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
-    <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/fab"
-            android:layout_centerHorizontal="true"/>
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_done_white_36dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_alignParentEnd="true" />
-
-    </RelativeLayout>
-
-
-
+        android:layout_height="500dp"
+        android:scaleType="centerCrop"/>
 </LinearLayout>
