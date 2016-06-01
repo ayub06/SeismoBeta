@@ -226,6 +226,13 @@
             </LinearLayout>
         </LinearLayout>
     </GridLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        style="@style/Base.Widget.AppCompat.Button.Colored"
+        android:text="upload foto"/>
 
     <RelativeLayout
         android:orientation="vertical"
