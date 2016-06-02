@@ -3,6 +3,7 @@ package com.pkm.proyek.seismoalpha.maps;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -197,6 +198,8 @@ public class MapsActivity extends FragmentActivity
     }
 
     private void getDataSesuaiFilter() {
+        clearCluster();
+
         if((spinnerKiriStatus == 0) && (spinnerKananStatus == 0)) {
             semuaSemua();
         } else if ((spinnerKiriStatus == 0) && (spinnerKananStatus == 1)) {
@@ -234,6 +237,8 @@ public class MapsActivity extends FragmentActivity
         } else if ((spinnerKiriStatus == 2) && (spinnerKananStatus == 5)) {
             umumRusakRingan();
         }
+
+        showCluster();
     }
 
     private void readLaporanForClustering() {
@@ -252,6 +257,8 @@ public class MapsActivity extends FragmentActivity
         } catch (NullPointerException e){
             e.getStackTrace();
         }
+
+        Log.d("READ LAPORAN","FOR CLUSTERING");
     }
 
     private void setWindowInMarker() {
