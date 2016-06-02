@@ -177,12 +177,12 @@ public class MapsActivity extends FragmentActivity
                 if (tab.getText().equals("Laporan")){
                 //    Toast.makeText(getApplicationContext(),"LAPORAN",Toast.LENGTH_SHORT).show();
                     clearHeatMap();
-                    spinnerOnItemSelect();
+                    //spinnerOnItemSelect();
                     showCluster();
                 }else {
                 //    Toast.makeText(getApplicationContext(),"HEATMAP",Toast.LENGTH_SHORT).show();
                     clearCluster();
-                    spinnerOnItemSelect();
+                    //spinnerOnItemSelect();
                     showHeatMap();
                     if(!list.isEmpty()) {
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(0), 9));
@@ -249,7 +249,7 @@ public class MapsActivity extends FragmentActivity
         }
 
         //mClusterManager.addItems();
-        showCluster();
+        //showCluster();
     }
 
     private void readLaporanForClustering() {
@@ -258,22 +258,22 @@ public class MapsActivity extends FragmentActivity
         try {
 
             for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-                MyItem myItem=new MyItem(Laporan.laporanArrayList.get(i).getLokasi().latitude,Laporan.laporanArrayList.get(i).getLokasi().longitude);
+                /*MyItem myItem=new MyItem(Laporan.laporanArrayList.get(i).getLokasi().latitude,Laporan.laporanArrayList.get(i).getLokasi().longitude);
                 myItem.setId(i);
                 mClusterManager.addItem(myItem);
                 list.add(Laporan.laporanArrayList.get(i).getLokasi());  //HeatMAP
-
+*/
                 //Add to laporanSemua
                 laporenSemua.add(Laporan.laporanArrayList.get(i));
             }
 
             //UMUM
             for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
-                MyItem myItem=new MyItem(LaporanUmum.laporanArrayList.get(i).getLokasi().latitude,LaporanUmum.laporanArrayList.get(i).getLokasi().longitude);
+  /*              MyItem myItem=new MyItem(LaporanUmum.laporanArrayList.get(i).getLokasi().latitude,LaporanUmum.laporanArrayList.get(i).getLokasi().longitude);
                 myItem.setId(Laporan.laporanArrayList.size()+i);
                 mClusterManager.addItem(myItem);
                 list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());  //HeatMAP
-
+*/
                 //Add to laporanSemua
                 Pelapor pelapor=new Pelapor(Pelapor.pelaporArrayList.size()+i,
                         LaporanUmum.laporanArrayList.get(i).getFoto(),
@@ -301,6 +301,9 @@ public class MapsActivity extends FragmentActivity
                 );
                 laporenSemua.add(laporan);
             }
+
+            semuaMeninggal();
+            //semuaSemua();
 
             Toast.makeText(getApplicationContext(),"TOTAL :"+laporenSemua.size(),Toast.LENGTH_SHORT).show();
 
@@ -419,8 +422,6 @@ public class MapsActivity extends FragmentActivity
                     return itemView;
                 }
 
-
-
                 @Override
                 public View getInfoContents(Marker marker) {
                     return null;
@@ -495,7 +496,7 @@ public class MapsActivity extends FragmentActivity
                     rusak_berat.setText(String.valueOf(laporenSemua.get(i).getRusak_berat()));
                     return itemView;
                 }
-                
+
                 private View showWindowGempa() {
                     TextView waktu;
                     TextView nama;
@@ -642,18 +643,35 @@ public class MapsActivity extends FragmentActivity
     }
 
     private void semuaSemua() {
-        //HEATMAP
         list = new ArrayList<>();
-        list = getAllLatLng();
+        mClusterManager.clearItems();
 
-        //CLUSTER
-
+        for (int i=0;i<laporenSemua.size();i++){
+            list.add(laporenSemua.get(i).getLokasi());
+            mClusterManager.addItem(
+                    new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                            laporenSemua.get(i).getLokasi().longitude)
+            );
+        }
 
     }
 
     private void semuaMeninggal() {
         list = new ArrayList<>();
-        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getJumlah_korban()));
+            if(laporenSemua.get(i).getJumlah_korban() != 0) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
+            }
+        }
+
+        /*for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
             if(Laporan.laporanArrayList.get(i).getJumlah_korban() != 0) {
                 mClusterManager.addItem(new MyItem(
                         Laporan.laporanArrayList.get(i).getLokasi().latitude,
@@ -669,7 +687,7 @@ public class MapsActivity extends FragmentActivity
                         LaporanUmum.laporanArrayList.get(i).getLokasi().longitude));
                 list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
             }
-        }
+        }*/
     }
 
     private void semuaLukaBerat() {

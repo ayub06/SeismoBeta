@@ -152,7 +152,7 @@
                         android:text="41"
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold"
-                        android:id="@+id/lapor_luka_berat" />
+                        android:id="@+id/lapor_korban_jiwa" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -177,7 +177,7 @@
                         android:text="41"
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold"
-                        android:id="@+id/lapor_korban_jiwa" />
+                        android:id="@+id/lapor_luka_berat" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
