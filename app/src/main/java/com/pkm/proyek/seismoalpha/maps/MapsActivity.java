@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -56,6 +57,7 @@ public class MapsActivity extends FragmentActivity
     private Spinner spinnerKiri, spinnerKanan;
     private int  spinnerKananStatus = 0;
     private int spinnerKiriStatus = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,11 +96,11 @@ public class MapsActivity extends FragmentActivity
         listKanan.add("Rusak Berat");
         listKanan.add("Rusak Ringan");
         ArrayAdapter<String> adapterKiri = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, listKiri);
+                android.R.layout.simple_spinner_dropdown_item, listKiri);
         adapterKiri.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerKiri.setAdapter(adapterKiri);
         ArrayAdapter<String> adapterKanan = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, listKanan);
+                android.R.layout.simple_spinner_dropdown_item, listKanan);
         adapterKanan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerKanan.setAdapter(adapterKanan);
     }
@@ -147,7 +149,7 @@ public class MapsActivity extends FragmentActivity
             //Add Marker for Pusat Gempa
             pusat=mMap.addMarker(new MarkerOptions()
                             .position(Gempa.gempaArrayList.get(id).getPusat())
-                            .title("pusat")
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_center_focus_strong_black_24dp))
             );
 
             //Camero focus to Pusat Gemap and show the window detail
@@ -205,6 +207,7 @@ public class MapsActivity extends FragmentActivity
         Log.d("GETDATASESUAI FILTER", String.valueOf(spinnerKiriStatus+spinnerKananStatus));
 
         clearCluster();
+        clearHeatMap();
 
         if((spinnerKiriStatus == 0) && (spinnerKananStatus == 0)) {
             semuaSemua();
@@ -607,6 +610,8 @@ public class MapsActivity extends FragmentActivity
                 getDataSesuaiFilter();
                 if(tabLayout.getSelectedTabPosition() == 1) {
                     clearCluster();
+                    heatMap();
+                    showHeatMap();
                 }
             }
 
@@ -622,6 +627,8 @@ public class MapsActivity extends FragmentActivity
                 getDataSesuaiFilter();
                 if(tabLayout.getSelectedTabPosition() == 1) {
                     clearCluster();
+                    heatMap();
+                    showHeatMap();
                 }
             }
 
