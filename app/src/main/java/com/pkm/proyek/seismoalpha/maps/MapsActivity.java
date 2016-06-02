@@ -49,7 +49,6 @@ public class MapsActivity extends FragmentActivity
 
     private TabLayout tabLayout;
     private static ArrayList<LatLng> list;
-    private static ArrayList<LatLng> clusterList;
     private Marker pusat;
 
     private ArrayList<Laporan> laporenSemua;
@@ -155,7 +154,7 @@ public class MapsActivity extends FragmentActivity
             focusOnMarker(Gempa.gempaArrayList.get(id).getPusat());
 
             //Settings for DropDown
-            //spinnerOnItemSelect();
+            spinnerOnItemSelect();
         }
 
         //Setting all window that show if clicked in the marker
@@ -177,12 +176,10 @@ public class MapsActivity extends FragmentActivity
                 if (tab.getText().equals("Laporan")){
                 //    Toast.makeText(getApplicationContext(),"LAPORAN",Toast.LENGTH_SHORT).show();
                     clearHeatMap();
-                    //spinnerOnItemSelect();
                     showCluster();
                 }else {
                 //    Toast.makeText(getApplicationContext(),"HEATMAP",Toast.LENGTH_SHORT).show();
                     clearCluster();
-                    //spinnerOnItemSelect();
                     showHeatMap();
                     if(!list.isEmpty()) {
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(0), 9));
@@ -302,8 +299,10 @@ public class MapsActivity extends FragmentActivity
                 laporenSemua.add(laporan);
             }
 
-            semuaMeninggal();
-            //semuaSemua();
+            getDataSesuaiFilter();
+//            semuaMeninggal();
+//            semuaSemua();
+//            semuaLukaBerat();
 
             Toast.makeText(getApplicationContext(),"TOTAL :"+laporenSemua.size(),Toast.LENGTH_SHORT).show();
 
@@ -584,18 +583,23 @@ public class MapsActivity extends FragmentActivity
         mMap.clear();
     }
 
-    private void showHeatMap(){
+    private void showHeatMap() {
         pusat.setVisible(false);
         heatMap();
     }
 
     private void heatMap() {
         // Create a heat map tile provider, passing it the latlngs of the police stations.
-        HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder()
-                .data(list)
-                .build();
-        // Add a tile overlay to the map, using the heat map tile provider.
-        mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+        try {
+            HeatmapTileProvider mProvider = new HeatmapTileProvider.Builder()
+                    .data(list)
+                    .build();
+            // Add a tile overlay to the map, using the heat map tile provider.
+            mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
+        } catch (IllegalArgumentException e) {
+            e.getStackTrace();
+        }
+
     }
 
     private void spinnerOnItemSelect() {
@@ -603,7 +607,6 @@ public class MapsActivity extends FragmentActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerKiriStatus = position;
-                getDataSesuaiFilter();
                 Log.d("SELCET","KIRI");
 //                if(tabLayout.getSelectedTabPosition() == 0) clearCluster();
             }
@@ -617,7 +620,6 @@ public class MapsActivity extends FragmentActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerKananStatus = position;
-                getDataSesuaiFilter();
 //                if(tabLayout.getSelectedTabPosition() == 1) clearHeatMap();
             }
 
@@ -626,20 +628,6 @@ public class MapsActivity extends FragmentActivity
 
             }
         });
-    }
-
-
-    private ArrayList<LatLng> getAllLatLng(){
-        ArrayList<LatLng> latLngs=new ArrayList<>();
-
-        for(int i=0;i<Laporan.laporanArrayList.size();i++){
-            latLngs.add(Laporan.laporanArrayList.get(i).getLokasi());
-        }
-
-        for(int i = 0; i< LaporanUmum.laporanArrayList.size(); i++){
-            latLngs.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
-        }
-        return latLngs;
     }
 
     private void semuaSemua() {
@@ -692,164 +680,254 @@ public class MapsActivity extends FragmentActivity
 
     private void semuaLukaBerat() {
         list = new ArrayList<>();
-        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-            if(Laporan.laporanArrayList.get(i).getLuka_berat() != 0) {
-                list.add(Laporan.laporanArrayList.get(i).getLokasi());
-            }
-        }
-
-        for (int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
-            if (LaporanUmum.laporanArrayList.get(i).getLuka_berat() != 0) {
-                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getLuka_berat()));
+            if(laporenSemua.get(i).getLuka_berat() != 0) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void semuaLukaRingan() {
         list = new ArrayList<>();
-        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-            if(Laporan.laporanArrayList.get(i).getLuka_ringan() != 0) {
-                list.add(Laporan.laporanArrayList.get(i).getLokasi());
-            }
-        }
-
-        for (int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
-            if (LaporanUmum.laporanArrayList.get(i).getLuka_ringan() != 0) {
-                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getLuka_ringan()));
+            if(laporenSemua.get(i).getLuka_ringan() != 0) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void semuaRusakBerat() {
         list = new ArrayList<>();
-        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-            if(Laporan.laporanArrayList.get(i).getRusak_berat() != 0) {
-                list.add(Laporan.laporanArrayList.get(i).getLokasi());
-            }
-        }
-
-        for (int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
-            if (LaporanUmum.laporanArrayList.get(i).getRusak_berat() != 0) {
-                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getRusak_berat()));
+            if(laporenSemua.get(i).getRusak_berat() != 0) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void semuaRusakRingan() {
         list = new ArrayList<>();
-        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-            if(Laporan.laporanArrayList.get(i).getRusak_ringan() != 0) {
-                list.add(Laporan.laporanArrayList.get(i).getLokasi());
-            }
-        }
-
-        for (int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
-            if (LaporanUmum.laporanArrayList.get(i).getRusak_ringan() != 0) {
-                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getRusak_ringan()));
+            if(laporenSemua.get(i).getRusak_ringan() != 0) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void timSemua() {
         list = new ArrayList<>();
-        for(int i=0;i<Laporan.laporanArrayList.size();i++){
-            list.add(Laporan.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+
+        for (int i=0;i<laporenSemua.size();i++){
+            if (laporenSemua.get(i).getIdLaporan() != -1) {
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
+            }
         }
     }
 
     private void timMeninggal() {
         list = new ArrayList<>();
-        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-            if(Laporan.laporanArrayList.get(i).getJumlah_korban() != 0) {
-                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getJumlah_korban()));
+            if((laporenSemua.get(i).getJumlah_korban() != 0) && laporenSemua.get(i).getIdLaporan() != -1) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void timLukaBerat() {
         list = new ArrayList<>();
-        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-            if(Laporan.laporanArrayList.get(i).getLuka_berat() != 0) {
-                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getLuka_berat()));
+            if((laporenSemua.get(i).getLuka_berat() != 0) && laporenSemua.get(i).getIdLaporan() != -1) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void timLukaRingan() {
         list = new ArrayList<>();
-        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-            if(Laporan.laporanArrayList.get(i).getLuka_ringan() != 0) {
-                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getLuka_ringan()));
+            if((laporenSemua.get(i).getLuka_ringan() != 0) && laporenSemua.get(i).getIdLaporan() != -1) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void timRusakBerat() {
         list = new ArrayList<>();
-        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-            if(Laporan.laporanArrayList.get(i).getRusak_berat() != 0) {
-                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getRusak_berat()));
+            if((laporenSemua.get(i).getRusak_berat() != 0) && laporenSemua.get(i).getIdLaporan() != -1) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void timRusakRingan() {
         list = new ArrayList<>();
-        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-            if(Laporan.laporanArrayList.get(i).getRusak_ringan() != 0) {
-                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getRusak_ringan()));
+            if((laporenSemua.get(i).getRusak_ringan() != 0) && laporenSemua.get(i).getIdLaporan() != -1) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void umumSemua() {
         list = new ArrayList<>();
-        for(int i=0;i<LaporanUmum.laporanArrayList.size();i++){
-            list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+
+        for (int i=0;i<laporenSemua.size();i++){
+            if (laporenSemua.get(i).getIdLaporan() == -1) {
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
+            }
         }
     }
 
     private void umumMeninggal() {
         list = new ArrayList<>();
-        for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
-            if(LaporanUmum.laporanArrayList.get(i).getJumlah_korban() != 0) {
-                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getJumlah_korban()));
+            if((laporenSemua.get(i).getJumlah_korban() != 0) && laporenSemua.get(i).getIdLaporan() == -1) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void umumLukaBerat() {
         list = new ArrayList<>();
-        for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
-            if(LaporanUmum.laporanArrayList.get(i).getLuka_berat() != 0) {
-                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getLuka_berat()));
+            if((laporenSemua.get(i).getLuka_berat() != 0) && laporenSemua.get(i).getIdLaporan() == -1) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void umumLukaRingan() {
         list = new ArrayList<>();
-        for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
-            if(LaporanUmum.laporanArrayList.get(i).getLuka_ringan() != 0) {
-                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getLuka_ringan()));
+            if((laporenSemua.get(i).getLuka_ringan() != 0) && laporenSemua.get(i).getIdLaporan() == -1) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void umumRusakBerat() {
         list = new ArrayList<>();
-        for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
-            if(LaporanUmum.laporanArrayList.get(i).getRusak_berat() != 0) {
-                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getRusak_berat()));
+            if((laporenSemua.get(i).getRusak_berat() != 0) && laporenSemua.get(i).getIdLaporan() == -1) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
 
     private void umumRusakRingan() {
         list = new ArrayList<>();
-        for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
-            if(LaporanUmum.laporanArrayList.get(i).getRusak_ringan() != 0) {
-                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+        mClusterManager.clearItems();
+        for (int i=0;i<laporenSemua.size();i++){
+            Log.d("JUMLAH KORBAN JIWA", String.valueOf(laporenSemua.get(i).getRusak_ringan()));
+            if((laporenSemua.get(i).getRusak_ringan() != 0) && laporenSemua.get(i).getIdLaporan() == -1) {
+                Log.d("KORBAN JIWA","OK");
+                list.add(laporenSemua.get(i).getLokasi());
+                mClusterManager.addItem(
+                        new MyItem(laporenSemua.get(i).getLokasi().latitude,
+                                laporenSemua.get(i).getLokasi().longitude)
+                );
             }
         }
     }
