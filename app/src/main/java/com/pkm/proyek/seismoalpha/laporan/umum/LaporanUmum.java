@@ -35,7 +35,9 @@ public class LaporanUmum {
     private int rusak_berat;
     private int rusak_ringan;
 
-    public LaporanUmum(Long idLaporan, Gempa gempa, String nama, Calendar waktu, LatLng lokasi, String alamat, int jumlah_korban, int luka_berat, int luka_ringan, int rusak_berat, int rusak_ringan) {
+    private Bitmap foto_laporan;
+
+    public LaporanUmum(Long idLaporan, Gempa gempa, String nama, Calendar waktu, LatLng lokasi, String alamat, int jumlah_korban, int luka_berat, int luka_ringan, int rusak_berat, int rusak_ringan,Bitmap foto_laporan) {
         this.idLaporan = idLaporan;
         this.gempa = gempa;
         this.nama=nama;
@@ -47,6 +49,15 @@ public class LaporanUmum {
         this.luka_ringan = luka_ringan;
         this.rusak_berat = rusak_berat;
         this.rusak_ringan = rusak_ringan;
+        this.foto_laporan=foto_laporan;
+    }
+
+    public Bitmap getFoto_laporan() {
+        return foto_laporan;
+    }
+
+    public void setFoto_laporan(Bitmap foto_laporan) {
+        this.foto_laporan = foto_laporan;
     }
 
     public String getNama() {

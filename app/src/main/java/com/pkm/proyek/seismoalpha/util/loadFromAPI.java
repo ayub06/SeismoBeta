@@ -259,7 +259,7 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
         }
         context = params[0].first;
 
-        Log.d("KENE","1");
+        Log.d("getLaporanSync","1");
         try {
             Laporan.laporanArrayList=new ArrayList<>();
             List<com.pkm.seismosense.backend.laporanApi.model.Laporan> laporanList=
@@ -490,6 +490,13 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTimeInMillis(laporanList.get(i).getId());
 
+                    //Getting foto
+                    //Create Design Bitmap by getting the stream
+                    byte[] bytestream=
+                            android.util.Base64.decode(
+                                    laporanList.get(i).getFoto().getBytes(),
+                                    android.util.Base64.DEFAULT);
+
                     //Create new Laporan from Server
                     LaporanUmum.laporanArrayList.add(new LaporanUmum(
                             laporanList.get(i).getId(),
@@ -502,7 +509,8 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                             laporanList.get(i).getLukaBerat(),
                             laporanList.get(i).getLukaRingan(),
                             laporanList.get(i).getRusakBerat(),
-                            laporanList.get(i).getRusakRingan()
+                            laporanList.get(i).getRusakRingan(),
+                            BitmapFactory.decodeByteArray(bytestream, 0, bytestream.length)
                     ));
 
                     //Getting Pelapor Foto

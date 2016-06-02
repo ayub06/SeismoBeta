@@ -29,9 +29,11 @@ public class LaporanUmumAdapter extends RecyclerView.Adapter<LaporanUmumAdapter.
     }
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
+
         //CardView cv;
         LinearLayout container;
         TextView  waktu;
+        TextView jam;
         ImageView foto;
         TextView  nama;
         TextView  alamat;
@@ -43,11 +45,13 @@ public class LaporanUmumAdapter extends RecyclerView.Adapter<LaporanUmumAdapter.
         TextView rusak_berat;
         TextView rusak_ringan;
 
+        ImageView foto_laporan;
         PersonViewHolder(View itemView) {
             super(itemView);
             //cv          = (CardView) itemView.findViewById(R.id.card_view);
             container   = (LinearLayout) itemView.findViewById(R.id.item_container);
             waktu       = (TextView)itemView.findViewById(R.id.tanggal_lapor);
+            jam         = (TextView)itemView.findViewById(R.id.jam_lapor);
             foto        = (ImageView)itemView.findViewById(R.id.foto_pelapor);
             nama        = (TextView) itemView.findViewById(R.id.nama_pelapor);
             alamat      = (TextView) itemView.findViewById(R.id.lokasi_laporan);
@@ -58,6 +62,7 @@ public class LaporanUmumAdapter extends RecyclerView.Adapter<LaporanUmumAdapter.
 
             rusak_berat = (TextView) itemView.findViewById(R.id.lapor_rusak_berat);
             rusak_ringan = (TextView) itemView.findViewById(R.id.lapor_rusak_ringan);
+            foto_laporan =(ImageView)itemView.findViewById(R.id.foto_laporan);
         }
     }
 
@@ -74,6 +79,7 @@ public class LaporanUmumAdapter extends RecyclerView.Adapter<LaporanUmumAdapter.
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
+        personViewHolder.foto_laporan.setImageBitmap(laporan.get(i).getFoto_laporan());
         personViewHolder.container.setTag(i);
         personViewHolder.container.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +96,10 @@ public class LaporanUmumAdapter extends RecyclerView.Adapter<LaporanUmumAdapter.
                 activity.startActivity(intent);
             }
         });
-        personViewHolder.waktu.setText(laporan.get(i).getJam()+" | "+laporan.get(i).getTanggalSingkat());
+
+        personViewHolder.waktu.setText(laporan.get(i).getTanggal());
+        personViewHolder.jam.setText(laporan.get(i).getJam());
+
         personViewHolder.foto.setImageBitmap(laporan.get(i).getFoto());
         personViewHolder.nama.setText(laporan.get(i).getNama());
         personViewHolder.alamat.setText(laporan.get(i).getAlamat());
