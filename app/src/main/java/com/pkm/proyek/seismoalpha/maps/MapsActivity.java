@@ -26,7 +26,6 @@ import com.pkm.proyek.seismoalpha.R;
 import com.pkm.proyek.seismoalpha.laporan.tim.Laporan;
 import com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum;
 import com.pkm.proyek.seismoalpha.main.Gempa;
-import com.pkm.seismosense.backend.laporanUmumApi.model.LaporanUmum;
 
 import java.util.ArrayList;
 import java.util.List;
