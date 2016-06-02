@@ -299,9 +299,6 @@ public class MapsActivity extends FragmentActivity
             }
 
             getDataSesuaiFilter();
-//            semuaMeninggal();
-//            semuaSemua();
-//            semuaLukaBerat();
 
             Toast.makeText(getApplicationContext(),"TOTAL :"+laporenSemua.size(),Toast.LENGTH_SHORT).show();
 
@@ -608,7 +605,9 @@ public class MapsActivity extends FragmentActivity
                 spinnerKiriStatus = position;
                 Log.d("SELCET","KIRI");
                 getDataSesuaiFilter();
-//                if(tabLayout.getSelectedTabPosition() == 0) clearCluster();
+                if(tabLayout.getSelectedTabPosition() == 1) {
+                    clearCluster();
+                }
             }
 
             @Override
@@ -621,8 +620,9 @@ public class MapsActivity extends FragmentActivity
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerKananStatus = position;
                 getDataSesuaiFilter();
-                ;
-//                if(tabLayout.getSelectedTabPosition() == 1) clearHeatMap();
+                if(tabLayout.getSelectedTabPosition() == 1) {
+                    clearCluster();
+                }
             }
 
             @Override
