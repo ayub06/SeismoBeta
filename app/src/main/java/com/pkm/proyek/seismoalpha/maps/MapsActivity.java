@@ -245,8 +245,7 @@ public class MapsActivity extends FragmentActivity
             umumRusakRingan();
         }
 
-        //mClusterManager.addItems();
-        //showCluster();
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Gempa.gempaArrayList.get(id).getPusat(), 7));
     }
 
     private void readLaporanForClustering() {
@@ -608,6 +607,7 @@ public class MapsActivity extends FragmentActivity
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerKiriStatus = position;
                 Log.d("SELCET","KIRI");
+                getDataSesuaiFilter();
 //                if(tabLayout.getSelectedTabPosition() == 0) clearCluster();
             }
 
@@ -620,6 +620,8 @@ public class MapsActivity extends FragmentActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerKananStatus = position;
+                getDataSesuaiFilter();
+                ;
 //                if(tabLayout.getSelectedTabPosition() == 1) clearHeatMap();
             }
 
