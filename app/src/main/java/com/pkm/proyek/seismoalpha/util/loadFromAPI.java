@@ -151,15 +151,14 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                     break;
                 case SYNC_MODE_GET_LAPORAN:
                     if (from==MAIN_ACTIVITY){
-                        Bundle bundleX=new Bundle();
-                        bundleX.putInt(MapsActivity.MODE,MapsActivity.DISPLAY_GEMPA);
-                        bundleX.putInt(MapsActivity.ID_GEMPA_OR_LAPORAN, GempaAdapter.indexGempaMain);
-                        Intent intentX=new Intent(new Intent(context, MapsActivity.class));
-                        intentX.putExtras(bundleX);
-                        MainActivity.stopLoading();
-                        context.startActivity(intentX);
+                        Log.d("RESULT GET LAPORAN TIM", result);
+                        loadFromAPI.sync_mode=loadFromAPI.SYNC_MODE_GET_LAPORAN_UMUM;
+                        new loadFromAPI().execute(
+                                new Pair<Context, String>(context, "Load Laporan")
+                        );
+
                     }else {
-                        Log.d("RESULT GET LAPORAN", result);
+                        Log.d("RESULT GET LAPORAN TIM", result);
                         LaporanActivity.showLaporanlist(false);
                     }
 
@@ -188,7 +187,20 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                     InputUmumActivity.success(context);
                     break;
                 case SYNC_MODE_GET_LAPORAN_UMUM:
-                    Log.d("RESULT GET LAPORAN", result);
+                    if (from==MAIN_ACTIVITY) {
+                        Bundle bundleX = new Bundle();
+                        bundleX.putInt(MapsActivity.MODE, MapsActivity.DISPLAY_GEMPA);
+                        bundleX.putInt(MapsActivity.ID_GEMPA_OR_LAPORAN, GempaAdapter.indexGempaMain);
+                        Intent intentX = new Intent(new Intent(context, MapsActivity.class));
+                        intentX.putExtras(bundleX);
+                        MainActivity.stopLoading();
+                        Log.d("RESULT GET LAPORAN UMUM", result);
+                        Log.d("FROM MAIN GOTO", "MAPS ACTIVITY");
+                        context.startActivity(intentX);
+                    }else {
+                        Log.d("FROM OTHER GET LAP UMUM", result);
+                        Log.d("RESULT GET LAPORAN UMUM", result);
+                    }
                     break;
                 default:
                     Log.d("RESULT RESPONSE", result+"  1");
@@ -589,7 +601,12 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                 LaporanUmum.laporanArrayList.get(index).setFoto(result);
                 Log.d("AKUN FOTO", "ADA");
             }
-            LaporanActivity.showLaporanlist(true);
+            if (from!=MAIN_ACTIVITY) {
+                LaporanActivity.showLaporanlist(true);
+            }
+
+            Log.d("TOTAL TIM", String.valueOf(Laporan.laporanArrayList.size()));
+            Log.d("TOTAL UMUM", String.valueOf(LaporanUmum.laporanArrayList.size()));
         }
     }
 

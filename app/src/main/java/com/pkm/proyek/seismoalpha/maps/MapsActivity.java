@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,6 +28,7 @@ import com.pkm.proyek.seismoalpha.R;
 import com.pkm.proyek.seismoalpha.laporan.tim.Laporan;
 import com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum;
 import com.pkm.proyek.seismoalpha.main.Gempa;
+import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +51,8 @@ public class MapsActivity extends FragmentActivity
     private static ArrayList<LatLng> list;
     private static ArrayList<LatLng> clusterList;
     private Marker pusat;
+
+    private ArrayList<Laporan> laporenSemua;
 
     private Spinner spinnerKiri, spinnerKanan;
     private int  spinnerKananStatus = 0;
@@ -149,6 +153,9 @@ public class MapsActivity extends FragmentActivity
 
             //Camero focus to Pusat Gemap and show the window detail
             focusOnMarker(Gempa.gempaArrayList.get(id).getPusat());
+
+            //Settings for DropDown
+            //spinnerOnItemSelect();
         }
 
         //Setting all window that show if clicked in the marker
@@ -198,11 +205,14 @@ public class MapsActivity extends FragmentActivity
     }
 
     private void getDataSesuaiFilter() {
+        Log.d("GETDATASESUAI FILTER", String.valueOf(spinnerKiriStatus+spinnerKananStatus));
+
         clearCluster();
 
         if((spinnerKiriStatus == 0) && (spinnerKananStatus == 0)) {
             semuaSemua();
         } else if ((spinnerKiriStatus == 0) && (spinnerKananStatus == 1)) {
+            Log.d("SEMUA","MENINGGAL");
             semuaMeninggal();
         } else if ((spinnerKiriStatus == 0) && (spinnerKananStatus == 2)) {
             semuaLukaBerat();
@@ -238,18 +248,61 @@ public class MapsActivity extends FragmentActivity
             umumRusakRingan();
         }
 
+        //mClusterManager.addItems();
         showCluster();
     }
 
     private void readLaporanForClustering() {
         list=new ArrayList<>();
+        laporenSemua=new ArrayList<>();
         try {
+
             for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
                 MyItem myItem=new MyItem(Laporan.laporanArrayList.get(i).getLokasi().latitude,Laporan.laporanArrayList.get(i).getLokasi().longitude);
                 myItem.setId(i);
                 mClusterManager.addItem(myItem);
-                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+                list.add(Laporan.laporanArrayList.get(i).getLokasi());  //HeatMAP
+
+                //Add to laporanSemua
+                laporenSemua.add(Laporan.laporanArrayList.get(i));
             }
+
+            //UMUM
+            for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
+                MyItem myItem=new MyItem(LaporanUmum.laporanArrayList.get(i).getLokasi().latitude,LaporanUmum.laporanArrayList.get(i).getLokasi().longitude);
+                myItem.setId(Laporan.laporanArrayList.size()+i);
+                mClusterManager.addItem(myItem);
+                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());  //HeatMAP
+
+                //Add to laporanSemua
+                Pelapor pelapor=new Pelapor(Pelapor.pelaporArrayList.size()+i,
+                        LaporanUmum.laporanArrayList.get(i).getFoto(),
+                        LaporanUmum.laporanArrayList.get(i).getNama(),
+                        LaporanUmum.laporanArrayList.get(i).getNama(),
+                        LaporanUmum.laporanArrayList.get(i).getNama(),
+                        LaporanUmum.laporanArrayList.get(i).getAlamat(),
+                        LaporanUmum.laporanArrayList.get(i).getLokasi()
+                );
+
+                Laporan laporan=new Laporan(
+                        (long) -1,      //IDENTIFIED LAPORAN UMUM
+                        LaporanUmum.laporanArrayList.get(i).getGempa(),
+                        pelapor,
+                        LaporanUmum.laporanArrayList.get(i).getWaktu(),
+                        LaporanUmum.laporanArrayList.get(i).getLokasi(),
+                        LaporanUmum.laporanArrayList.get(i).getAlamat(),
+                        LaporanUmum.laporanArrayList.get(i).getJumlah_korban(),
+                        LaporanUmum.laporanArrayList.get(i).getLuka_berat(),
+                        LaporanUmum.laporanArrayList.get(i).getLuka_ringan(),
+                        LaporanUmum.laporanArrayList.get(i).getRusak_berat(),
+                        LaporanUmum.laporanArrayList.get(i).getRusak_ringan(),
+                        LaporanUmum.laporanArrayList.get(i).getFoto_laporan()
+
+                );
+                laporenSemua.add(laporan);
+            }
+
+            Toast.makeText(getApplicationContext(),"TOTAL :"+laporenSemua.size(),Toast.LENGTH_SHORT).show();
 
             if (Laporan.laporanArrayList.size()==0){
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Laporan.laporanArrayList.get(0).getLokasi(), 5));
@@ -273,9 +326,52 @@ public class MapsActivity extends FragmentActivity
                         return showWindowGempa();
                     } else {
                         //Laporan
+
                         int i = Integer.parseInt(title);
                         return showWindowLaporan(i);
+
                     }
+                }
+
+                private View showWindowLaporan(int i) {
+                    TextView waktu;
+                    ImageView foto;
+                    TextView nama;
+                    TextView alamat;
+
+                    TextView jumlah_korban;
+                    TextView luka_berat;
+                    TextView luka_ringan;
+
+                    TextView rusak_berat;
+                    TextView rusak_ringan;
+
+                    View itemView = getLayoutInflater().inflate(R.layout.item_report, null);
+                    waktu = (TextView) itemView.findViewById(R.id.tanggal_lapor);
+                    foto = (ImageView) itemView.findViewById(R.id.foto_pelapor);
+                    nama = (TextView) itemView.findViewById(R.id.nama_pelapor);
+                    alamat = (TextView) itemView.findViewById(R.id.lokasi_laporan);
+
+                    jumlah_korban = (TextView) itemView.findViewById(R.id.lapor_korban_jiwa);
+                    luka_berat = (TextView) itemView.findViewById(R.id.lapor_luka_berat);
+                    luka_ringan = (TextView) itemView.findViewById(R.id.lapor_luka_ringan);
+
+                    rusak_berat = (TextView) itemView.findViewById(R.id.lapor_rusak_berat);
+                    rusak_ringan = (TextView) itemView.findViewById(R.id.lapor_rusak_ringan);
+
+                    //Data Binding
+                    waktu.setText(Laporan.laporanArrayList.get(i).getJam() + " | " + Laporan.laporanArrayList.get(i).getTanggalSingkat());
+                    foto.setImageBitmap(Laporan.laporanArrayList.get(i).getPelapor().getFoto());
+                    nama.setText(Laporan.laporanArrayList.get(i).getPelapor().getNama());
+                    alamat.setText(Laporan.laporanArrayList.get(i).getAlamat());
+
+                    jumlah_korban.setText(String.valueOf(Laporan.laporanArrayList.get(i).getJumlah_korban()));
+                    luka_berat.setText(String.valueOf(Laporan.laporanArrayList.get(i).getLuka_berat()));
+                    luka_ringan.setText(String.valueOf(Laporan.laporanArrayList.get(i).getLuka_ringan()));
+
+                    rusak_ringan.setText(String.valueOf(Laporan.laporanArrayList.get(i).getRusak_ringan()));
+                    rusak_berat.setText(String.valueOf(Laporan.laporanArrayList.get(i).getRusak_berat()));
+                    return itemView;
                 }
 
                 private View showWindowGempa() {
@@ -323,46 +419,7 @@ public class MapsActivity extends FragmentActivity
                     return itemView;
                 }
 
-                private View showWindowLaporan(int i) {
-                    TextView waktu;
-                    ImageView foto;
-                    TextView nama;
-                    TextView alamat;
 
-                    TextView jumlah_korban;
-                    TextView luka_berat;
-                    TextView luka_ringan;
-
-                    TextView rusak_berat;
-                    TextView rusak_ringan;
-
-                    View itemView = getLayoutInflater().inflate(R.layout.item_report, null);
-                    waktu = (TextView) itemView.findViewById(R.id.tanggal_lapor);
-                    foto = (ImageView) itemView.findViewById(R.id.foto_pelapor);
-                    nama = (TextView) itemView.findViewById(R.id.nama_pelapor);
-                    alamat = (TextView) itemView.findViewById(R.id.lokasi_laporan);
-
-                    jumlah_korban = (TextView) itemView.findViewById(R.id.lapor_korban_jiwa);
-                    luka_berat = (TextView) itemView.findViewById(R.id.lapor_luka_berat);
-                    luka_ringan = (TextView) itemView.findViewById(R.id.lapor_luka_ringan);
-
-                    rusak_berat = (TextView) itemView.findViewById(R.id.lapor_rusak_berat);
-                    rusak_ringan = (TextView) itemView.findViewById(R.id.lapor_rusak_ringan);
-
-                    //Data Binding
-                    waktu.setText(Laporan.laporanArrayList.get(i).getJam() + " | " + Laporan.laporanArrayList.get(i).getTanggalSingkat());
-                    foto.setImageBitmap(Laporan.laporanArrayList.get(i).getPelapor().getFoto());
-                    nama.setText(Laporan.laporanArrayList.get(i).getPelapor().getNama());
-                    alamat.setText(Laporan.laporanArrayList.get(i).getAlamat());
-
-                    jumlah_korban.setText(String.valueOf(Laporan.laporanArrayList.get(i).getJumlah_korban()));
-                    luka_berat.setText(String.valueOf(Laporan.laporanArrayList.get(i).getLuka_berat()));
-                    luka_ringan.setText(String.valueOf(Laporan.laporanArrayList.get(i).getLuka_ringan()));
-
-                    rusak_ringan.setText(String.valueOf(Laporan.laporanArrayList.get(i).getRusak_ringan()));
-                    rusak_berat.setText(String.valueOf(Laporan.laporanArrayList.get(i).getRusak_berat()));
-                    return itemView;
-                }
 
                 @Override
                 public View getInfoContents(Marker marker) {
@@ -385,17 +442,19 @@ public class MapsActivity extends FragmentActivity
                     //LAPORAN
                     int idLaporan = 0;
                     //Getting ID Laporan
-                    for (int i=0;i<Laporan.laporanArrayList.size();i++){
-                        if (Laporan.laporanArrayList.get(i).getLokasi().latitude==marker.getPosition().latitude){
+                    for (int i=0;i<laporenSemua.size();i++){
+                        if (laporenSemua.get(i).getLokasi().latitude==marker.getPosition().latitude){
                             //Toast.makeText(getApplicationContext(),"FOUND "+i,Toast.LENGTH_SHORT).show();
                             idLaporan=i;
                         }
                     }
+                    Log.d("CLICK", String.valueOf(idLaporan));
                     return showWindowLaporan(idLaporan);
                 }
 
                 private View showWindowLaporan(int i) {
                     TextView waktu;
+                    TextView jam;
                     ImageView foto;
                     TextView nama;
                     TextView alamat;
@@ -409,6 +468,7 @@ public class MapsActivity extends FragmentActivity
 
                     View itemView = getLayoutInflater().inflate(R.layout.item_report, null);
                     waktu = (TextView) itemView.findViewById(R.id.tanggal_lapor);
+                    jam = (TextView) itemView.findViewById(R.id.jam_lapor);
                     foto = (ImageView) itemView.findViewById(R.id.foto_pelapor);
                     nama = (TextView) itemView.findViewById(R.id.nama_pelapor);
                     alamat = (TextView) itemView.findViewById(R.id.lokasi_laporan);
@@ -421,20 +481,21 @@ public class MapsActivity extends FragmentActivity
                     rusak_ringan = (TextView) itemView.findViewById(R.id.lapor_rusak_ringan);
 
                     //Data Binding
-                    waktu.setText(Laporan.laporanArrayList.get(i).getJam() + " | " + Laporan.laporanArrayList.get(i).getTanggalSingkat());
-                    foto.setImageBitmap(Laporan.laporanArrayList.get(i).getPelapor().getFoto());
-                    nama.setText(Laporan.laporanArrayList.get(i).getPelapor().getNama());
-                    alamat.setText(Laporan.laporanArrayList.get(i).getAlamat());
+                    jam.setText(laporenSemua.get(i).getJam());
+                    waktu.setText(laporenSemua.get(i).getTanggalSingkat());
+                    foto.setImageBitmap(laporenSemua.get(i).getPelapor().getFoto());
+                    nama.setText(laporenSemua.get(i).getPelapor().getNama());
+                    alamat.setText(laporenSemua.get(i).getAlamat());
 
-                    jumlah_korban.setText(String.valueOf(Laporan.laporanArrayList.get(i).getJumlah_korban()));
-                    luka_berat.setText(String.valueOf(Laporan.laporanArrayList.get(i).getLuka_berat()));
-                    luka_ringan.setText(String.valueOf(Laporan.laporanArrayList.get(i).getLuka_ringan()));
+                    jumlah_korban.setText(String.valueOf(laporenSemua.get(i).getJumlah_korban()));
+                    luka_berat.setText(String.valueOf(laporenSemua.get(i).getLuka_berat()));
+                    luka_ringan.setText(String.valueOf(laporenSemua.get(i).getLuka_ringan()));
 
-                    rusak_ringan.setText(String.valueOf(Laporan.laporanArrayList.get(i).getRusak_ringan()));
-                    rusak_berat.setText(String.valueOf(Laporan.laporanArrayList.get(i).getRusak_berat()));
+                    rusak_ringan.setText(String.valueOf(laporenSemua.get(i).getRusak_ringan()));
+                    rusak_berat.setText(String.valueOf(laporenSemua.get(i).getRusak_berat()));
                     return itemView;
                 }
-
+                
                 private View showWindowGempa() {
                     TextView waktu;
                     TextView nama;
@@ -536,26 +597,13 @@ public class MapsActivity extends FragmentActivity
         mMap.addTileOverlay(new TileOverlayOptions().tileProvider(mProvider));
     }
 
-    /*private ArrayList<Laporan> loadLaporanByIDGempa() {
-        //Get Laporan from Server
-        if(Laporan.laporanArrayList==null) {
-            loadFromAPI.sync_mode = loadFromAPI.SYNC_MODE_GET_LAPORAN;
-            new loadFromAPI().execute(
-                    new Pair<Context, String>(this, "Load Laporan")
-            );
-        }
-        return Laporan.laporanArrayList;
-
-    }*/
-
-
-
     private void spinnerOnItemSelect() {
         spinnerKiri.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerKiriStatus = position;
                 getDataSesuaiFilter();
+                Log.d("SELCET","KIRI");
 //                if(tabLayout.getSelectedTabPosition() == 0) clearCluster();
             }
 
@@ -594,20 +642,31 @@ public class MapsActivity extends FragmentActivity
     }
 
     private void semuaSemua() {
+        //HEATMAP
         list = new ArrayList<>();
         list = getAllLatLng();
+
+        //CLUSTER
+
+
     }
 
     private void semuaMeninggal() {
         list = new ArrayList<>();
         for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
             if(Laporan.laporanArrayList.get(i).getJumlah_korban() != 0) {
+                mClusterManager.addItem(new MyItem(
+                        Laporan.laporanArrayList.get(i).getLokasi().latitude,
+                        Laporan.laporanArrayList.get(i).getLokasi().longitude));
                 list.add(Laporan.laporanArrayList.get(i).getLokasi());
             }
         }
 
         for (int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
             if (LaporanUmum.laporanArrayList.get(i).getJumlah_korban() != 0) {
+                mClusterManager.addItem(new MyItem(
+                        LaporanUmum.laporanArrayList.get(i).getLokasi().latitude,
+                        LaporanUmum.laporanArrayList.get(i).getLokasi().longitude));
                 list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
             }
         }

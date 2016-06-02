@@ -126,6 +126,7 @@ public class GempaAdapter extends RecyclerView.Adapter<GempaAdapter.PersonViewHo
 
         Laporan.laporanArrayList=new ArrayList<>();
         loadFromAPI.from=loadFromAPI.MAIN_ACTIVITY;
+
         loadFromAPI.sync_mode = loadFromAPI.SYNC_MODE_GET_LAPORAN;
         new loadFromAPI().execute(
                 new Pair<Context, String>(activity, "Load Laporan")
