@@ -573,7 +573,7 @@ public class MapsActivity extends FragmentActivity
                 listLokasi.add(Laporan.laporanArrayList.get(i).getLokasi());
             }
 
-            if (Laporan.laporanArrayList.size()!=0){
+            if (Laporan.laporanArrayList.size()==0){
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Laporan.laporanArrayList.get(0).getLokasi(), 5));
             }
         } catch (NullPointerException e){
@@ -584,16 +584,16 @@ public class MapsActivity extends FragmentActivity
     private void ambilDataUmum() {
         listLokasi=new ArrayList<>();
         try {
-            for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
-                MyItem myItem=new MyItem(LaporanUmum.laporanArrayList.get(i).getLokasi().latitude,
-                        LaporanUmum.laporanArrayList.get(i).getLokasi().longitude);
+            for(int i = 0; i < com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum.laporanArrayList.size(); i++) {
+                MyItem myItem=new MyItem(com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum.laporanArrayList.get(i).getLokasi().latitude,
+                        com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum.laporanArrayList.get(i).getLokasi().longitude);
                 myItem.setId(i);
                 mClusterManager.addItem(myItem);
-                listLokasi.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+                listLokasi.add(Laporan.laporanArrayList.get(i).getLokasi());
             }
 
-            if (LaporanUmum.laporanArrayList.size()!=0){
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LaporanUmum.laporanArrayList.get(0).getLokasi(), 5));
+            if (Laporan.laporanArrayList.size()==0){
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Laporan.laporanArrayList.get(0).getLokasi(), 5));
             }
         } catch (NullPointerException e){
             e.getStackTrace();
