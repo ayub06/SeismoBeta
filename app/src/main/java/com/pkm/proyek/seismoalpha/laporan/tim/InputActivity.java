@@ -138,8 +138,8 @@ public class InputActivity extends AppCompatActivity {
         foto.compress(Bitmap.CompressFormat.JPEG, 100, bos);
         byte [] bytestream=bos.toByteArray();
 
-        Toast.makeText(getApplicationContext(),"File Size :"+bytestream.length,Toast.LENGTH_SHORT).show();
-        Log.d("FOTO SIZE", String.valueOf(bytestream.length));
+        //Toast.makeText(getApplicationContext(),"File Size :"+bytestream.length,Toast.LENGTH_SHORT).show();
+        //Log.d("FOTO SIZE", String.valueOf(bytestream.length));
         laporanSave.setFoto(android.util.Base64.encodeToString(bytestream, android.util.Base64.DEFAULT));
 
         //Store Now
