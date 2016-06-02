@@ -31,6 +31,7 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.PersonVi
         //CardView cv;
         LinearLayout container;
         TextView  waktu;
+        TextView jam;
         ImageView foto;
         TextView  nama;
         TextView  alamat;
@@ -49,6 +50,7 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.PersonVi
             //cv          = (CardView) itemView.findViewById(R.id.card_view);
             container   = (LinearLayout) itemView.findViewById(R.id.item_container);
             waktu       = (TextView)itemView.findViewById(R.id.tanggal_lapor);
+            jam         = (TextView)itemView.findViewById(R.id.jam_lapor);
             foto        = (ImageView)itemView.findViewById(R.id.foto_pelapor);
             nama        = (TextView) itemView.findViewById(R.id.nama_pelapor);
             alamat      = (TextView) itemView.findViewById(R.id.lokasi_laporan);
@@ -94,7 +96,9 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.PersonVi
                 activity.startActivity(intent);
             }
         });
-        personViewHolder.waktu.setText(laporan.get(i).getJam()+" | "+laporan.get(i).getTanggalSingkat());
+        personViewHolder.waktu.setText(laporan.get(i).getTanggal());
+        personViewHolder.jam.setText(laporan.get(i).getJam());
+
         personViewHolder.foto.setImageBitmap(laporan.get(i).getPelapor().getFoto());
         personViewHolder.nama.setText(laporan.get(i).getPelapor().getNama());
         personViewHolder.alamat.setText(laporan.get(i).getAlamat());

@@ -34,6 +34,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class InputActivity extends AppCompatActivity {
@@ -116,6 +117,7 @@ public class InputActivity extends AppCompatActivity {
 
         //Create Laporan Entity, it will be saved in Google Datastore
         laporanSave = new Laporan();
+        laporanSave.setId(Calendar.getInstance().getTimeInMillis());
         laporanSave.setGempaId(String.valueOf(LaporanActivity.indexGempa));
         laporanSave.setUsernamePelapor(Pelapor.akunIni.getUsername());
         laporanSave.setLokasiLat(PickLocation.position.latitude);   //LOKASI BASED ON LOCATION PICKER
@@ -136,8 +138,8 @@ public class InputActivity extends AppCompatActivity {
         foto.compress(Bitmap.CompressFormat.JPEG, 100, bos);
         byte [] bytestream=bos.toByteArray();
 
+        Toast.makeText(getApplicationContext(),"File Size :"+bytestream.length,Toast.LENGTH_SHORT).show();
         Log.d("FOTO SIZE", String.valueOf(bytestream.length));
-
         laporanSave.setFoto(android.util.Base64.encodeToString(bytestream, android.util.Base64.DEFAULT));
 
         //Store Now
