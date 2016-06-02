@@ -10,11 +10,7 @@ import com.google.appengine.api.datastore.QueryResultIterator;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.cmd.Query;
 
-import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -42,8 +38,10 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 )
 public class LaporanEndpoint {
 
+    private static final Logger logger = Logger.getLogger(LaporanEndpoint.class.getName());
+
     private static final int DEFAULT_LIST_LIMIT = 20;
-    public  static long countData=0;
+
     static {
         // Typically you would register this inside an OfyServive wrapper. See: https://code.google.com/p/objectify-appengine/wiki/BestPractices
         ObjectifyService.register(Laporan.class);
@@ -61,6 +59,7 @@ public class LaporanEndpoint {
             path = "laporan/{id}",
             httpMethod = ApiMethod.HttpMethod.GET)
     public Laporan get(@Named("id") Long id) throws NotFoundException {
+        logger.info("Getting Laporan with ID: " + id);
         Laporan laporan = ofy().load().type(Laporan.class).id(id).now();
         if (laporan == null) {
             throw new NotFoundException("Could not find Laporan with ID: " + id);
@@ -68,6 +67,9 @@ public class LaporanEndpoint {
         return laporan;
     }
 
+    /**
+     * Inserts a new {@code Laporan}.
+     */
     @ApiMethod(
             name = "insert",
             path = "laporan",
@@ -78,9 +80,8 @@ public class LaporanEndpoint {
         // Objectify ID generator, e.g. long or String, then you should generate the unique ID yourself prior to saving.
         //
         // If your client provides the ID then you should probably use PUT instead.
-
-        laporan.setId(Calendar.getInstance().getTimeInMillis());
         ofy().save().entity(laporan).now();
+        logger.info("Created Laporan with ID: " + laporan.getId());
 
         return ofy().load().entity(laporan).now();
     }
@@ -102,6 +103,7 @@ public class LaporanEndpoint {
         // TODO: You should validate your ID parameter against your resource's ID here.
         checkExists(id);
         ofy().save().entity(laporan).now();
+        logger.info("Updated Laporan: " + laporan);
         return ofy().load().entity(laporan).now();
     }
 
@@ -119,6 +121,7 @@ public class LaporanEndpoint {
     public void remove(@Named("id") Long id) throws NotFoundException {
         checkExists(id);
         ofy().delete().type(Laporan.class).id(id).now();
+        logger.info("Deleted Laporan with ID: " + id);
     }
 
     /**
@@ -157,5 +160,4 @@ public class LaporanEndpoint {
             throw new NotFoundException("Could not find Laporan with ID: " + id);
         }
     }
-
 }

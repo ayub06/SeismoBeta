@@ -1,5 +1,8 @@
 package com.pkm.proyek.seismoalpha.laporan.tim;
 
+import android.graphics.Bitmap;
+
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.LatLng;
 import com.pkm.proyek.seismoalpha.main.Gempa;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
@@ -28,7 +31,9 @@ public class Laporan {
     private int rusak_berat;
     private int rusak_ringan;
 
-    public Laporan(Long idLaporan, Gempa gempa, Pelapor pelapor, Calendar waktu, LatLng lokasi, String alamat, int jumlah_korban, int luka_berat, int luka_ringan, int rusak_berat, int rusak_ringan) {
+    private Bitmap foto;
+
+    public Laporan(Long idLaporan, Gempa gempa, Pelapor pelapor, Calendar waktu, LatLng lokasi, String alamat, int jumlah_korban, int luka_berat, int luka_ringan, int rusak_berat, int rusak_ringan,Bitmap foto) {
         this.idLaporan = idLaporan;
         this.gempa = gempa;
         this.pelapor = pelapor;
@@ -40,6 +45,15 @@ public class Laporan {
         this.luka_ringan = luka_ringan;
         this.rusak_berat = rusak_berat;
         this.rusak_ringan = rusak_ringan;
+        this.foto=foto;
+    }
+
+    public Bitmap getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Bitmap foto) {
+        this.foto = foto;
     }
 
     public String getAlamat() {

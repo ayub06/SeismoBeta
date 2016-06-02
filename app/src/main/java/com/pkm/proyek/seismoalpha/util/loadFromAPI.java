@@ -61,6 +61,7 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
 
 /*    public static final String URL_ROOT="http://10.0.2.2:8080/_ah/api/";*/
     public static final String URL_ROOT="https://seismosense-1261.appspot.com/_ah/api/";
+    public static final String URL_ROOT_TANDINGAN="http://10.0.2.2:8080/_ah/api/";
 
     private static MyApi myApiService   =   null;
     private static PelaporApi loginApi  =   null;
@@ -279,6 +280,13 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                         }
                     }
 
+                    //Getting foto
+                    //Create Design Bitmap by getting the stream
+                    byte[] bytestream=
+                            android.util.Base64.decode(
+                                    laporanList.get(i).getFoto().getBytes(),
+                                    android.util.Base64.DEFAULT);
+
                     //Create new Laporan from Server
                     Laporan.laporanArrayList.add(new Laporan(
                             laporanList.get(i).getId(),
@@ -291,7 +299,8 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                             laporanList.get(i).getLukaBerat(),
                             laporanList.get(i).getLukaRingan(),
                             laporanList.get(i).getRusakBerat(),
-                            laporanList.get(i).getRusakRingan()
+                            laporanList.get(i).getRusakRingan(),
+                            BitmapFactory.decodeByteArray(bytestream, 0, bytestream.length)
                     ));
                 }
             }

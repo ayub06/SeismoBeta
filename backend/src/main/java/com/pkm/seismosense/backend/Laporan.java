@@ -1,5 +1,6 @@
 package com.pkm.seismosense.backend;
 
+import com.google.appengine.api.datastore.Blob;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 @Entity
@@ -21,6 +22,7 @@ public class Laporan {
     private int rusak_berat;
     private int rusak_ringan;
 
+    private Blob foto;
 
     public Laporan() {
     }
@@ -36,6 +38,14 @@ public class Laporan {
         this.luka_ringan = luka_ringan;
         this.rusak_berat = rusak_berat;
         this.rusak_ringan = rusak_ringan;
+    }
+
+    public Blob getFoto() {
+        return foto;
+    }
+
+    public void setFoto(Blob foto) {
+        this.foto = foto;
     }
 
     public String getAlamat() {

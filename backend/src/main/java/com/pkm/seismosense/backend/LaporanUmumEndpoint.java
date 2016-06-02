@@ -139,7 +139,6 @@ public class LaporanUmumEndpoint {
         com.google.appengine.api.datastore.Query.Filter propertyFilter =
                 new com.google.appengine.api.datastore.Query.FilterPredicate("gempaId", com.google.appengine.api.datastore.Query.FilterOperator.EQUAL, idGempa);
 
-
         limit = limit == null ? DEFAULT_LIST_LIMIT : limit;
         Query<LaporanUmum> query = ofy().load().type(LaporanUmum.class).filter(propertyFilter);
         if (cursor != null) {

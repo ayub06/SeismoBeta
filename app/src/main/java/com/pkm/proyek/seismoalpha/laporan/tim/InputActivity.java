@@ -30,6 +30,7 @@ import com.pkm.proyek.seismoalpha.maps.PickLocation;
 import com.pkm.proyek.seismoalpha.pelapor.Pelapor;
 import com.pkm.seismosense.backend.laporanApi.model.Laporan;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -39,19 +40,21 @@ public class InputActivity extends AppCompatActivity {
 
     public static com.pkm.seismosense.backend.laporanApi.model.Laporan laporanSave;
 
-    EditText inputKorbanJiwa;
-    EditText inputLukaBerat;
-    EditText inputLukaRingan;
-    EditText inputRusakBerat;
-    EditText inputRusakRingan;
+    private EditText inputKorbanJiwa;
+    private EditText inputLukaBerat;
+    private EditText inputLukaRingan;
+    private EditText inputRusakBerat;
+    private EditText inputRusakRingan;
 
 
-    String korbanJiwa;
-    String lukaBerat;
-    String lukaRingan;
-    String rusakBerat;
-    String rusakRingan;
-    Double longitude, latitude;
+    private String korbanJiwa;
+    private String lukaBerat;
+    private String lukaRingan;
+    private String rusakBerat;
+    private String rusakRingan;
+    private Double longitude, latitude;
+    private Bitmap foto;
+
     //String lokasiLaporan;
     //private LocationManager locationManager;
     private static Activity activity;
@@ -128,6 +131,15 @@ public class InputActivity extends AppCompatActivity {
         laporanSave.setRusakBerat(Integer.parseInt(rusakBerat));
         laporanSave.setRusakRingan(Integer.parseInt(rusakRingan));
 
+        //Handle foto saving
+        ByteArrayOutputStream bos=new ByteArrayOutputStream();
+        foto.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+        byte [] bytestream=bos.toByteArray();
+
+        Log.d("FOTO SIZE", String.valueOf(bytestream.length));
+
+        laporanSave.setFoto(android.util.Base64.encodeToString(bytestream, android.util.Base64.DEFAULT));
+
         //Store Now
         loadFromAPI.sync_mode = loadFromAPI.SYNC_MODE_POST_LAPORAN;
         new loadFromAPI().execute(
@@ -180,9 +192,7 @@ public class InputActivity extends AppCompatActivity {
         NavUtils.navigateUpFromSameTask(activity);
     }
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
-
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -267,7 +277,7 @@ public class InputActivity extends AppCompatActivity {
 
         Log.d("PHOTO","LOAD");
 
-        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        mImageView.setImageBitmap(bitmap);
+        foto = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        mImageView.setImageBitmap(foto);
     }
 }

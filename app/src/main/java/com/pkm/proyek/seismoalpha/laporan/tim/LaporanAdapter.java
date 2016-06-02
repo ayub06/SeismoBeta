@@ -42,6 +42,8 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.PersonVi
         TextView rusak_berat;
         TextView rusak_ringan;
 
+        ImageView foto_laporan;
+
         PersonViewHolder(View itemView) {
             super(itemView);
             //cv          = (CardView) itemView.findViewById(R.id.card_view);
@@ -57,6 +59,8 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.PersonVi
 
             rusak_berat = (TextView) itemView.findViewById(R.id.lapor_rusak_berat);
             rusak_ringan = (TextView) itemView.findViewById(R.id.lapor_rusak_ringan);
+
+            foto_laporan =(ImageView)itemView.findViewById(R.id.foto_laporan);
         }
     }
 
@@ -73,6 +77,7 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.PersonVi
 
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
+        personViewHolder.foto_laporan.setImageBitmap(laporan.get(i).getFoto());
         personViewHolder.container.setTag(i);
         personViewHolder.container.setOnClickListener(new View.OnClickListener() {
             @Override

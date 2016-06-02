@@ -16,6 +16,11 @@
         android:paddingBottom="8dp"
         android:orientation="vertical"
         android:background="#FFF3E0">
+        <ImageView
+            android:id="@+id/foto_laporan"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
