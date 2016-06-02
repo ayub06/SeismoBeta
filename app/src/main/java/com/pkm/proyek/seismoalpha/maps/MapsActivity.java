@@ -25,6 +25,7 @@ import com.google.maps.android.heatmaps.HeatmapTileProvider;
 import com.pkm.proyek.seismoalpha.R;
 import com.pkm.proyek.seismoalpha.laporan.tim.Laporan;
 import com.pkm.proyek.seismoalpha.main.Gempa;
+import com.pkm.seismosense.backend.laporanUmumApi.model.LaporanUmum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class MapsActivity extends FragmentActivity
 
     private TabLayout tabLayout;
     private static ArrayList<LatLng> list;
+    private static ArrayList<LatLng> listLokasi;
     private Marker pusat;
 
     private Spinner spinnerKiri, spinnerKanan;
@@ -55,47 +57,8 @@ public class MapsActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         tabLayout=(TabLayout)findViewById(R.id.tabLayout);
-//        spinnerKiri = (Spinner)findViewById(R.id.umum_tim_spinner);
+        spinnerKiri = (Spinner)findViewById(R.id.umum_tim_spinner);
         spinnerKanan = (Spinner)findViewById(R.id.filter_spinner);
-        addListToSpinner();
-        /*spinnerKiri.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                spinnerKiriStatus = position;
-                handleMultipleKondisi();
-                if(tabLayout.getSelectedTabPosition() == 0) {
-                    clearCluster();
-                    showCluster();
-                } else {
-                    clearHeatMap();
-                    showHeatMap();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });*/
-        spinnerKanan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                spinnerKananStatus = position;
-//                handleMultipleKondisi();
-                if(tabLayout.getSelectedTabPosition() == 0) {
-                    clearCluster();
-                    showCluster();
-                } else {
-                    clearHeatMap();
-                    showHeatMap();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         //Mode apa?
         Bundle bundle=getIntent().getExtras();
@@ -104,9 +67,10 @@ public class MapsActivity extends FragmentActivity
 
         if (mode!=DISPLAY_LAPORAN) {
             //SET TAB LAYOUT
-            ambilSemuaData();
             setTabLayout();
         }
+        addListToSpinner();
+        spinnerOnItemSelect();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -115,7 +79,7 @@ public class MapsActivity extends FragmentActivity
     }
 
     private void handleMultipleKondisi() {
-        /*if((spinnerKiriStatus == 0) && spinnerKananStatus == 0){
+        if((spinnerKiriStatus == 0) && spinnerKananStatus == 0){
             ambilSemuaData();
         } else if ((spinnerKiriStatus == 0) && spinnerKananStatus == 1) {
             ambilSemuaData();
@@ -166,25 +130,25 @@ public class MapsActivity extends FragmentActivity
         } else if ((spinnerKiriStatus == 2) && spinnerKananStatus == 5) {
             ambilDataUmum();
             ambilDataRusakRingan();
-        }*/
+        }
     }
 
     private void addListToSpinner() {
-//        List<String> listKiri = new ArrayList<String>();
+        List<String> listKiri = new ArrayList<String>();
         List<String> listKanan = new ArrayList<String>();
-//        listKiri.add("Semua");
-//        listKiri.add("Tim");
-//        listKiri.add("Umum");
+        listKiri.add("Semua");
+        listKiri.add("Tim");
+        listKiri.add("Umum");
         listKanan.add("Semua");
         listKanan.add("Korban Jiwa");
         listKanan.add("Luka Berat");
         listKanan.add("Luka Ringan");
         listKanan.add("Rusak Berat");
         listKanan.add("Rusak Ringan");
-//        ArrayAdapter<String> adapterKiri = new ArrayAdapter<String>(this,
-//                android.R.layout.simple_spinner_item, listKiri);
-//        adapterKiri.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerKiri.setAdapter(adapterKiri);
+        ArrayAdapter<String> adapterKiri = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, listKiri);
+        adapterKiri.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerKiri.setAdapter(adapterKiri);
         ArrayAdapter<String> adapterKanan = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, listKanan);
         adapterKanan.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -231,33 +195,11 @@ public class MapsActivity extends FragmentActivity
 
             //Here Use Read MyItem to Cluster Marker
 //            readLaporanForClustering();
-
-            if(spinnerKananStatus == 1) {
-                clearCluster();
-                clearHeatMap();
-                ambilDataMeninggal();
-            } else if(spinnerKananStatus == 2) {
-                clearCluster();
-                clearHeatMap();
-                ambilDataLukaBerat();
-            } else if(spinnerKananStatus == 3) {
-                clearCluster();
-                clearHeatMap();
-                ambilDataLukaRingan();
-            } else if(spinnerKananStatus == 4) {
-                clearCluster();
-                clearHeatMap();
-                ambilDataRusakBerat();
-            } else if(spinnerKananStatus == 5){
-                clearCluster();
-                clearHeatMap();
-                ambilDataRusakRingan();
-            } else if(spinnerKananStatus == 0){
-                clearCluster();
-                clearHeatMap();
-                ambilSemuaData();
+            if(spinnerKiriStatus == 1) {
+                ambilDataTim();
+            } else if (spinnerKiriStatus == 2) {
+                ambilDataUmum();
             }
-
             //Add Marker for Pusat Gempa
             pusat=mMap.addMarker(new MarkerOptions()
                             .position(Gempa.gempaArrayList.get(id).getPusat())
@@ -618,13 +560,17 @@ public class MapsActivity extends FragmentActivity
     }*/
 
     private void ambilSemuaData() {
-        list=new ArrayList<>();
+
+    }
+
+    private void ambilDataTim() {
+        listLokasi=new ArrayList<>();
         try {
             for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
                 MyItem myItem=new MyItem(Laporan.laporanArrayList.get(i).getLokasi().latitude,Laporan.laporanArrayList.get(i).getLokasi().longitude);
                 myItem.setId(i);
                 mClusterManager.addItem(myItem);
-                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+                listLokasi.add(Laporan.laporanArrayList.get(i).getLokasi());
             }
 
             if (Laporan.laporanArrayList.size()==0){
@@ -633,123 +579,82 @@ public class MapsActivity extends FragmentActivity
         } catch (NullPointerException e){
             e.getStackTrace();
         }
-    }
-
-    private void ambilDataTim() {
-
     }
 
     private void ambilDataUmum() {
+        listLokasi=new ArrayList<>();
+        try {
+            for(int i = 0; i < com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum.laporanArrayList.size(); i++) {
+                MyItem myItem=new MyItem(com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum.laporanArrayList.get(i).getLokasi().latitude,
+                        com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum.laporanArrayList.get(i).getLokasi().longitude);
+                myItem.setId(i);
+                mClusterManager.addItem(myItem);
+                listLokasi.add(Laporan.laporanArrayList.get(i).getLokasi());
+            }
 
+            if (Laporan.laporanArrayList.size()==0){
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Laporan.laporanArrayList.get(0).getLokasi(), 5));
+            }
+        } catch (NullPointerException e){
+            e.getStackTrace();
+        }
     }
 
     private void ambilDataMeninggal() {
-        list=new ArrayList<>();
-        try {
-            for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-                if(Laporan.laporanArrayList.get(i).getJumlah_korban() == 0) {
-                    i++;
-                } else {
-                    MyItem myItem = new MyItem(Laporan.laporanArrayList.get(i).getLokasi().latitude, Laporan.laporanArrayList.get(i).getLokasi().longitude);
-                    myItem.setId(i);
-                    mClusterManager.addItem(myItem);
-                    list.add(Laporan.laporanArrayList.get(i).getLokasi());
-                }
-            }
 
-            if (Laporan.laporanArrayList.size()==0){
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Laporan.laporanArrayList.get(0).getLokasi(), 5));
-            }
-        } catch (NullPointerException e){
-            e.getStackTrace();
-        }
     }
 
     private void ambilDataLukaBerat() {
-        list=new ArrayList<>();
-        try {
-            for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-                if(Laporan.laporanArrayList.get(i).getLuka_berat() == 0) {
-                    i++;
-                } else {
-                    MyItem myItem = new MyItem(Laporan.laporanArrayList.get(i).getLokasi().latitude, Laporan.laporanArrayList.get(i).getLokasi().longitude);
-                    myItem.setId(i);
-                    mClusterManager.addItem(myItem);
-                    list.add(Laporan.laporanArrayList.get(i).getLokasi());
-                }
-            }
 
-            if (Laporan.laporanArrayList.size()==0){
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Laporan.laporanArrayList.get(0).getLokasi(), 5));
-            }
-        } catch (NullPointerException e){
-            e.getStackTrace();
-        }
     }
 
     private void ambilDataLukaRingan() {
-        list=new ArrayList<>();
-        try {
-            for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-                if(Laporan.laporanArrayList.get(i).getLuka_ringan() == 0) {
-                    i++;
-                } else {
-                    MyItem myItem = new MyItem(Laporan.laporanArrayList.get(i).getLokasi().latitude, Laporan.laporanArrayList.get(i).getLokasi().longitude);
-                    myItem.setId(i);
-                    mClusterManager.addItem(myItem);
-                    list.add(Laporan.laporanArrayList.get(i).getLokasi());
-                }
-            }
 
-            if (Laporan.laporanArrayList.size()==0){
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Laporan.laporanArrayList.get(0).getLokasi(), 5));
-            }
-        } catch (NullPointerException e){
-            e.getStackTrace();
-        }
     }
 
     private void ambilDataRusakBerat() {
-        list=new ArrayList<>();
-        try {
-            for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-                if(Laporan.laporanArrayList.get(i).getRusak_berat() == 0) {
-                    i++;
-                } else {
-                    MyItem myItem = new MyItem(Laporan.laporanArrayList.get(i).getLokasi().latitude, Laporan.laporanArrayList.get(i).getLokasi().longitude);
-                    myItem.setId(i);
-                    mClusterManager.addItem(myItem);
-                    list.add(Laporan.laporanArrayList.get(i).getLokasi());
-                }
-            }
 
-            if (Laporan.laporanArrayList.size()==0){
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Laporan.laporanArrayList.get(0).getLokasi(), 5));
-            }
-        } catch (NullPointerException e){
-            e.getStackTrace();
-        }
     }
 
     private void ambilDataRusakRingan() {
-        list=new ArrayList<>();
-        try {
-            for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-                if(Laporan.laporanArrayList.get(i).getRusak_ringan() == 0) {
-                    i++;
+
+    }
+
+    private void spinnerOnItemSelect() {
+        spinnerKiri.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spinnerKiriStatus = position;
+                handleMultipleKondisi();
+                if(tabLayout.getSelectedTabPosition() == 0) {
+                    clearCluster();
+                    showCluster();
                 } else {
-                    MyItem myItem = new MyItem(Laporan.laporanArrayList.get(i).getLokasi().latitude, Laporan.laporanArrayList.get(i).getLokasi().longitude);
-                    myItem.setId(i);
-                    mClusterManager.addItem(myItem);
-                    list.add(Laporan.laporanArrayList.get(i).getLokasi());
+
                 }
             }
 
-            if (Laporan.laporanArrayList.size()==0){
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Laporan.laporanArrayList.get(0).getLokasi(), 5));
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
-        } catch (NullPointerException e){
-            e.getStackTrace();
-        }
+        });
+        spinnerKanan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spinnerKananStatus = position;
+                handleMultipleKondisi();
+                if(tabLayout.getSelectedTabPosition() == 0) {
+
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }
