@@ -46,7 +46,7 @@ public class MapsActivity extends FragmentActivity
 
     private TabLayout tabLayout;
     private static ArrayList<LatLng> list;
-    private static ArrayList<LatLng> listLokasi;
+    private static ArrayList<LatLng> clusterList;
     private Marker pusat;
 
     private Spinner spinnerKiri, spinnerKanan;
@@ -70,67 +70,11 @@ public class MapsActivity extends FragmentActivity
             setTabLayout();
         }
         addListToSpinner();
-        spinnerOnItemSelect();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
-
-    private void handleMultipleKondisi() {
-        if((spinnerKiriStatus == 0) && spinnerKananStatus == 0){
-            ambilSemuaData();
-        } else if ((spinnerKiriStatus == 0) && spinnerKananStatus == 1) {
-            ambilSemuaData();
-            ambilDataMeninggal();
-        } else if ((spinnerKiriStatus == 0) && spinnerKananStatus == 2) {
-            ambilSemuaData();
-            ambilDataLukaBerat();
-        } else if ((spinnerKiriStatus == 0) && spinnerKananStatus == 3) {
-            ambilSemuaData();
-            ambilDataLukaRingan();
-        } else if ((spinnerKiriStatus == 0) && spinnerKananStatus == 4) {
-            ambilSemuaData();
-            ambilDataRusakBerat();
-        } else if ((spinnerKiriStatus == 0) && spinnerKananStatus == 5) {
-            ambilSemuaData();
-            ambilDataRusakRingan();
-        } else if ((spinnerKiriStatus == 1) && spinnerKananStatus == 0) {
-            ambilDataTim();
-        } else if ((spinnerKiriStatus == 1) && spinnerKananStatus == 1) {
-            ambilDataTim();
-            ambilDataMeninggal();
-        } else if ((spinnerKiriStatus == 1) && spinnerKananStatus == 2) {
-            ambilDataTim();
-            ambilDataLukaBerat();
-        } else if ((spinnerKiriStatus == 1) && spinnerKananStatus == 3) {
-            ambilDataTim();
-            ambilDataLukaRingan();
-        } else if ((spinnerKiriStatus == 1) && spinnerKananStatus == 4) {
-            ambilDataTim();
-            ambilDataRusakBerat();
-        } else if ((spinnerKiriStatus == 1) && spinnerKananStatus == 5) {
-            ambilDataTim();
-            ambilDataRusakRingan();
-        } else if ((spinnerKiriStatus == 2) && spinnerKananStatus == 0) {
-            ambilDataUmum();
-        } else if ((spinnerKiriStatus == 2) && spinnerKananStatus == 1) {
-            ambilDataUmum();
-            ambilDataMeninggal();
-        } else if ((spinnerKiriStatus == 2) && spinnerKananStatus == 2) {
-            ambilDataUmum();
-            ambilDataLukaBerat();
-        } else if ((spinnerKiriStatus == 2) && spinnerKananStatus == 3) {
-            ambilDataUmum();
-            ambilDataLukaRingan();
-        } else if ((spinnerKiriStatus == 2) && spinnerKananStatus == 4) {
-            ambilDataUmum();
-            ambilDataRusakBerat();
-        } else if ((spinnerKiriStatus == 2) && spinnerKananStatus == 5) {
-            ambilDataUmum();
-            ambilDataRusakRingan();
-        }
     }
 
     private void addListToSpinner() {
@@ -172,7 +116,7 @@ public class MapsActivity extends FragmentActivity
             tabLayout.setVisibility(View.GONE);
 
             //Show all LAPORAN MARKER
-            showAllLaporanMarker();
+            showLaporanMarker();
 
             //Camero focus to Selected Laporan and show the window detail
             focusOnMarker(Laporan.laporanArrayList.get(id).getLokasi());
@@ -194,12 +138,8 @@ public class MapsActivity extends FragmentActivity
             mMap.setOnMarkerClickListener(mClusterManager);
 
             //Here Use Read MyItem to Cluster Marker
-//            readLaporanForClustering();
-            if(spinnerKiriStatus == 1) {
-                ambilDataTim();
-            } else if (spinnerKiriStatus == 2) {
-                ambilDataUmum();
-            }
+            readLaporanForClustering();
+
             //Add Marker for Pusat Gempa
             pusat=mMap.addMarker(new MarkerOptions()
                             .position(Gempa.gempaArrayList.get(id).getPusat())
@@ -229,10 +169,12 @@ public class MapsActivity extends FragmentActivity
                 if (tab.getText().equals("Laporan")){
                 //    Toast.makeText(getApplicationContext(),"LAPORAN",Toast.LENGTH_SHORT).show();
                     clearHeatMap();
+                    spinnerOnItemSelect();
                     showCluster();
                 }else {
                 //    Toast.makeText(getApplicationContext(),"HEATMAP",Toast.LENGTH_SHORT).show();
                     clearCluster();
+                    spinnerOnItemSelect();
                     showHeatMap();
                     if(!list.isEmpty()) {
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(0), 9));
@@ -252,6 +194,46 @@ public class MapsActivity extends FragmentActivity
 
             }
         });
+    }
+
+    private void getDataSesuaiFilter() {
+        if((spinnerKiriStatus == 0) && (spinnerKananStatus == 0)) {
+            semuaSemua();
+        } else if ((spinnerKiriStatus == 0) && (spinnerKananStatus == 1)) {
+            semuaMeninggal();
+        } else if ((spinnerKiriStatus == 0) && (spinnerKananStatus == 2)) {
+            semuaLukaBerat();
+        } else if ((spinnerKiriStatus == 0) && (spinnerKananStatus == 3)) {
+            semuaLukaRingan();
+        } else if ((spinnerKiriStatus == 0) && (spinnerKananStatus == 4)) {
+            semuaRusakBerat();
+        } else if ((spinnerKiriStatus == 0) && (spinnerKananStatus == 5)) {
+            semuaRusakRingan();
+        } else if ((spinnerKiriStatus == 1) && (spinnerKananStatus == 0)) {
+            timSemua();
+        } else if ((spinnerKiriStatus == 1) && (spinnerKananStatus == 1)) {
+            timMeninggal();
+        } else if ((spinnerKiriStatus == 1) && (spinnerKananStatus == 2)) {
+            timLukaBerat();
+        } else if ((spinnerKiriStatus == 1) && (spinnerKananStatus == 3)) {
+            timLukaRingan();
+        } else if ((spinnerKiriStatus == 1) && (spinnerKananStatus == 4)) {
+            timRusakBerat();
+        } else if ((spinnerKiriStatus == 1) && (spinnerKananStatus == 5)) {
+            timRusakRingan();
+        } else if ((spinnerKiriStatus == 2) && (spinnerKananStatus == 0)) {
+            umumSemua();
+        } else if ((spinnerKiriStatus == 2) && (spinnerKananStatus == 1)) {
+            umumMeninggal();
+        } else if ((spinnerKiriStatus == 2) && (spinnerKananStatus == 2)) {
+            umumLukaBerat();
+        } else if ((spinnerKiriStatus == 2) && (spinnerKananStatus == 3)) {
+            umumLukaRingan();
+        } else if ((spinnerKiriStatus == 2) && (spinnerKananStatus == 4)) {
+            umumRusakBerat();
+        } else if ((spinnerKiriStatus == 2) && (spinnerKananStatus == 5)) {
+            umumRusakRingan();
+        }
     }
 
     private void readLaporanForClustering() {
@@ -512,10 +494,10 @@ public class MapsActivity extends FragmentActivity
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lokasi, 8));
     }
 
-    private void showAllLaporanMarker() {
-        for(int i=0;i<Laporan.laporanArrayList.size();i++){
+    private void showLaporanMarker() {
+        for(int i=0;i<list.size();i++){
             mMap.addMarker(new MarkerOptions()
-                            .position(Laporan.laporanArrayList.get(i).getLokasi())
+                            .position(list.get(i))
                             .title(String.valueOf(i))
             );
         }
@@ -559,79 +541,15 @@ public class MapsActivity extends FragmentActivity
 
     }*/
 
-    private void ambilSemuaData() {
 
-    }
-
-    private void ambilDataTim() {
-        listLokasi=new ArrayList<>();
-        try {
-            for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
-                MyItem myItem=new MyItem(Laporan.laporanArrayList.get(i).getLokasi().latitude,Laporan.laporanArrayList.get(i).getLokasi().longitude);
-                myItem.setId(i);
-                mClusterManager.addItem(myItem);
-                listLokasi.add(Laporan.laporanArrayList.get(i).getLokasi());
-            }
-
-            if (Laporan.laporanArrayList.size()==0){
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Laporan.laporanArrayList.get(0).getLokasi(), 5));
-            }
-        } catch (NullPointerException e){
-            e.getStackTrace();
-        }
-    }
-
-    private void ambilDataUmum() {
-        listLokasi=new ArrayList<>();
-        try {
-            for(int i = 0; i < com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum.laporanArrayList.size(); i++) {
-                MyItem myItem=new MyItem(com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum.laporanArrayList.get(i).getLokasi().latitude,
-                        com.pkm.proyek.seismoalpha.laporan.umum.LaporanUmum.laporanArrayList.get(i).getLokasi().longitude);
-                myItem.setId(i);
-                mClusterManager.addItem(myItem);
-                listLokasi.add(Laporan.laporanArrayList.get(i).getLokasi());
-            }
-
-            if (Laporan.laporanArrayList.size()==0){
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Laporan.laporanArrayList.get(0).getLokasi(), 5));
-            }
-        } catch (NullPointerException e){
-            e.getStackTrace();
-        }
-    }
-
-    private void ambilDataMeninggal() {
-
-    }
-
-    private void ambilDataLukaBerat() {
-
-    }
-
-    private void ambilDataLukaRingan() {
-
-    }
-
-    private void ambilDataRusakBerat() {
-
-    }
-
-    private void ambilDataRusakRingan() {
-
-    }
 
     private void spinnerOnItemSelect() {
         spinnerKiri.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerKiriStatus = position;
-                handleMultipleKondisi();
-                if(tabLayout.getSelectedTabPosition() == 0) {
-                    clearCluster();
-                    showCluster();
-                } else {
-
-                }
+                getDataSesuaiFilter();
+//                if(tabLayout.getSelectedTabPosition() == 0) clearCluster();
             }
 
             @Override
@@ -643,12 +561,8 @@ public class MapsActivity extends FragmentActivity
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerKananStatus = position;
-                handleMultipleKondisi();
-                if(tabLayout.getSelectedTabPosition() == 0) {
-
-                } else {
-
-                }
+                getDataSesuaiFilter();
+//                if(tabLayout.getSelectedTabPosition() == 1) clearHeatMap();
             }
 
             @Override
@@ -670,5 +584,189 @@ public class MapsActivity extends FragmentActivity
             latLngs.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
         }
         return latLngs;
+    }
+
+    private void semuaSemua() {
+        list = new ArrayList<>();
+        list = getAllLatLng();
+    }
+
+    private void semuaMeninggal() {
+        list = new ArrayList<>();
+        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
+            if(Laporan.laporanArrayList.get(i).getJumlah_korban() != 0) {
+                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+            }
+        }
+
+        for (int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
+            if (LaporanUmum.laporanArrayList.get(i).getJumlah_korban() != 0) {
+                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void semuaLukaBerat() {
+        list = new ArrayList<>();
+        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
+            if(Laporan.laporanArrayList.get(i).getLuka_berat() != 0) {
+                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+            }
+        }
+
+        for (int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
+            if (LaporanUmum.laporanArrayList.get(i).getLuka_berat() != 0) {
+                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void semuaLukaRingan() {
+        list = new ArrayList<>();
+        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
+            if(Laporan.laporanArrayList.get(i).getLuka_ringan() != 0) {
+                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+            }
+        }
+
+        for (int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
+            if (LaporanUmum.laporanArrayList.get(i).getLuka_ringan() != 0) {
+                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void semuaRusakBerat() {
+        list = new ArrayList<>();
+        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
+            if(Laporan.laporanArrayList.get(i).getRusak_berat() != 0) {
+                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+            }
+        }
+
+        for (int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
+            if (LaporanUmum.laporanArrayList.get(i).getRusak_berat() != 0) {
+                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void semuaRusakRingan() {
+        list = new ArrayList<>();
+        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
+            if(Laporan.laporanArrayList.get(i).getRusak_ringan() != 0) {
+                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+            }
+        }
+
+        for (int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
+            if (LaporanUmum.laporanArrayList.get(i).getRusak_ringan() != 0) {
+                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void timSemua() {
+        list = new ArrayList<>();
+        for(int i=0;i<Laporan.laporanArrayList.size();i++){
+            list.add(Laporan.laporanArrayList.get(i).getLokasi());
+        }
+    }
+
+    private void timMeninggal() {
+        list = new ArrayList<>();
+        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
+            if(Laporan.laporanArrayList.get(i).getJumlah_korban() != 0) {
+                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void timLukaBerat() {
+        list = new ArrayList<>();
+        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
+            if(Laporan.laporanArrayList.get(i).getLuka_berat() != 0) {
+                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void timLukaRingan() {
+        list = new ArrayList<>();
+        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
+            if(Laporan.laporanArrayList.get(i).getLuka_ringan() != 0) {
+                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void timRusakBerat() {
+        list = new ArrayList<>();
+        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
+            if(Laporan.laporanArrayList.get(i).getRusak_berat() != 0) {
+                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void timRusakRingan() {
+        list = new ArrayList<>();
+        for(int i = 0; i < Laporan.laporanArrayList.size(); i++) {
+            if(Laporan.laporanArrayList.get(i).getRusak_ringan() != 0) {
+                list.add(Laporan.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void umumSemua() {
+        list = new ArrayList<>();
+        for(int i=0;i<LaporanUmum.laporanArrayList.size();i++){
+            list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+        }
+    }
+
+    private void umumMeninggal() {
+        list = new ArrayList<>();
+        for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
+            if(LaporanUmum.laporanArrayList.get(i).getJumlah_korban() != 0) {
+                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void umumLukaBerat() {
+        list = new ArrayList<>();
+        for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
+            if(LaporanUmum.laporanArrayList.get(i).getLuka_berat() != 0) {
+                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void umumLukaRingan() {
+        list = new ArrayList<>();
+        for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
+            if(LaporanUmum.laporanArrayList.get(i).getLuka_ringan() != 0) {
+                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void umumRusakBerat() {
+        list = new ArrayList<>();
+        for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
+            if(LaporanUmum.laporanArrayList.get(i).getRusak_berat() != 0) {
+                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+            }
+        }
+    }
+
+    private void umumRusakRingan() {
+        list = new ArrayList<>();
+        for(int i = 0; i < LaporanUmum.laporanArrayList.size(); i++) {
+            if(LaporanUmum.laporanArrayList.get(i).getRusak_ringan() != 0) {
+                list.add(LaporanUmum.laporanArrayList.get(i).getLokasi());
+            }
+        }
     }
 }
