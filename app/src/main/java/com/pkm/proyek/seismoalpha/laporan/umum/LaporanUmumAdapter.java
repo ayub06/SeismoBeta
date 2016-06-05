@@ -1,6 +1,8 @@
 package com.pkm.proyek.seismoalpha.laporan.umum;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pkm.proyek.seismoalpha.R;
+import com.pkm.proyek.seismoalpha.laporan.FotoLaporan;
+import com.pkm.proyek.seismoalpha.laporan.LaporanActivity;
 import com.pkm.proyek.seismoalpha.laporan.tim.Laporan;
 import com.pkm.proyek.seismoalpha.maps.MapsActivity;
 
@@ -80,6 +84,26 @@ public class LaporanUmumAdapter extends RecyclerView.Adapter<LaporanUmumAdapter.
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
         personViewHolder.foto_laporan.setImageBitmap(laporan.get(i).getFoto_laporan());
+        personViewHolder.foto_laporan.setTag(i);
+        personViewHolder.foto_laporan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("CLICK ID", String.valueOf(v.getTag()));
+                FragmentManager fragmentManager = LaporanActivity.activity.getFragmentManager();
+                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                FotoLaporan fotolaporan=new FotoLaporan();
+
+                //Build communication
+                Bundle bundle1=new Bundle();
+                bundle1.putInt("index", (Integer) v.getTag());
+                bundle1.putBoolean("tim",false);
+                fotolaporan.setArguments(bundle1);
+
+                //add and run
+                fragmentTransaction.add(fotolaporan,"buy");
+                fragmentTransaction.commit();
+            }
+        });
         personViewHolder.container.setTag(i);
         personViewHolder.container.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -260,6 +260,7 @@ public class InputUmumActivity extends AppCompatActivity {
         mCurrentPhotoPath =image.getPath();
         return image;
     }
+
     private void setDensityValue() {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -293,6 +294,4 @@ public class InputUmumActivity extends AppCompatActivity {
         foto = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
         mImageView.setImageBitmap(foto);
     }
-
-
 }
