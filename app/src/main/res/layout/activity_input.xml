@@ -197,13 +197,44 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rusak ringan:" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="48dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:layout_height="wrap_content"
+                android:hint="0"
+                android:inputType="numberSigned|numberDecimal"
+                android:id="@+id/input_rusak_ringan"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:text="unit"/>
+        </LinearLayout>
+    </LinearLayout>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rusak ringan:" />
+                android:text="Rusak sedang:" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -217,7 +248,7 @@
                     android:layout_height="wrap_content"
                     android:hint="0"
                     android:inputType="numberSigned|numberDecimal"
-                    android:id="@+id/input_rusak_ringan"
+                    android:id="@+id/input_rusak_sedang"
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -228,6 +259,19 @@
             </LinearLayout>
         </LinearLayout>
     </GridLayout>
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="4dp"
+    android:background="@android:color/darker_gray"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:hint="Nomor HP untuk dihubungi lebih lanjut"/>
     <Button
         android:id="@+id/upload"
         android:layout_width="match_parent"
