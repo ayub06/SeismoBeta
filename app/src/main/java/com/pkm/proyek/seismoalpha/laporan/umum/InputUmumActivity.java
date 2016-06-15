@@ -45,14 +45,12 @@ public class InputUmumActivity extends AppCompatActivity {
     private EditText inputLukaBerat;
     private EditText inputLukaRingan;
     private EditText inputRusakBerat;
-    private EditText inputRusakSedang;
     private EditText inputRusakRingan;
 
     private String korbanJiwa;
     private String lukaBerat;
     private String lukaRingan;
     private String rusakBerat;
-    private String rusakSedang;
     private String rusakRingan;
     private Double longitude, latitude;
 
@@ -89,7 +87,6 @@ public class InputUmumActivity extends AppCompatActivity {
         inputLukaRingan = (EditText) findViewById(R.id.input_luka_ringan);
 
         inputRusakBerat = (EditText) findViewById(R.id.input_rusak_berat);
-        inputRusakSedang = (EditText) findViewById(R.id.input_rusak_sedang);
         inputRusakRingan = (EditText) findViewById(R.id.input_rusak_ringan);
 
 
@@ -183,10 +180,6 @@ public class InputUmumActivity extends AppCompatActivity {
         rusakBerat = inputRusakBerat.getText().toString();
         if (rusakBerat.isEmpty()) {
             rusakBerat = "0";
-        }
-        rusakSedang = inputRusakSedang.getText().toString();
-        if (rusakSedang.isEmpty()) {
-            rusakSedang = "0";
         }
         rusakRingan = inputRusakRingan.getText().toString();
         if (rusakRingan.isEmpty()) {
