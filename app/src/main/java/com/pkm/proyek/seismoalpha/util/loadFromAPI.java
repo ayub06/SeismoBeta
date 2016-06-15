@@ -311,6 +311,7 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                             laporanList.get(i).getLukaBerat(),
                             laporanList.get(i).getLukaRingan(),
                             laporanList.get(i).getRusakBerat(),
+                            laporanList.get(i).getRusakSedang(),
                             laporanList.get(i).getRusakRingan(),
                             BitmapFactory.decodeByteArray(bytestream, 0, bytestream.length)
                     ));
@@ -521,6 +522,7 @@ public class loadFromAPI extends AsyncTask<Pair<Context, String>, Void, String> 
                             laporanList.get(i).getLukaBerat(),
                             laporanList.get(i).getLukaRingan(),
                             laporanList.get(i).getRusakBerat(),
+                            laporanList.get(i).getRusakSedang(),
                             laporanList.get(i).getRusakRingan(),
                             BitmapFactory.decodeByteArray(bytestream, 0, bytestream.length)
                     ));
