@@ -33,6 +33,7 @@ public class LaporanUmum {
     private int luka_ringan;
 
     private int rusak_berat;
+    private int rusak_sedang;
     private int rusak_ringan;
 
     private Bitmap foto_laporan;
@@ -146,6 +147,14 @@ public class LaporanUmum {
 
     public void setRusak_berat(int rusak_berat) {
         this.rusak_berat = rusak_berat;
+    }
+
+    public int getRusak_sedang() {
+        return rusak_sedang;
+    }
+
+    public void setRusak_sedang(int rusak_sedang) {
+        this.rusak_sedang = rusak_sedang;
     }
 
     public int getRusak_ringan() {

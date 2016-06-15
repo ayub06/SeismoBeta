@@ -45,6 +45,7 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.PersonVi
         TextView luka_ringan;
 
         TextView rusak_berat;
+        TextView rusak_sedang;
         TextView rusak_ringan;
 
         ImageView foto_laporan;
@@ -64,6 +65,7 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.PersonVi
             luka_ringan = (TextView) itemView.findViewById(R.id.lapor_luka_ringan);
 
             rusak_berat = (TextView) itemView.findViewById(R.id.lapor_rusak_berat);
+            rusak_sedang = (TextView) itemView.findViewById(R.id.lapor_rusak_sedang);
             rusak_ringan = (TextView) itemView.findViewById(R.id.lapor_rusak_ringan);
 
             foto_laporan =(ImageView)itemView.findViewById(R.id.foto_laporan);
@@ -132,6 +134,7 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.PersonVi
         personViewHolder.luka_ringan.setText(String.valueOf(laporan.get(i).getLuka_ringan()));
 
         personViewHolder.rusak_ringan.setText(String.valueOf(laporan.get(i).getRusak_ringan()));
+        personViewHolder.rusak_sedang.setText(String.valueOf(laporan.get(i).getRusak_sedang()));
         personViewHolder.rusak_berat.setText(String.valueOf(laporan.get(i).getRusak_berat()));
     }
 
