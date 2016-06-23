@@ -134,7 +134,7 @@ public class LaporanAdapter extends RecyclerView.Adapter<LaporanAdapter.PersonVi
         personViewHolder.luka_ringan.setText(String.valueOf(laporan.get(i).getLuka_ringan()));
 
         personViewHolder.rusak_ringan.setText(String.valueOf(laporan.get(i).getRusak_ringan()));
-        personViewHolder.rusak_sedang.setText(String.valueOf(laporan.get(i).getRusak_sedang()));
+        //personViewHolder.rusak_sedang.setText(String.valueOf(laporan.get(i).getRusak_sedang()));
         personViewHolder.rusak_berat.setText(String.valueOf(laporan.get(i).getRusak_berat()));
     }
 

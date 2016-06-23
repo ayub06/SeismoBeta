@@ -38,7 +38,7 @@ public class LaporanUmum {
 
     private Bitmap foto_laporan;
 
-    public LaporanUmum(Long idLaporan, Gempa gempa, String nama, Calendar waktu, LatLng lokasi, String alamat, int jumlah_korban, int luka_berat, int luka_ringan, int rusak_berat, int rusak_sedang, int rusak_ringan,Bitmap foto_laporan) {
+    public LaporanUmum(Long idLaporan, Gempa gempa, String nama, Calendar waktu, LatLng lokasi, String alamat, int jumlah_korban, int luka_berat, int luka_ringan, int rusak_berat, int rusak_ringan,Bitmap foto_laporan) {
         this.idLaporan = idLaporan;
         this.gempa = gempa;
         this.nama=nama;
@@ -49,7 +49,7 @@ public class LaporanUmum {
         this.luka_berat = luka_berat;
         this.luka_ringan = luka_ringan;
         this.rusak_berat = rusak_berat;
-        this.rusak_sedang = rusak_sedang;
+      //  this.rusak_sedang = rusak_sedang;
         this.rusak_ringan = rusak_ringan;
         this.foto_laporan=foto_laporan;
     }

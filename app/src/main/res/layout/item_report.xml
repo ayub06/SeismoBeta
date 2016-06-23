@@ -49,6 +49,13 @@
                 android:text="Potorono RT 5 Banguntapan"
                 android:layout_below="@id/nama_pelapor"
                 android:layout_toRightOf="@id/foto_pelapor"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="085729138066"
+                android:textColor="#000000"
+                android:layout_toRightOf="@id/foto_pelapor"
+                android:layout_below="@id/lokasi_laporan"/>
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
@@ -96,6 +103,11 @@
                 android:id="@+id/jam_lapor"
                 android:textStyle="bold"
                 android:textColor="@color/colorAccent"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WIB"
+                android:layout_marginStart="4dp"/>
         </LinearLayout>
         <View
             android:layout_width="match_parent"
@@ -131,7 +143,7 @@
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2"
+            android:columnCount="3"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp">
             <LinearLayout
@@ -139,32 +151,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="Korban jiwa:" />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="24dp"
-                        android:layout_height="wrap_content"
-                        android:text="41"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold"
-                        android:id="@+id/lapor_korban_jiwa" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="orang"/>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Luka berat:" />
                 <LinearLayout
@@ -189,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Luka ringan:" />
                 <LinearLayout
@@ -203,6 +190,31 @@
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold"
                         android:id="@+id/lapor_luka_ringan" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="orang"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Korban jiwa:" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="24dp"
+                        android:layout_height="wrap_content"
+                        android:text="41"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"
+                        android:id="@+id/lapor_korban_jiwa" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -242,7 +254,7 @@
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2"
+            android:columnCount="3"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp">
             <LinearLayout
@@ -250,7 +262,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
-                    android:layout_width="150dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Rusak berat:" />
                 <LinearLayout
@@ -277,6 +289,31 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Rusak sedang:" />
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="24dp"
+                        android:layout_height="wrap_content"
+                        android:text="12"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"
+                        android:id="@+id/lapor_rusak_sedang" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="unit"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
                     android:text="Rusak ringan:" />
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -289,31 +326,6 @@
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold"
                         android:id="@+id/lapor_rusak_ringan" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="unit"/>
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rusak sedang:" />
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="24dp"
-                        android:layout_height="wrap_content"
-                        android:text="12"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold"
-                        android:id="@+id/lapor_rusak_sedang" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

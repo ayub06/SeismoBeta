@@ -294,7 +294,7 @@ public class MapsActivity extends FragmentActivity
                         LaporanUmum.laporanArrayList.get(i).getLuka_berat(),
                         LaporanUmum.laporanArrayList.get(i).getLuka_ringan(),
                         LaporanUmum.laporanArrayList.get(i).getRusak_berat(),
-                        LaporanUmum.laporanArrayList.get(i).getRusak_sedang(),
+                        //LaporanUmum.laporanArrayList.get(i).getRusak_sedang(),
                         LaporanUmum.laporanArrayList.get(i).getRusak_ringan(),
                         LaporanUmum.laporanArrayList.get(i).getFoto_laporan()
 
